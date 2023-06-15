@@ -1,27 +1,690 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #f1f6fb;
+  font-family: 'Instrument Sans', sans-serif;
+}
+
+h1 {
+  @apply font-bold;
+  font-size: 25px;
+  margin-bottom: 20px;
+  font-family: 'Instrument Sans', sans-serif;
+  @apply text-triadicDarkBlue;
+  @apply text-center;
+}
+
+label {
+  @apply text-blueVariation;
+}
+
+input[type=number] {
+  @apply rounded-md;
+  @apply text-pentagramBlue;
+  margin-bottom: 10px;
+  width: 40%;
+  border: 1px solid #828db3;
+  text-align: center;
+}
+
+input[type=number]:focus {
+  box-shadow: 10px 10px lightblue;
+}
+
+
+article {
+  @apply flex;
+  @apply justify-evenly;
+}
+
+button[type="submit"] {
+  @apply bg-madeMoiselleRed;
+  @apply rounded-full;
+  @apply flex;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 30px;
+  position: absolute;
+  margin-left: 200px;
+  font-weight: bold;
+  font-family: 'Instrument Sans', sans-serif;
+}
+
+button[type="submit"]:hover {
+  @apply bg-red500;
+  border-radius: 15px;
+}
+
+nav {
+  background-color: #fff;
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.logo {
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+.titulo-menu {
+  font-family: 'Jost', sans-serif;
+  font-size: 28px;
+}
+
+.container-principal {
+  margin-top: 50px;
+  width: 98%;
+}
+
+.container-card {
+  margin: 20px 0px;
+  width: 20%;
+}
+
+.titulo-card {
+  font-family: 'Jost', sans-serif;
+}
+
+
+.form-calculadora,
+.resultado {
+  background-color: #fff;
+  width: 30%;
+  height: 100%;
+  padding: 20px 20px;
+  border-radius: 10px;
+  margin-bottom: 60px;
+  margin-top: 100px;
+  @apply flex flex-col;
+}
+
+.form-1rm {
+  background-color: #fff;
+  width: 40%;
+  height: 100%;
+  padding: 20px 20px;
+  border-radius: 10px;
+  margin-bottom: 60px;
+  margin-top: 100px;
+  @apply flex;
+  @apply flex-col;
+}
+
+.resultado h2 {
+  @apply text-pentagramBlue;
+  text-align: center;
+}
+
+.resultado h3 {
+  @apply text-triadicDarkBlue;
+  text-align: center;
+  font-family: 'Instrument Sans', sans-serif;
+  margin-bottom: 10px;
+}
+
+#mostrar-resultado {
+  margin-top: 28%;
+}
+
+.imagem-demo {
+  max-width: 512px;
+  object-fit: contain;
+}
+
+.input-linha {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.input-label {
+  flex: 0 0 50%;
+}
+
+.input-campo {
+  flex: 0 0 50%;
+}
+
+.formulas-radio {
+  @apply flex flex-row;
+}
+
+.formulas-radio label {
+  margin: 8px 5px;
+}
+
+.formulas-radio a {
+  font-size: 10px;
+  @apply bg-pentagramBlue;
+  color: #fff;
+  height: 100%;
+  padding: 2px 5px;
+  border-radius: 10px;
+  margin-right: 5px;
+}
+
+.input-bf {
+  max-width: 60px;
+  padding: 2px;
+  text-align: center;
+  background-image: url('../../public/images/percent.png');
+  background-size: cover;
+  background-size: 13px;
+  background-repeat: no-repeat;
+  background-position: center right 5px;
+  appearance: textfield;
+  -moz-appearance: textfield;
+  color: black;
+}
+
+.input-bf::-webkit-inner-spin-button,
+.input-bf::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  display: none;
+
+}
+
+.subtitulo-tmb {
+  @apply text-triadicDarkBlue;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 20px 0px 10px;
+}
+
+.small-nivel-atividade {
+  margin-bottom: 10px;
+}
+
+.select-formulario {
+  @apply text-sm text-center rounded-lg border border-blueVariation;
+  @apply focus:ring-blueVariation focus:border-blueVariation;
+  @apply block w-full p-1.5;
+  @apply dark:border-blueVariation dark:placeholder-blueVariation;
+  @apply dark:text-pentagramBlue dark:focus:ring-pentagramBlue dark:focus:border-pentagramBlue;
+  margin-bottom: 8px;
+}
+
+.informacoes {
+  width: 90%;
+  background-color: #fff;
+  margin: 0 auto;
+  padding: 30px 40px;
+  margin-bottom: 50px;
+  border-radius: 5px;
+}
+
+.informacoes h2 {
+  @apply text-2xl text-center font-semibold pb-2;
+}
+
+.informacoes hr { 
+  display: flex;
+  margin: 20px auto;
+  width:40%;  
+  color:#ddd;
+}
+
+.informacoes p,
+.informacoes ul li {
+  @apply text-xl indent-8 my-2;
+  text-align: justify;
+  line-height: 1.6em;
+}
+
+.conteiner-informacoes {
+  margin: 0 10px;
+}
+
+.informacoes h2 {
+  @apply text-3xl mb-2.5;
+}
+
+.informacoes h3 {
+  @apply text-2xl font-semibold my-2.5;
+}
+
+.autores-formulas h4 {
+   @apply text-2xl font-semibold text-center pt-4 mb-4;
+}
+
+.autores-formulas .homens {
+  @apply text-center;
+  background: linear-gradient(to right, green 0%, lightblue 100%);
+  background-clip: text;
+    -webkit-background-clip: text;
+  -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.autores-formulas .mulheres {
+  @apply text-center;
+  background: linear-gradient(to right, red 0%, pink 100%);
+  background-clip: text;
+    -webkit-background-clip: text;
+  -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.texto-destaque {
+  @apply text-sm py-2.5;
+  display: flex;
+  justify-content: center;
+  margin: 5px 0px;
+  text-transform: uppercase;
+  background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
+  background-clip: text;
+    -webkit-background-clip: text;
+  -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.fontes {
+  @apply flex flex-col mt-3 text-sm;
+}
+
+.referencias {
+  @apply text-sm font-semibold;
+}
+
+
+@media (max-width: 480px) {
+
+  article {
+    @apply flex flex-col justify-around items-center;
+  }
+
+  h1 {
+    font-size: 18px;
+    margin: 20px 10px;
+  }
+
+  label {
+    @apply text-blueVariation;
+    font-size: 13px;
+  }
+
+  .texto-destaque em sub {
+    font-size: 7px;
+  }
+
+  .titulo-menu {
+    font-size: 16px;
+  }
+
+  .logo {
+    margin-left: 0px;
+  }
+
+  .container-principal {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0px;
+  }
+
+  .container-card {
+    width: 80%;
+    margin: 20px 0px;
+  }
+
+  .titulo-card {
+    font-size: 18px;
+  }
+
+  .titulo-menu {
+    font-size: 22px;
+  }
+
+  .form-calculadora,
+  .resultado {
+    width: 90%;
+    margin-bottom: 40px;
+  }
+
+  .form-1rm {
+    width: 90%;
+    margin: 0;
+    margin-top: 100px;
+    margin-bottom: 40px;
+    padding: 0px;
+  }
+
+  .form-1rm .input-linha, 
+  .form-calculadora .input-linha,
+  .form-calculadora {
+    @apply flex flex-wrap;
+  }
+
+  .form-1rm .label-treinamento, 
+  .form-calculadora .labels-select {
+    position: relative;
+    margin-right: 40%;
+  }
+
+  .form-1rm .select-formulario, 
+  .form-carboidratos .select-formulario,
+  .form-calorias .select-formulario,
+  .form-proteinas .select-formulario,
+  .form-gorduras .select-formulario {
+    margin-top: 5px;
+    flex: 0 0 80%;
+  }
+
+  .botao-1rm {
+    margin-right: 50%;
+  }
+
+
+  .resultado {
+    margin-top: 5px;
+  }
+
+  .resultado h2 {
+    font-size: 18px;
+  }
+
+  .resultado h3 {
+    font-size: 16px;
+  }
+
+  #mostrar-resultado {
+    margin-top: 10px;
+  }
+
+  .formulas-radio {
+    padding: 0 10%;
+  }
+
+  .formulas-radio a {
+    position: relative;
+  }otao-calcular
+
+  .benedict-question{
+    right: 7px;
+    bottom: 8px;
+  }
+
+  .benedict-question, .mcardle-question {
+     right: 8px;
+     bottom: 8px;
+  }
+
+  .formulas-radio label, .input-bf {
+    margin: 10px;
+  }
+
+ .botao-calcular {
+    font-size: 10px;
+    margin: 0 auto;
+    margin-left: 60%;
+    left: 1%;
+  }
+
+  .botao-1rm {
+    left: 30%;
+  }
+
+  .imagem-demo {
+    display: block;
+    margin: auto;
+    margin-bottom: 20px;
+  }
+
+  .input-linha {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .input-label {
+    flex: 0 0 40%;
+  }
+
+  .input-campo {
+    flex: 0 0 40%;
+  }
+
+  .subtitulo-tmb {
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .box-informacoes {
+    margin-bottom: 10px;
+  }
+
+
+  .small-nivel-atividade {
+    text-align: center;
+  }
+
+  .small-nivel-atividade small,
+  .small-nivel-atividade small strong {
+    font-size: 12px;
+  }
+
+  .informacoes p,
+  .informacoes ul li {
+  @apply text-base;
+  word-wrap: break-word;
+  text-align: left;
+  word-spacing: 8px;
+}
+
+.informacoes h2 {
+  @apply text-2xl;
+}
+
+.informacoes h3 {
+  @apply text-xl;
+}
+
+.texto-destaque {
+  width: 100%;
+  margin-left: 12px;
+}
+
+}
+
+@media screen and (min-width: 481px) and (max-width: 767px) {
+ .botao-calcular {
+    padding: 10px 20px;
+    margin-right: 50%;
+  }
+
+
+  article {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .container-principal {
+    width: 98%;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .container-card {
+    width: 40%;
+    margin: 10px 10px;
+  }
+
+  .titulo-card {
+    font-size: 15px;
+  }
+
+  .imagem-card {
+    width: 140px;
+    height: 140px;
+  }
+
+  .titulo-menu {
+    font-size: 22px;
+  }
+
+  .form-calculadora {
+    width: 60%;
+    margin-bottom: 0px;
+  }
+
+  .formulas-radio a {
+    position: relative;
+  }
+
+  .informacoes {
+    margin-top: 50px;
+  }
+  
+
+  .benedict-question, .mcardle-question {
+    right: 2px;
+    bottom: 8px;
+ }
+
+  .resultado {
+    margin-bottom: 5px;
+    width: 80%;
+  }
+
+  .imagem-demo {
+    width: 20%;
+    margin-top: 80px;
+  }
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+  article {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .form-calculadora, .form-1rm {
+      width: 60%;
+      margin-bottom: 40px;
+  }
+
+  .form-1rm {
+    width: 70%;
+  }
+
+  .resultado {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  #mostrar-resultado {
+    margin-top: 10px;
+  }
+
+  .botao-1rm {
+    left: 20%;
+  }
+
+  .botao-calcular {
+    padding: 10px 20px;
+    left: 22%;
+  }
+
+  .container-principal {
+    margin-top: 0px;
+    flex-wrap: wrap;
+  }
+
+  .imagem-demo {
+    height: 110px;
+    width: 110px;
+    margin-top: 15%;
+  }
+
+  .resultado h3 {
+    @apply text-base;
+  }
+
+  .resultado h2 {
+    @apply text-lg;
+  }
+
+  .resultado .question {
+    width: 13px;
+    height: 13px;
+  }
+
+  .formulas-radio {
+    margin: 5px 0px;
+  }
+
+  .formulas-radio label {
+    font-size: 12px;
+  }
+
+  .formulas-radio a {
+    position: relative;
+  }
+
+  .benedict-question, .mcardle-question {
+    right: 2px;
+    bottom: 8px;
+ }
+
+ 
+ .input-bf {
+    padding: 0;
+ }
+
+
+  .container-card {
+    width: 40%;
+    margin: 20px 0px;
+  }
+
+  .titulo-card {
+    font-size: 18px;
+  }
+
+  .titulo-menu {
+    font-size: 22px;
+  }
+
+}
+
+@media screen and (max-width: 1025px) {
+ .botao-calcular {
+    padding: 10px 20px;
+  }
+
+  .container-principal {
+    margin-top: 0px;
+    flex-wrap: wrap;
+  }
+
+  .container-card {
+    margin: 20px 0px;
+  }
+
+  .titulo-card {
+    font-size: 18px;
+  }
+
+  .titulo-menu {
+    font-size: 28px;
+  }
+
+  .formulas-radio {
+    display: inline-block;
+  }
+
+  .input-bf {
+    margin-left: 8px;
+  }
 }
