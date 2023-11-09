@@ -99,7 +99,7 @@ export default function IMC() {
                 <h3>Estimativa do peso saudável</h3>
                 <p> O IMC é frequentemente utilizado para estimar se uma pessoa
                     está dentro de faixas consideradas saudáveis em relação ao seu peso e altura. Faixas de IMC
-                    consideradas como "peso normal" têm sido associadas a menor risco de várias condições de saúde,
+                    consideradas como &ldquo;peso normal&ldquo; têm sido associadas a menor risco de várias condições de saúde,
                     como doenças cardíacas, diabetes tipo 2 e certos tipos de câncer.
                 </p>
                 <h3>Risco de problemas de saúde</h3> 

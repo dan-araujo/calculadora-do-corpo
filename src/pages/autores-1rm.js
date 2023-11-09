@@ -12,7 +12,7 @@ export default function Autores1RepeticaoMaxima() {
                     <span className="texto-destaque">
                         1RM = Peso Levantado &times; (1 + 0.0333 &times; Número de Repetições);
                     </span>
-                    <p>O "Peso Levantado" refere-se ao peso utilizado na carga submáxima e o "Número de Repetições"
+                    <p>O &ldquo;Peso Levantado&ldquo; refere-se ao peso utilizado na carga submáxima e o &ldquo;Número de Repetições&ldquo;
                         refere-se ao número de repetições realizadas com esse peso.</p>
                     <p>Esse cálculo é apenas uma estimativa aproximada e pode ter alguma margem de erro. Existem também outras fórmulas
                         e métodos semelhantes para estimar o 1RM</p>

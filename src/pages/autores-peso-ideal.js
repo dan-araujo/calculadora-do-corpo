@@ -65,8 +65,8 @@ export default function AutoresPesoIdeal() {
             <div id="devine">
                 <h4>O que é a Fórmula de Devine?</h4>
                 <p>A fórmula de Devine é uma das muitas abordagens usadas para estimar o peso corporal ideal
-                    com base na altura. Essa fórmula é frequentemente referida como "fórmula de Devine" ou
-                    "equação de Devine", em referência ao estudo original publicado por B. J. Devine em 1974.</p>
+                    com base na altura. Essa fórmula é frequentemente referida como &ldquo;Fórmula de Devine&ldquo; ou
+                    &ldquo;Equação de Devine&ldquo;, em referência ao estudo original publicado por B. J. Devine em 1974.</p>
                 <p>A fórmula de Devine para estimar o peso corporal ideal é a seguinte:</p>
 
                 <p className="homens">Homens:</p>

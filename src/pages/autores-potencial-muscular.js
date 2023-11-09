@@ -4,7 +4,7 @@ export default function AutoresPotencialMaximoMuscular() {
             <div id="martin-berkhan" className="pt-2 text-center">
                 <h3>Quem é Martin Berkhan?</h3>
                 <p>Martin Berkhan é um renomado coach de fitness e nutricionista sueco conhecido por desenvolver
-                    o método de dieta conhecido como "Leangains". Ele ganhou popularidade por sua abordagem única
+                    o método de dieta conhecido como &ldquo;Leangains&ldquo;. Ele ganhou popularidade por sua abordagem única
                     de jejum intermitente combinado com treinamento de força para ajudar na perda de gordura e ganho de massa muscular.
                     Ele tem uma abordagem científica
                     embasada em suas recomendações e busca promover uma abordagem sustentável e realista para a transformação física.</p>
@@ -17,7 +17,7 @@ export default function AutoresPotencialMaximoMuscular() {
                 <p>Além da fórmula de Berkhan para obter Potencial Máximo Muscular, ele desenvolveu o método Leangains, que
                     é uma abordagem de jejum intermitente envolvendo períodos de jejum
                     prolongado seguidos por janelas de alimentação. A forma mais comum de jejum intermitente praticada no Leangains
-                    é conhecida como "16/8", que envolve um período de jejum de 16 horas, seguido por uma janela de alimentação de 8 horas.
+                    é conhecida como &ldquo;16/8&ldquo;, que envolve um período de jejum de 16 horas, seguido por uma janela de alimentação de 8 horas.
                     Durante a janela de alimentação, os macronutrientes e calorias
                     são ajustados de acordo com as metas de composição corporal.</p>
                 <p>O método de cálculo de Martin Berkhan é:</p>
@@ -38,8 +38,9 @@ export default function AutoresPotencialMaximoMuscular() {
                     e potencial genético para o crescimento muscular. Ele é especializado em determinar os limites máximos de
                     ganho de massa muscular natural com base em estudos e análises extensas.</p>
 
-                <p>Ele é famoso por desenvolver a fórmula "Índice de Dimensão Muscular" (MDI, na sigla em inglês) e a
-                    fórmula "Potencial Genético Máximo Muscular" (MMP, na sigla em inglês). Essas fórmulas são usadas para calcular o
+                <p>Ele é famoso por desenvolver a fórmula &ldquo;Índice de Dimensão Muscular&ldquo; (MDI, na sigla em inglês) e a
+                    fórmula &ldquo;Potencial Genético Máximo Muscular&ldquo; (MMP, na sigla em inglês). Essas fórmulas são
+                    usadas para calcular o
                     potencial máximo de ganho de massa muscular natural com base em altura, tamanho dos pulsos, tamanho do tornozelo e
                     outras medidas antropométricas.
                 </p>
@@ -63,62 +64,62 @@ export default function AutoresPotencialMaximoMuscular() {
 
             </div>
             <div className="fontes">
-                        <small className="text-sm font-semibold">Referências:</small>
-                        <a href="https://www.feitodeiridium.com.br/potencial-muscular-maximo/"
-                            target="_blank">
-                            - Feito de Iridium,
-                            2017,
-                            <strong> Potencial muscular máximo: descubra o quanto você pode crescer</strong>
-                        </a>
-                        <a href="https://leangains.com/maximum-muscular-potential-of-drug-free-athletes-updated-dec-31st/"
-                            target="_blank">
-                            - Martin Berkhan,
-                            LeanGains,
-                            2010,
-                            <strong> Maximum Muscular Potencial of Drug-free Athletes</strong>
-                        </a>
-                        <a href="https://www.poseidonperformance.com/blog/what-is-the-maximum-muscular-potential-of-drug-free-athletes-or-natural-bodybuilders"
-                            target="_blank">
-                            - Nicholas Martin-Jones,
-                            Poseidon Performance,
-                            2022,
-                            <strong> What is the maximum muscular potential of drug-free athletes?</strong>
-                        </a>
-                        <a href="https://rippedbody.com/maximum-muscular-potential/" target="_blank">
-                            - Andy Morgan,
-                            Ripped Body,
-                            No-Nonsense Diet & Training Guides,
-                            2015,
-                            <strong> Maximum Muscle Potential — What is your genetic muscular potential?</strong>
-                        </a>
-                        <a href="https://www.builtlean.com/how-much-muscle-can-you-gain-naturally/" target="_blank">
-                            - Marc Perry,
-                            BuiltLean,
-                            2022,
-                            <strong> How Much Muscle Can You Gain Naturally?</strong>
-                        </a>
-                        <a href="https://www.muscleandstrength.com/articles/interview-with-casey-butt-part-1.html">
-                            - M&S Writers,
-                            Muscle Strength,
-                            2011,
-                            <strong> An Interview with Casey Butt, Part 1</strong>
-                        </a>
-                        <a href="https://www.muscleandstrength.com/articles/interview-casey-butt-part-2.html" target="_blank">
-                            - M&S Writers,
-                            Muscle Strength,
-                            2011,
-                            <strong> An Interview with Casey Butt, Part 2 </strong>
-                        </a>
-                        <a href="https://www.muscleandstrength.com/articles/interview-with-casey-butt-part-3.html" target="_blank">
-                            - M&S Writers,
-                            Muscle Strength,
-                            2011,
-                            <strong> An Interview with Casey Butt, Part 3 </strong>
-                        </a>
-                        <a href="https://www.flaticon.com/br/icones-gratis/" title="exercite-se ícones" target="_blank">
-                            - ícones criados por ultimatearm e justicon - flaticon
-                        </a>
-                    </div>
+                <small className="text-sm font-semibold">Referências:</small>
+                <a href="https://www.feitodeiridium.com.br/potencial-muscular-maximo/"
+                    target="_blank">
+                    - Feito de Iridium,
+                    2017,
+                    <strong> Potencial muscular máximo: descubra o quanto você pode crescer</strong>
+                </a>
+                <a href="https://leangains.com/maximum-muscular-potential-of-drug-free-athletes-updated-dec-31st/"
+                    target="_blank">
+                    - Martin Berkhan,
+                    LeanGains,
+                    2010,
+                    <strong> Maximum Muscular Potencial of Drug-free Athletes</strong>
+                </a>
+                <a href="https://www.poseidonperformance.com/blog/what-is-the-maximum-muscular-potential-of-drug-free-athletes-or-natural-bodybuilders"
+                    target="_blank">
+                    - Nicholas Martin-Jones,
+                    Poseidon Performance,
+                    2022,
+                    <strong> What is the maximum muscular potential of drug-free athletes?</strong>
+                </a>
+                <a href="https://rippedbody.com/maximum-muscular-potential/" target="_blank">
+                    - Andy Morgan,
+                    Ripped Body,
+                    No-Nonsense Diet & Training Guides,
+                    2015,
+                    <strong> Maximum Muscle Potential — What is your genetic muscular potential?</strong>
+                </a>
+                <a href="https://www.builtlean.com/how-much-muscle-can-you-gain-naturally/" target="_blank">
+                    - Marc Perry,
+                    BuiltLean,
+                    2022,
+                    <strong> How Much Muscle Can You Gain Naturally?</strong>
+                </a>
+                <a href="https://www.muscleandstrength.com/articles/interview-with-casey-butt-part-1.html">
+                    - M&S Writers,
+                    Muscle Strength,
+                    2011,
+                    <strong> An Interview with Casey Butt, Part 1</strong>
+                </a>
+                <a href="https://www.muscleandstrength.com/articles/interview-casey-butt-part-2.html" target="_blank">
+                    - M&S Writers,
+                    Muscle Strength,
+                    2011,
+                    <strong> An Interview with Casey Butt, Part 2 </strong>
+                </a>
+                <a href="https://www.muscleandstrength.com/articles/interview-with-casey-butt-part-3.html" target="_blank">
+                    - M&S Writers,
+                    Muscle Strength,
+                    2011,
+                    <strong> An Interview with Casey Butt, Part 3 </strong>
+                </a>
+                <a href="https://www.flaticon.com/br/icones-gratis/" title="exercite-se ícones" target="_blank">
+                    - ícones criados por ultimatearm e justicon - flaticon
+                </a>
+            </div>
         </section>
     )
 }

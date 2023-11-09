@@ -16,7 +16,7 @@ export default function AutoresMassaCorporalMagra() {
                 </span>
 
                 <p>Essa fórmula foi proposta pelo pesquisador Boer em um estudo publicado em 1984, intitulado
-                    <em>"Estimation of body composition: a critical evaluation of the dual-energy X-ray absorptiometry method"</em>.
+                    <em>&ldquo;Estimation of body composition: a critical evaluation of the dual-energy X-ray absorptiometry method&ldquo;</em>.
                     No estudo, Boer desenvolveu uma equação para estimar a massa corporal magra em uma população de homens e mulheres idosos.</p>
 
                 <p>No entanto, é importante observar que essa fórmula foi desenvolvida para uma população específica e
