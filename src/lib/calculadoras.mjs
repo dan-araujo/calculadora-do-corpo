@@ -252,9 +252,9 @@ export function calcularMassaCorporalMagraPorHume(peso, altura, genero) {
     validateChoice(genero, ['masculino', 'feminino']);
     let massaCorporalMagra = 0;
     if (genero === "masculino") {
-        massaCorporalMagra = (0.328 * peso) + (0.339 * altura) - 29.53;
+        massaCorporalMagra = (0.32810 * peso) + (0.33929 * altura) - 29.5336;
     } else if (genero === "feminino") {
-        massaCorporalMagra = (0.295 * peso) + (0.418 * altura) - 43.293;
+        massaCorporalMagra = (0.29569 * peso) + (0.41813 * altura) - 43.2933;
     }
     return validateResult(massaCorporalMagra.toFixed(1), { max: peso });
 }

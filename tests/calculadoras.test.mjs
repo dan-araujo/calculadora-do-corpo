@@ -36,6 +36,16 @@ describe('Peso ideal por Peterson', () => {
   });
 });
 
+describe('Massa corporal magra por Hume', () => {
+  it('deve usar os coeficientes publicados para homens', () => {
+    assert.equal(calc.calcularMassaCorporalMagraPorHume(80, 180, 'masculino'), '57.8');
+  });
+
+  it('deve usar os coeficientes publicados para mulheres', () => {
+    assert.equal(calc.calcularMassaCorporalMagraPorHume(70, 175, 'feminino'), '50.6');
+  });
+});
+
 describe('Repetição máxima', () => {
   it('deve preservar a carga de uma repetição e calcular a manutenção', () => {
     for (const [name, fn] of Object.entries(calc)) {
