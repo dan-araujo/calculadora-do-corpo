@@ -1,5 +1,6 @@
 # dependencies
 /node_modules
+/output/
 /.pnp
 .pnp.js
 
@@ -34,5 +35,6 @@ next-env.d.ts
 
 /public/sitemap.xml
 /public/robots.txt
+/public/images/otimizadas/
 
 .vercel
