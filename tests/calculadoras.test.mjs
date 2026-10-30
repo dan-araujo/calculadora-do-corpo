@@ -68,8 +68,8 @@ describe('Potencial muscular', () => {
   it('deve ajustar a gordura sem duplicar sua contribuição no peso', () => {
     assert.equal(calc.calcularPotencialMaximoMuscularPorBerkhan(180, 5), '80.0');
     assert.equal(calc.calcularPotencialMaximoMuscularPorBerkhan(180, 20), '95.0');
-    const semGordura = Number(calc.calcularPotencialMaximoMuscularPorCaseyButt(180, 17, 23, 0));
+    const semGordura = Number(calc.calcularPotencialMaximoMuscularPorCaseyButt(180, 17, 23, 5));
     const comGordura = Number(calc.calcularPotencialMaximoMuscularPorCaseyButt(180, 17, 23, 10));
-    assert.ok(Math.abs(comGordura / semGordura - (1 + 10 / 224)) < 0.002);
+    assert.ok(Math.abs(comGordura / semGordura - (1 + 10 / 224) / (1 + 5 / 224)) < 0.002);
   });
 });

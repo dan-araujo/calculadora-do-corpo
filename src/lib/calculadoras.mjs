@@ -1,3 +1,5 @@
+import { validateNumber, validateResult, validateChoice } from './validation.mjs';
+
 function converterCmParaPolegadas(cm) {
     const polegadas = cm / 2.54;
     return polegadas;
@@ -14,21 +16,27 @@ function converterLibrasParaKg(lbs) {
 }
 
 export function calcularIMC(peso, altura) {
+    peso = validateNumber(peso, 'peso');
+    altura = validateNumber(altura, 'altura');
     const alturaEmMetros = altura / 100;
-    return (peso / (alturaEmMetros * alturaEmMetros)).toFixed(2);
+    return validateResult((peso / (alturaEmMetros * alturaEmMetros)).toFixed(2), { min: 5, max: 200 });
 }
 
 export function calcularPesoIdealPorLorentz(altura, genero) {
+    altura = validateNumber(altura, 'altura');
+    validateChoice(genero, ['masculino', 'feminino']);
     let pesoIdeal = 0;
     if (genero === 'masculino') {
         pesoIdeal = (altura - 100) - ((altura - 150) / 4);
     } else if (genero === 'feminino') {
         pesoIdeal = (altura - 100) - ((altura - 150) / 2);
     }
-    return pesoIdeal.toFixed(1);
+    return validateResult(pesoIdeal.toFixed(1), { max: 635 });
 }
 
 export function calcularPesoIdealPorRobinson(altura, genero) {
+    altura = validateNumber(altura, 'altura');
+    validateChoice(genero, ['masculino', 'feminino']);
     let pesoIdeal = 0;
     const alturaEmPolegadas = converterCmParaPolegadas(altura);
     if (genero === "masculino") {
@@ -36,10 +44,12 @@ export function calcularPesoIdealPorRobinson(altura, genero) {
     } else if (genero === "feminino") {
         pesoIdeal = 49 + 1.7 * (alturaEmPolegadas - 60);
     }
-    return pesoIdeal.toFixed(1);
+    return validateResult(pesoIdeal.toFixed(1), { max: 635 });
 }
 
 export function calcularPesoIdealPorMiller(altura, genero) {
+    altura = validateNumber(altura, 'altura');
+    validateChoice(genero, ['masculino', 'feminino']);
     let pesoIdeal = 0;
     const alturaEmPolegadas = converterCmParaPolegadas(altura);
     if (genero === "masculino") {
@@ -47,10 +57,12 @@ export function calcularPesoIdealPorMiller(altura, genero) {
     } else if (genero === "feminino") {
         pesoIdeal = 53.1 + 1.36 * (alturaEmPolegadas - 60);
     }
-    return pesoIdeal.toFixed(1);
+    return validateResult(pesoIdeal.toFixed(1), { max: 635 });
 }
 
 export function calcularPesoIdealPorDevine(altura, genero) {
+    altura = validateNumber(altura, 'altura');
+    validateChoice(genero, ['masculino', 'feminino']);
     let pesoIdeal = 0;
     const alturaEmPolegadas = converterCmParaPolegadas(altura);
     if (genero === "masculino") {
@@ -58,42 +70,61 @@ export function calcularPesoIdealPorDevine(altura, genero) {
     } else if (genero === "feminino") {
         pesoIdeal = 45.5 + 2.3 * (alturaEmPolegadas - 60);
     }
-    return pesoIdeal.toFixed(1);
+    return validateResult(pesoIdeal.toFixed(1), { max: 635 });
 }
 
 export function calcularPesoIdealPorPeterson(altura) {
+    altura = validateNumber(altura, 'altura');
     const imcReferencia = 22;
-    return (2.2 * imcReferencia + 3.5 * imcReferencia * (altura / 100 - 1.5)).toFixed(1);
+    return validateResult((2.2 * imcReferencia + 3.5 * imcReferencia * (altura / 100 - 1.5)).toFixed(1), { max: 635 });
 }
 
 export function calcularTaxaMetabolicaBasalPorBenedict(idade, peso, altura, genero) {
+    idade = validateNumber(idade, 'idade');
+    peso = validateNumber(peso, 'peso');
+    altura = validateNumber(altura, 'altura');
+    validateChoice(genero, ['masculino', 'feminino']);
     let tmb;
     if (genero === "masculino") {
         tmb = (88.4 + 13.4 * peso) + (4.8 * altura) - (5.68 * idade);
     } else if (genero === "feminino") {
         tmb = (447.6 + 9.25 * peso) + (3.10 * altura) - (4.33 * idade);
     }
-    return Math.round(tmb);
+    return validateResult(Math.round(tmb), { max: 20000 });
 }
 
 export function calcularTaxaMetabolicaBasalPorMcArdle(peso, gorduraCorporal) {
+    peso = validateNumber(peso, 'peso');
+    gorduraCorporal = validateNumber(gorduraCorporal, 'gorduraCorporal');
     let massaCorporalMagra = (peso * (100 - (gorduraCorporal))) / 100;
     const tmb = 370 + (21.6 * massaCorporalMagra);
-    return Math.round(tmb);
+    return validateResult(Math.round(tmb), { max: 20000 });
 }
 
 export function calcularTaxaMetabolicaBasal(idade, peso, altura, genero, formulaCalorias, gorduraCorporal) {
+    idade = validateNumber(idade, 'idade');
+    peso = validateNumber(peso, 'peso');
+    altura = validateNumber(altura, 'altura');
+    gorduraCorporal = validateNumber(gorduraCorporal, 'gorduraCorporal');
+    validateChoice(genero, ['masculino', 'feminino']);
+    validateChoice(formulaCalorias, ['harris-benedict', 'katch-mcardle']);
     let resultado;
     if (formulaCalorias === 'harris-benedict') {
         resultado = calcularTaxaMetabolicaBasalPorBenedict(idade, peso, altura, genero);
     } else if (formulaCalorias === 'katch-mcardle') {
         resultado = calcularTaxaMetabolicaBasalPorMcArdle(peso, gorduraCorporal);
     }
-    return resultado;
+    return validateResult(resultado, { max: 20000 });
 }
 
 export function calcularCalorias(idade, peso, altura, genero,
     nivelAtividade, formulaCalorias, gorduraCorporal) {
+    idade = validateNumber(idade, 'idade');
+    peso = validateNumber(peso, 'peso');
+    altura = validateNumber(altura, 'altura');
+    gorduraCorporal = validateNumber(gorduraCorporal, 'gorduraCorporal');
+    validateChoice(genero, ['masculino', 'feminino']);
+    validateChoice(formulaCalorias, ['harris-benedict', 'katch-mcardle']);
 
     const tmb = calcularTaxaMetabolicaBasal(idade, peso, altura, genero, formulaCalorias, gorduraCorporal);
     let tmbNivelAtividade;
@@ -120,10 +151,11 @@ export function calcularCalorias(idade, peso, altura, genero,
     }
 
     const calorias = tmb * tmbNivelAtividade;
-    return Math.round(calorias);
+    return validateResult(Math.round(calorias), { max: 20000 });
 }
 
 export function calcularTotalCaloriasPorDieta(macroNutrientes, objetivoDieta) {
+    macroNutrientes = Number(validateResult(macroNutrientes));
     switch (objetivoDieta) {
         case "perda-peso-gradual":
             macroNutrientes -= 250;
@@ -142,11 +174,17 @@ export function calcularTotalCaloriasPorDieta(macroNutrientes, objetivoDieta) {
             break;
     }
 
-    return macroNutrientes;
+    return validateResult(macroNutrientes, { max: 20000 });
 }
 
 
 export function calcularNivelGorduraCorporal(altura, pescoco, cintura, quadril, genero) {
+    altura = validateNumber(altura, 'altura');
+    pescoco = validateNumber(pescoco, 'pescoco');
+    cintura = validateNumber(cintura, 'cintura');
+    if (genero === 'feminino') quadril = validateNumber(quadril, 'quadril');
+    validateChoice(genero, ['masculino', 'feminino']);
+    if ((genero === 'masculino' ? cintura - pescoco : cintura + quadril - pescoco) <= 0) throw new RangeError('Confira as circunferências: a combinação informada não permite calcular a gordura corporal.');
     let gorduraCorporal;
 
     if (genero === "masculino") {
@@ -157,10 +195,11 @@ export function calcularNivelGorduraCorporal(altura, pescoco, cintura, quadril, 
             495 / (1.29579 - 0.35004 * (Math.log(cintura + quadril - pescoco) / Math.log(10)) + 0.22100 * (Math.log(altura) / Math.log(10))) - 450;
     }
 
-    return gorduraCorporal.toFixed(1);
+    return validateResult(gorduraCorporal.toFixed(1), { max: 80 });
 }
 
 export function calcularGorduraCorporalIdeal(genero, gorduraCoporal) {
+    validateChoice(genero, ['masculino', 'feminino']);
     let categoria = " ... ";
 
     if (genero === "masculino") {
@@ -195,38 +234,48 @@ export function calcularGorduraCorporalIdeal(genero, gorduraCoporal) {
 }
 
 export function calcularMassaCorporalMagraPorBoer(peso, altura, genero) {
+    peso = validateNumber(peso, 'peso');
+    altura = validateNumber(altura, 'altura');
+    validateChoice(genero, ['masculino', 'feminino']);
     let massaCorporalMagra;
     if (genero === "masculino") {
         massaCorporalMagra = (0.407 * peso) + (0.267 * altura) - 19.2;
     } else if (genero === "feminino") {
         massaCorporalMagra = (0.252 * peso) + (0.473 * altura) - 48.3;
     }
-    return massaCorporalMagra.toFixed(1);
+    return validateResult(massaCorporalMagra.toFixed(1), { max: peso });
 }
 
 export function calcularMassaCorporalMagraPorHume(peso, altura, genero) {
+    peso = validateNumber(peso, 'peso');
+    altura = validateNumber(altura, 'altura');
+    validateChoice(genero, ['masculino', 'feminino']);
     let massaCorporalMagra = 0;
     if (genero === "masculino") {
         massaCorporalMagra = (0.328 * peso) + (0.339 * altura) - 29.53;
     } else if (genero === "feminino") {
         massaCorporalMagra = (0.295 * peso) + (0.418 * altura) - 43.293;
     }
-    return massaCorporalMagra.toFixed(1);
+    return validateResult(massaCorporalMagra.toFixed(1), { max: peso });
 }
 
 export function calcularMassaCorporalMagraPorJames(peso, altura, genero) {
+    peso = validateNumber(peso, 'peso');
+    altura = validateNumber(altura, 'altura');
+    validateChoice(genero, ['masculino', 'feminino']);
     let massaCorporalMagra = 0;
     if (genero === "masculino") {
         massaCorporalMagra = (1.1 * peso) - 128 * Math.pow(peso / altura, 2);
     } else if (genero === "feminino") {
         massaCorporalMagra = (1.07 * peso) - 148 * Math.pow(peso / altura, 2);
     }
-    return massaCorporalMagra.toFixed(1);
+    return validateResult(massaCorporalMagra.toFixed(1), { max: peso });
 }
 
 // A Sociedade Brasileira de Medicina do Esporte estabelece a ingestão de 1,6 a 1,7 g/kg
 // a cada dia, para atletas com o objetivo de ganho de massa muscular.
 export function calcularProteinas(peso, nivelAtividade) {
+    peso = validateNumber(peso, 'peso');
     let quantidadeProteinasMinima, quantidadeProteinasMaxima = 0;
 
     switch (nivelAtividade) {
@@ -255,11 +304,16 @@ export function calcularProteinas(peso, nivelAtividade) {
     const proteinasMinima = peso * quantidadeProteinasMinima;
     const proteinasMaxima = peso * quantidadeProteinasMaxima;
 
-    return [Math.round(proteinasMinima), Math.round(proteinasMaxima)];
+    return validateResult([Math.round(proteinasMinima), Math.round(proteinasMaxima)], { max: 1500, allowZero: true });
 }
 
 export function calcularCarboidratos(idade, peso, altura, genero,
     nivelAtividade, formulaTMB, gorduraCorporal, objetivoDieta = 'manutencao-peso') {
+    idade = validateNumber(idade, 'idade');
+    peso = validateNumber(peso, 'peso');
+    altura = validateNumber(altura, 'altura');
+    gorduraCorporal = validateNumber(gorduraCorporal, 'gorduraCorporal');
+    validateChoice(genero, ['masculino', 'feminino']);
 
     const caloriasBase = calcularCalorias(idade, peso, altura, genero,
         nivelAtividade, formulaTMB, gorduraCorporal);
@@ -270,12 +324,17 @@ export function calcularCarboidratos(idade, peso, altura, genero,
     const gramasMinimasCarboidratos = minimoCarboidratos / 4;
     const gramasMaximasCarboidratos = maximoCarboidratos / 4;
 
-    return [Math.round(gramasMinimasCarboidratos), Math.round(gramasMaximasCarboidratos)];
+    return validateResult([Math.round(gramasMinimasCarboidratos), Math.round(gramasMaximasCarboidratos)], { max: 20000 });
 }
 
 
 export function calcularGordurasSaudaveis(idade, peso, altura, genero,
     nivelAtividade, formulaTMB, gorduraCorporal, objetivoDieta = 'manutencao-peso') {
+    idade = validateNumber(idade, 'idade');
+    peso = validateNumber(peso, 'peso');
+    altura = validateNumber(altura, 'altura');
+    gorduraCorporal = validateNumber(gorduraCorporal, 'gorduraCorporal');
+    validateChoice(genero, ['masculino', 'feminino']);
 
     const caloriasBase = calcularCalorias(idade, peso, altura, genero,
         nivelAtividade, formulaTMB, gorduraCorporal);
@@ -286,18 +345,24 @@ export function calcularGordurasSaudaveis(idade, peso, altura, genero,
     const menorGramasGorduras = gordurasMinimas / 9;
     const maiorGramasGorduras = gordurasMaximas / 9;
 
-    return [Math.round(menorGramasGorduras), Math.round(maiorGramasGorduras)];
+    return validateResult([Math.round(menorGramasGorduras), Math.round(maiorGramasGorduras)], { max: 20000 });
 }
 
 
 
 export function calcularPotencialMaximoMuscularPorBerkhan(altura, gorduraCorporal) {
+    altura = validateNumber(altura, 'altura');
+    gorduraCorporal = validateNumber(gorduraCorporal, 'gorduraCorporal');
     // Altura - 100 é peso total a 5% de gordura; conserva-se a massa magra.
     const massaMagra = (altura - 100) * 0.95;
-    return (massaMagra / (1 - gorduraCorporal / 100)).toFixed(1);
+    return validateResult((massaMagra / (1 - gorduraCorporal / 100)).toFixed(1), { max: 635 });
 }
 
 export function calcularPotencialMaximoMuscularPorCaseyButt(altura, pulso, tornozelo, gorduraCorporal) {
+    altura = validateNumber(altura, 'altura');
+    pulso = validateNumber(pulso, 'pulso');
+    tornozelo = validateNumber(tornozelo, 'tornozelo');
+    gorduraCorporal = validateNumber(gorduraCorporal, 'gorduraCorporal');
     altura = converterCmParaPolegadas(altura);
     pulso = converterCmParaPolegadas(pulso);
     tornozelo = converterCmParaPolegadas(tornozelo);
@@ -308,10 +373,13 @@ export function calcularPotencialMaximoMuscularPorCaseyButt(altura, pulso, torno
     let pesoTotal = massaCorporalMagra;
     pesoTotal = converterLibrasParaKg(pesoTotal);
 
-    return pesoTotal.toFixed(1);
+    return validateResult(pesoTotal.toFixed(1), { max: 635 });
 }
 
 export function calcularMedidasMuscularesPorCaseyButt(altura, pulso, tornozelo) {
+    altura = validateNumber(altura, 'altura');
+    pulso = validateNumber(pulso, 'pulso');
+    tornozelo = validateNumber(tornozelo, 'tornozelo');
     altura = converterCmParaPolegadas(altura);
     pulso = converterCmParaPolegadas(pulso);
     tornozelo = converterCmParaPolegadas(tornozelo);
@@ -330,46 +398,59 @@ export function calcularMedidasMuscularesPorCaseyButt(altura, pulso, tornozelo) 
     coxa = converterPolegadasParaCm(coxa).toFixed(1);
     panturrilha = converterPolegadasParaCm(panturrilha).toFixed(1);
 
-    return [peito, braco, antebraco, pescoco, coxa, panturrilha];
+    return validateResult([peito, braco, antebraco, pescoco, coxa, panturrilha], { max: 20000 });
 }
 
 export function calcular1RepeticaoMaximaPorEpley(pesoLevantado, numeroRepeticoes) {
-    if (Number(numeroRepeticoes) === 1) return Number(pesoLevantado);
+    pesoLevantado = validateNumber(pesoLevantado, 'pesoLevantado');
+    numeroRepeticoes = validateNumber(numeroRepeticoes, 'numeroRepeticoes');
+    if (Number(numeroRepeticoes) === 1) return validateResult(Number(pesoLevantado), { max: 20000 });
     const repeticaoMaxima = pesoLevantado * (1 + 0.0333 * numeroRepeticoes);
-    return Math.round(repeticaoMaxima);
+    return validateResult(Math.round(repeticaoMaxima), { max: 20000 });
 }
 
 export function calcular1RepeticaoMaximaPorLander(pesoLevantado, numeroRepeticoes) {
-    if (Number(numeroRepeticoes) === 1) return Number(pesoLevantado);
+    pesoLevantado = validateNumber(pesoLevantado, 'pesoLevantado');
+    numeroRepeticoes = validateNumber(numeroRepeticoes, 'numeroRepeticoes');
+    if (Number(numeroRepeticoes) === 1) return validateResult(Number(pesoLevantado), { max: 20000 });
     const repeticaoMaxima = (100 * pesoLevantado) / (101.3 - 2.67123 * numeroRepeticoes);
-    return Math.round(repeticaoMaxima);
+    return validateResult(Math.round(repeticaoMaxima), { max: 20000 });
 }
 
 export function calcular1RepeticaoMaximaPorOConner(pesoLevantado, numeroRepeticoes) {
-    if (Number(numeroRepeticoes) === 1) return Number(pesoLevantado);
+    pesoLevantado = validateNumber(pesoLevantado, 'pesoLevantado');
+    numeroRepeticoes = validateNumber(numeroRepeticoes, 'numeroRepeticoes');
+    if (Number(numeroRepeticoes) === 1) return validateResult(Number(pesoLevantado), { max: 20000 });
     const repeticaoMaxima = pesoLevantado * (1 + 0.025 * numeroRepeticoes);
-    return Math.round(repeticaoMaxima);
+    return validateResult(Math.round(repeticaoMaxima), { max: 20000 });
 }
 
 export function calcular1RepeticaoMaximaPorLombardi(pesoLevantado, numeroRepeticoes) {
-    if (Number(numeroRepeticoes) === 1) return Number(pesoLevantado);
+    pesoLevantado = validateNumber(pesoLevantado, 'pesoLevantado');
+    numeroRepeticoes = validateNumber(numeroRepeticoes, 'numeroRepeticoes');
+    if (Number(numeroRepeticoes) === 1) return validateResult(Number(pesoLevantado), { max: 20000 });
     const repeticaoMaxima = pesoLevantado * Math.pow(numeroRepeticoes, 0.1);
-    return Math.round(repeticaoMaxima);
+    return validateResult(Math.round(repeticaoMaxima), { max: 20000 });
 }
 
 export function calcular1RepeticaoMaximaPorBrzycki(pesoLevantado, numeroRepeticoes) {
-    if (Number(numeroRepeticoes) === 1) return Number(pesoLevantado);
+    pesoLevantado = validateNumber(pesoLevantado, 'pesoLevantado');
+    numeroRepeticoes = validateNumber(numeroRepeticoes, 'numeroRepeticoes');
+    if (Number(numeroRepeticoes) === 1) return validateResult(Number(pesoLevantado), { max: 20000 });
     const repeticaoMaxima = pesoLevantado / (1.0278 - 0.0278 * numeroRepeticoes);
-    return Math.round(repeticaoMaxima);
+    return validateResult(Math.round(repeticaoMaxima), { max: 20000 });
 }
 
 export function calcular1RepeticaoMaximaPorWathen(pesoLevantado, numeroRepeticoes) {
-    if (Number(numeroRepeticoes) === 1) return Number(pesoLevantado);
+    pesoLevantado = validateNumber(pesoLevantado, 'pesoLevantado');
+    numeroRepeticoes = validateNumber(numeroRepeticoes, 'numeroRepeticoes');
+    if (Number(numeroRepeticoes) === 1) return validateResult(Number(pesoLevantado), { max: 20000 });
     const repeticaoMaxima = (100 * pesoLevantado) / (48.8 + 53.8 * Math.pow(Math.E, -0.075 * numeroRepeticoes));
-    return Math.round(repeticaoMaxima);
+    return validateResult(Math.round(repeticaoMaxima), { max: 20000 });
 }
 
 export function mostrarCargasRecomendadas1RepeticaoMaxima(peso1RepeticaoMaxima, tipoTreinamento) {
+    validateResult(peso1RepeticaoMaxima, { max: 1500 });
     let cargaMinima = 0, cargaMaxima = 0;
 
     switch (tipoTreinamento) {
@@ -397,11 +478,12 @@ export function mostrarCargasRecomendadas1RepeticaoMaxima(peso1RepeticaoMaxima, 
     const cargaMinimaRecomendada = peso1RepeticaoMaxima * cargaMinima;
     const cargaMaximaRecomendada = peso1RepeticaoMaxima * cargaMaxima;
 
-    return [Math.round(cargaMinimaRecomendada), Math.round(cargaMaximaRecomendada)];
+    return validateResult([Math.round(cargaMinimaRecomendada), Math.round(cargaMaximaRecomendada)], { max: 1500, allowZero: true });
 }
 
 /** Estimativa educativa para adultos saudáveis; extra do exercício é ilustrativo. */
 export function calcularQuantidadeAguaConsumida(peso, nivelAtividade = 'sedentario') {
+    peso = validateNumber(peso, 'peso');
     const pesoNumerico = Number(peso);
     if (!Number.isFinite(pesoNumerico) || pesoNumerico <= 0) {
         throw new RangeError('Informe um peso maior que zero.');
