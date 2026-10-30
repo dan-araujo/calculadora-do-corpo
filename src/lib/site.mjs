@@ -9,7 +9,7 @@ export const calculators = [
   { slug: 'massa-corporal-magra', title: 'Massa corporal magra', image: 'massa-corporal-magra.png', description: 'Compare estimativas de massa corporal magra a partir de peso, altura e sexo.' },
   { slug: 'carboidratos', title: 'Carboidratos', image: 'carboidratos2.png', description: 'Explore uma faixa estimada de carboidratos com base na energia diária.' },
   { slug: 'proteinas', title: 'Proteínas', image: 'proteinas2.png', description: 'Estime a ingestão de proteínas em função do peso e do tipo de atividade física.' },
-  { slug: 'gorduras-saudaveis', title: 'Gorduras na alimentação', image: 'manteiga-de-amendoim.png', description: 'Estime uma faixa de gorduras totais e conheça as diferentes fontes alimentares.' },
+  { slug: 'gorduras-saudaveis', title: 'Gorduras totais', image: 'gorduras2.png', description: 'Estime uma faixa de gorduras totais e conheça as diferentes fontes alimentares.' },
   { slug: 'consumo-agua', title: 'Consumo de água', image: 'agua.png', description: 'Estime o consumo diário de água com 35 ml por kg e entenda a hidratação no exercício.' },
 ];
 
