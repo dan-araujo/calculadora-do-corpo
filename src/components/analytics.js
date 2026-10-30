@@ -21,7 +21,7 @@ const snapshot = () => {
 
 export function AnalyticsPreferencesButton() {
   if (!enabled) return null;
-  return <button className="link-button" onClick={() => window.dispatchEvent(new Event('open-analytics-preferences'))}>Preferências de cookies</button>;
+  return <button className="botao-link" onClick={() => window.dispatchEvent(new Event('open-analytics-preferences'))}>Preferências de cookies</button>;
 }
 
 export default function Analytics() {
@@ -81,9 +81,9 @@ export default function Analytics() {
         setReady(true);
       }}
     />}
-    {(consent === 'pending' || preferencesOpen) && <section className="consent-panel" aria-label="Preferências de cookies">
+    {(consent === 'pending' || preferencesOpen) && <section className="painel-consentimento" aria-label="Preferências de cookies">
       <p>Utilizamos cookies opcionais para analisar o uso do site e melhorar sua experiência. Você pode aceitar ou recusar esses cookies a qualquer momento. Saiba mais em nossa <Link href="/privacidade/">Política de Privacidade</Link>.</p>
-      <div className="consent-actions">
+      <div className="acoes-consentimento">
         <button onClick={() => choose('rejected')}>Recusar cookies</button>
         <button onClick={() => choose('accepted')}>Aceitar cookies</button>
       </div>

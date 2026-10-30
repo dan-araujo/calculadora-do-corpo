@@ -1,7 +1,7 @@
 import { AnalyticsPreferencesButton } from '../components/analytics';
 
 export default function Privacidade() {
-  return <main><section className="informacoes"><div className="container-informacoes">
+  return <main><section className="informacoes"><div className="conteiner-informacoes">
     <h1>Privacidade</h1>
     <h2>Dados das calculadoras</h2>
     <p>Os cálculos são realizados no seu navegador. Este site não envia o peso, a idade, as medidas corporais ou os resultados preenchidos nas calculadoras para um banco de dados ou para o Google Analytics. Ao sair ou recarregar a página, os campos são reiniciados.</p>
