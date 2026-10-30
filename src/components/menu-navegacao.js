@@ -6,8 +6,8 @@ function MenuNavegacao() {
         <header>
             <nav className="navegacao">
                 <div>
-                    <Link href="/" className="brand" aria-label="Calculadora do Corpo — início">
-                        <Image src="/images/logo.png" alt="" width={40} height={40} className="logo" />
+                    <Link href="/" className="marca" aria-label="Calculadora do Corpo — início">
+                        <Image src="/images/logo.svg" alt="" width={40} height={40} className="logo" />
                         <span className="titulo-menu">Calculadora do Corpo</span>
                     </Link>
                 </div>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="Calculadora do Corpo: calculadora sorridente com teclas coloridas">
+  <defs>
+    <linearGradient id="case" x1="0" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#315779"/>
+      <stop offset="1" stop-color="#203B59"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#A4E8F3"/>
+      <stop offset="1" stop-color="#77D6E9"/>
+    </linearGradient>
+    <linearGradient id="lightKey" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E9F1F5"/>
+    </linearGradient>
+    <linearGradient id="yellowKey" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFE88B"/>
+      <stop offset="1" stop-color="#FFC958"/>
+    </linearGradient>
+    <linearGradient id="greenKey" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9BEACB"/>
+      <stop offset="1" stop-color="#59CDA7"/>
+    </linearGradient>
+    <linearGradient id="coralKey" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF9990"/>
+      <stop offset="1" stop-color="#FF716D"/>
+    </linearGradient>
+  </defs>
+  <!-- Compact, rounded silhouette; transparent outer background -->
+  <rect x="16" y="8" width="224" height="240" rx="36" fill="url(#case)"/>
+  <path d="M52 16h153c13 0 24 7 29 17" fill="none" stroke="#6485A0" stroke-width="3" opacity=".22" stroke-linecap="round"/>
+  <!-- Friendly, human-feeling face integrated into the display -->
+  <rect x="33" y="31" width="190" height="79" rx="21" fill="#142C44" opacity=".38"/>
+  <rect x="35" y="31" width="186" height="76" rx="20" fill="url(#screen)"/>
+  <path d="M48 42c21-13 60-9 80-9" fill="none" stroke="#F0FFFF" stroke-width="3" stroke-linecap="round" opacity=".30"/>
+  <ellipse cx="89" cy="69" rx="5.6" ry="8" fill="#203B59"/>
+  <ellipse cx="167" cy="69" rx="5.6" ry="8" fill="#203B59"/>
+  <ellipse cx="69" cy="85" rx="10" ry="6.5" fill="#FF827A" opacity=".95"/>
+  <ellipse cx="187" cy="85" rx="10" ry="6.5" fill="#FF827A" opacity=".95"/>
+  <path d="M112 77c8 13 24 13 32 0" fill="none" stroke="#203B59" stroke-width="7" stroke-linecap="round"/>
+  <!-- Four large, clear keys -->
+  <rect x="35" y="128" width="87" height="48" rx="15" fill="url(#lightKey)"/>
+  <rect x="134" y="128" width="87" height="48" rx="15" fill="url(#yellowKey)"/>
+  <rect x="35" y="186" width="87" height="48" rx="15" fill="url(#greenKey)"/>
+  <rect x="134" y="186" width="87" height="48" rx="15" fill="url(#coralKey)"/>
+  <!-- Slight top edging conveys dimension without compromising 32-px clarity -->
+  <path d="M50 131h56M149 131h55M50 189h56M149 189h55" fill="none" stroke="white" stroke-linecap="round" stroke-width="2" opacity=".32"/>
+  <!-- Mathematical symbols: sturdy, round stroke -->
+  <g fill="none" stroke="#263D57" stroke-linecap="round" stroke-linejoin="round" stroke-width="8.5">
+    <path d="M78.5 140v24 M66.5 152h24"/>
+    <path d="M160 152h35"/>
+    <path d="M69 198l20 24 M89 198l-20 24"/>
+    <path d="M160 204h35 M160 216h35"/>
+  </g>
+</svg>
