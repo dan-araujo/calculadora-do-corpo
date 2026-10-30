@@ -1,12 +1,15 @@
+import NumericInput from '../components/numeric-input';
+import CalculatorForm from '../components/calculator-form';
+import CalculatorHeader from '../components/calculator-header';
 import { useState } from "react";
 import { calcularPotencialMaximoMuscularPorBerkhan, calcularPotencialMaximoMuscularPorCaseyButt } from "../lib/calculadoras.mjs";
 import Image from "next/image";
 import AutoresPotencialMaximoMuscular from "../components/autores-potencial-muscular";
 
 export default function PotencialMaximoMuscular() {
-    const [altura, setAltura] = useState(0);
-    const [pulso, setPulso] = useState(0);
-    const [tornozelo, setTornozelo] = useState(0);
+    const [altura, setAltura] = useState('');
+    const [pulso, setPulso] = useState('');
+    const [tornozelo, setTornozelo] = useState('');
     const [gorduraCorporal, setGorduraCorporal] = useState(10);
     const [potencialMuscularPorBerkhan, setPotencialMuscularPorBerkhan] = useState(0);
     const [potencialMuscularPorCaseyButt, setPotencialMuscularPorCaseyButt] = useState(0);
@@ -26,73 +29,62 @@ export default function PotencialMaximoMuscular() {
 
     return (
         <main>
-            <article>
-                <section className="form-calculadora">
-                    <form onSubmit={calculoPotencialMaximoMuscular}>
-                        <h1>Calculadora de Potencial Máximo Muscular</h1>
-                        <p className="form-help">Modelos teóricos derivados de homens treinados. Os resultados não são metas de saúde nem limites do seu corpo.</p>
-                        <div className="input-linha">
-                            <label htmlFor="altura" className="input-label">
+            <article className="area-calculadora">
+                <section className="formulario-calculadora">
+                    <CalculatorForm onResetResult={() => setMostrarResultado(false)} onSubmit={calculoPotencialMaximoMuscular}>
+                        <CalculatorHeader title="Calculadora de Potencial Máximo Muscular" image="/images/musculos.png" />
+                        <p className="orientacao-formulario">Modelos teóricos derivados de homens treinados. Os resultados não são metas de saúde nem limites do seu corpo.</p>
+                        <div className="linha-campo">
+                            <label htmlFor="altura" className="rotulo-campo">
                                 Altura (cm):
                             </label>
-                            <input
-                                min={100}
-                                step="0.1"
+                            <NumericInput field="altura"
                                 id="altura"
-                                type="number"
                                 value={altura}
                                 onChange={(e) => setAltura(e.target.value)}
                                 required
-                                className="input-campo"
+                                className="campo-formulario"
                             />
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="pulso" className="input-label">
+                        <div className="linha-campo">
+                            <label htmlFor="pulso" className="rotulo-campo">
                                 Pulso (cm):
                             </label>
-                            <input min={0.1}
-                                step="0.1"
+                            <NumericInput field="pulso"
                                 id="pulso"
-                                type="number"
                                 value={pulso}
                                 onChange={(e) => setPulso(e.target.value)}
                                 required
-                                className="input-campo"
+                                className="campo-formulario"
                             />
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="tornozelo" className="input-label">
+                        <div className="linha-campo">
+                            <label htmlFor="tornozelo" className="rotulo-campo">
                                 Tornozelo (cm):
                             </label>
-                            <input min={0.1}
-                                step="0.1"
+                            <NumericInput field="tornozelo"
                                 id="tornozelo"
-                                type="number"
                                 value={tornozelo}
                                 onChange={(e) => setTornozelo(e.target.value)}
                                 required
-                                className="input-campo"
+                                className="campo-formulario"
                             />
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="gorduraCorporal" className="input-label">
+                        <div className="linha-campo">
+                            <label htmlFor="gorduraCorporal" className="rotulo-campo">
                                 Gordura Corporal (%):
                             </label>
-                            <input step="0.1" id="gorduraCorporal"
-                                type="number"
+                            <NumericInput field="gorduraCorporal" id="gorduraCorporal"
                                 value={gorduraCorporal}
-                                className="input-campo gorduraCorporal"
-                                min={5}
-                                max={80}
+                                className="campo-formulario gordura-corporal"
                                 onChange={(e) => setGorduraCorporal(e.target.value)}
                                 required
                             />
                         </div>
                         <button type="submit" className="botao-calcular">Calcular</button>
-                    </form>
+                    </CalculatorForm>
                 </section>
-                <Image src={"/images/musculos.png"} alt="" width={150} height={150}
-                    className="imagem-demo" />
+
                 <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
                     {potencialMuscularPorBerkhan !== 0 && (
                         <div>
@@ -109,7 +101,7 @@ export default function PotencialMaximoMuscular() {
                 </div>
             </article>
             <section className="informacoes">
-                <div className="container-informacoes">
+                <div className="conteiner-informacoes">
                     <h2>Por que pode ser útil você saber o seu Potencial Máximo Muscular?</h2>
                     <h3>Estabelecimento de metas realistas</h3>
                     <p>Compreender o seu potencial máximo muscular pode ajudá-lo a estabelecer

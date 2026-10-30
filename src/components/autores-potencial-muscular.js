@@ -115,9 +115,7 @@ export default function AutoresPotencialMaximoMuscular() {
                     2011,
                     <strong> An Interview with Casey Butt, Part 3 </strong>
                 </a>
-                <a href="https://www.flaticon.com/br/icones-gratis/" title="exercite-se ícones" target="_blank" rel="noopener noreferrer">
-                    - ícones criados por ultimatearm e justicon - flaticon
-                </a>
+
             </div>
         </section>
     )

@@ -1,11 +1,14 @@
+import NumericInput from '../components/numeric-input';
+import CalculatorForm from '../components/calculator-form';
+import CalculatorHeader from '../components/calculator-header';
 import { useState } from "react";
 import { calcularMassaCorporalMagraPorBoer, calcularMassaCorporalMagraPorHume, calcularMassaCorporalMagraPorJames } from "../lib/calculadoras.mjs";
 import Image from "next/image";
 import AutoresMassaCorporalMagra from "../components/autores-massa-corporal";
 
 export default function MassaCorporalMagra() {
-    const [peso, setPeso] = useState(0)
-    const [altura, setAltura] = useState(0);
+    const [peso, setPeso] = useState('')
+    const [altura, setAltura] = useState('');
     const [genero, setGenero] = useState('masculino');
     const [massaCorporalMagraPorBoer, setMassaMagraCorporalPorBoer] = useState(0);
     const [massaCorporalMagraPorHume, setMassaCorporalMagraPorHume] = useState(0);
@@ -26,48 +29,44 @@ export default function MassaCorporalMagra() {
 
     return (
         <main>
-            <article>
-                <section className="form-calculadora">
-                    <form onSubmit={calculoMassaCorporalMagra}>
-                        <h1>Calculadora de Massa Corporal Magra</h1>
-                        <div className="input-linha">
-                            <label htmlFor="peso" className="input-label">
+            <article className="area-calculadora">
+                <section className="formulario-calculadora">
+                    <CalculatorForm onResetResult={() => setMostrarResultado(false)} onSubmit={calculoMassaCorporalMagra}>
+                        <CalculatorHeader title="Calculadora de Massa Corporal Magra" image="/images/massa-corporal-halter.png" />
+                        <div className="linha-campo">
+                            <label htmlFor="peso" className="rotulo-campo">
                                 Peso (kg):
                             </label>
-                            <input step="0.1" min={0.1} id="peso" type="number" value={peso}
+                            <NumericInput field="peso" id="peso" value={peso}
                                 onChange={(e) => setPeso(e.target.value)}
-                                className="input-campo" required />
+                                className="campo-formulario" required />
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="altura" className="input-label">
+                        <div className="linha-campo">
+                            <label htmlFor="altura" className="rotulo-campo">
                                 Altura (cm):
                             </label>
-                            <input
-                                min={100}
-                                step="0.1"
+                            <NumericInput field="altura"
                                 id="altura"
-                                type="number"
                                 value={altura}
                                 onChange={(e) => setAltura(e.target.value)}
-                                className="input-campo" required />
+                                className="campo-formulario" required />
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="genero" className="input-label">Gênero:</label>
+                        <div className="linha-campo">
+                            <label htmlFor="genero" className="rotulo-campo">Gênero:</label>
                             <select
                                 id="genero"
                                 value={genero}
                                 onChange={(e) => setGenero(e.target.value)}
-                                className="input-campo select-formulario"
+                                className="campo-formulario seletor-formulario"
                             >
                                 <option value="masculino">Masculino</option>
                                 <option value="feminino">Feminino</option>
                             </select>
                         </div>
                         <button type="submit" className="botao-calcular">Calcular</button>
-                    </form>
+                    </CalculatorForm>
                 </section>
-                <Image src={"/images/massa-corporal-halter.png"} alt=""
-                    width={180} height={100} className="imagem-demo flex flex-row" />
+
                 <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
                     {massaCorporalMagraPorBoer !== 0 &&
                         (
@@ -91,7 +90,7 @@ export default function MassaCorporalMagra() {
                 </div>
             </article>
             <section className="informacoes">
-                <div className="container-informacoes">
+                <div className="conteiner-informacoes">
                     <h2>Porque é interessante saber quanto você tem de músculos?</h2>
                     <p>Os músculos ou massa corporal magra desempenham um papel fundamental em nosso corpo e são essenciais
                         para a nossa saúde e bem-estar. Eles não são apenas responsáveis por nos dar força e mobilidade,

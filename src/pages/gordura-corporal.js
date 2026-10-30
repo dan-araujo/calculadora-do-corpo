@@ -1,12 +1,14 @@
+import NumericInput from '../components/numeric-input';
+import CalculatorForm from '../components/calculator-form';
+import CalculatorHeader from '../components/calculator-header';
 import { useState } from "react";
 import { calcularNivelGorduraCorporal, calcularGorduraCorporalIdeal } from "../lib/calculadoras.mjs";
-import Image from "next/image";
 
 export default function GorduraCorporal() {
-    const [altura, setAltura] = useState(0);
-    const [pescoco, setPescoco] = useState(0);
-    const [cintura, setCintura] = useState(0);
-    const [quadril, setQuadril] = useState(0);
+    const [altura, setAltura] = useState('');
+    const [pescoco, setPescoco] = useState('');
+    const [cintura, setCintura] = useState('');
+    const [quadril, setQuadril] = useState('');
     const [genero, setGenero] = useState("masculino");
     const [gorduraCorporal, setGorduraCorporal] = useState(0);
     const [mostrarResultado, setMostrarResultado] = useState(false);
@@ -41,67 +43,58 @@ export default function GorduraCorporal() {
 
     return (
         <main>
-            <article>
-                <section className="form-calculadora">
-                    <form onSubmit={calculoGorduraCorporal}>
-                        <h1>Calculadora de Percentual de Gordura Corporal</h1>
-                        <div className="input-linha">
-                            <label htmlFor="altura" className="input-label">Altura (cm):</label>
-                            <input
-                                min={100}
-                                step="0.1"
+            <article className="area-calculadora">
+                <section className="formulario-calculadora">
+                    <CalculatorForm onResetResult={() => setMostrarResultado(false)} onSubmit={calculoGorduraCorporal}>
+                        <CalculatorHeader title="Calculadora de Percentual de Gordura Corporal" image="/images/gordura-corporal2.png" />
+                        <div className="linha-campo">
+                            <label htmlFor="altura" className="rotulo-campo">Altura (cm):</label>
+                            <NumericInput field="altura"
                                 id="altura"
-                                type="number"
                                 value={altura}
                                 onChange={(e) => setAltura(e.target.value)}
-                                className="input-campo" required />
+                                className="campo-formulario" required />
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="pescoco" className="input-label">Pescoço (cm):</label>
-                            <input min={0.1}
-                                step="0.1"
+                        <div className="linha-campo">
+                            <label htmlFor="pescoco" className="rotulo-campo">Pescoço (cm):</label>
+                            <NumericInput field="pescoco"
                                 id="pescoco"
-                                type="number"
                                 value={pescoco}
                                 onChange={(e) => setPescoco(e.target.value)}
-                                className="input-campo" required />
+                                className="campo-formulario" required />
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="cintura" className="input-label">Cintura (cm):</label>
-                            <input min={0.1}
-                                step="0.1"
+                        <div className="linha-campo">
+                            <label htmlFor="cintura" className="rotulo-campo">Cintura (cm):</label>
+                            <NumericInput field="cintura"
                                 id="cintura"
-                                type="number"
                                 value={cintura}
                                 onChange={(e) => setCintura(e.target.value)}
-                                className="input-campo" required />
+                                className="campo-formulario" required />
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="quadril" className="input-label">Quadril (cm):</label>
-                            <input min={0.1}
-                                step="0.1"
+                        <div className="linha-campo">
+                            <label htmlFor="quadril" className="rotulo-campo">Quadril (cm):</label>
+                            <NumericInput field="quadril"
                                 id="quadril"
-                                type="number"
                                 value={quadril}
                                 onChange={(e) => setQuadril(e.target.value)}
-                                className="input-campo" required />
+                                className="campo-formulario" required />
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="genero" className="input-label">Gênero:</label>
+                        <div className="linha-campo">
+                            <label htmlFor="genero" className="rotulo-campo">Gênero:</label>
                             <select
                                 id="genero"
                                 value={genero}
                                 onChange={(e) => setGenero(e.target.value)}
-                                className="input-campo select-formulario">
+                                className="campo-formulario seletor-formulario">
                                 <option value="masculino">Masculino</option>
                                 <option value="feminino">Feminino</option>
                             </select>
                         </div>
-                        {erro && <p className="form-error" role="alert">{erro}</p>}
+                        {erro && <p className="erro-formulario" role="alert">{erro}</p>}
                         <button type="submit" className="botao-calcular">Calcular</button>
-                    </form>
+                    </CalculatorForm>
                 </section>
-                <Image src={"/images/gordura-corporal2.png"} width={150} height={150} className="imagem-demo"  alt="" />
+
                 {gorduraCorporal !== 0 &&
                     <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
                         <div>
@@ -113,7 +106,7 @@ export default function GorduraCorporal() {
                 }
             </article>
             <section className="informacoes">
-                <div className="container-informacoes">
+                <div className="conteiner-informacoes">
                     <h2>Por que pode ser útil saber o nível de gordura corporal?</h2>
                     <h3>Saúde geral</h3>
                     <p>O excesso de gordura corporal está associado a uma série de problemas de saúde,
@@ -206,9 +199,7 @@ export default function GorduraCorporal() {
                         american physiological society,
                         1953
                     </a>
-                    <a href="https://www.flaticon.com/br/" title="ícone bf" target="_blank" rel="noopener noreferrer">
-                        - ícones criados por dDara e freepik - flaticon
-                    </a>
+
                 </div>
             </section>
         </main>

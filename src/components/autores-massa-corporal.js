@@ -69,9 +69,7 @@ export default function AutoresMassaCorporalMagra() {
                     <strong> Prediction of lean body mass from height and weight</strong>,
                     Journal of Clinical Pathology, 1966
                 </a>
-                <a href="https://www.flaticon.com/br/" title="musculo ícone" target="_blank" rel="noopener noreferrer">
-                    - ícones criados por justicon - flaticon
-                </a>
+
             </div>
         </section>
     )
