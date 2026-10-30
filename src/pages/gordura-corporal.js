@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { calcularNivelGorduraCorporal, calcularGorduraCorporalIdeal } from "./api/calculadoras";
+import { useState } from "react";
+import { calcularNivelGorduraCorporal, calcularGorduraCorporalIdeal } from "../lib/calculadoras.mjs";
 import Image from "next/image";
 
 export default function GorduraCorporal() {
@@ -10,6 +10,7 @@ export default function GorduraCorporal() {
     const [genero, setGenero] = useState("masculino");
     const [gorduraCorporal, setGorduraCorporal] = useState(0);
     const [mostrarResultado, setMostrarResultado] = useState(false);
+    const [erro, setErro] = useState("");
     const [categoria, setCategoria] = useState("");
 
     const calcularGorduraCorporal = (altura, pescoco, cintura, quadril, genero) => {
@@ -25,13 +26,18 @@ export default function GorduraCorporal() {
 
     const calculoGorduraCorporal = (e) => {
         e.preventDefault();
+        const medida = Number(cintura) + (genero === 'feminino' ? Number(quadril) : 0) - Number(pescoco);
+        if (medida <= 0) {
+            setErro('Confira as medidas: a combinação de cintura, quadril e pescoço não permite calcular o percentual.');
+            setMostrarResultado(false);
+            return;
+        }
+        setErro('');
         calcularGorduraCorporal(altura, pescoco, cintura, quadril, genero);
         setMostrarResultado(true);
     };
 
-    useEffect(() => {
-        calcularGorduraCorporal(altura, pescoco, cintura, quadril, genero);
-    }, [altura, pescoco, cintura, quadril, genero]);
+
 
     return (
         <main>
@@ -52,7 +58,7 @@ export default function GorduraCorporal() {
                         </div>
                         <div className="input-linha">
                             <label htmlFor="pescoco" className="input-label">Pescoço (cm):</label>
-                            <input
+                            <input min={0.1}
                                 step="0.1"
                                 id="pescoco"
                                 type="number"
@@ -62,7 +68,7 @@ export default function GorduraCorporal() {
                         </div>
                         <div className="input-linha">
                             <label htmlFor="cintura" className="input-label">Cintura (cm):</label>
-                            <input
+                            <input min={0.1}
                                 step="0.1"
                                 id="cintura"
                                 type="number"
@@ -72,7 +78,7 @@ export default function GorduraCorporal() {
                         </div>
                         <div className="input-linha">
                             <label htmlFor="quadril" className="input-label">Quadril (cm):</label>
-                            <input
+                            <input min={0.1}
                                 step="0.1"
                                 id="quadril"
                                 type="number"
@@ -91,10 +97,11 @@ export default function GorduraCorporal() {
                                 <option value="feminino">Feminino</option>
                             </select>
                         </div>
+                        {erro && <p className="form-error" role="alert">{erro}</p>}
                         <button type="submit" className="botao-calcular">Calcular</button>
                     </form>
                 </section>
-                <Image src={"/images/gordura-corporal2.png"} width={150} height={150} className="imagem-demo" />
+                <Image src={"/images/gordura-corporal2.png"} width={150} height={150} className="imagem-demo"  alt="" />
                 {gorduraCorporal !== 0 &&
                     <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
                         <div>
@@ -180,26 +187,26 @@ export default function GorduraCorporal() {
                         que poderá realizar a medição utilizando as ferramentas apropriadas para interpretar corretamente os resultados.</p>
                 </div>
                 <div className="fontes">
-                    <a href="https://blog.livup.com.br/gordura-corporal-nutri-explica-como-diminuir-o-percentual/" target="_blank">
+                    <a href="https://blog.livup.com.br/gordura-corporal-nutri-explica-como-diminuir-o-percentual/" target="_blank" rel="noopener noreferrer">
                         - Júlia Sommer Canabarro,
                         <strong> Gordura corporal: nutri explica como diminuir o percentual</strong>,
                         Blog LivUp,
                         2023
                     </a>
-                    <a href="https://www.e-publicacoes.uerj.br/index.php/demetra/article/view/48505" target="_blank">
+                    <a href="https://www.e-publicacoes.uerj.br/index.php/demetra/article/view/48505" target="_blank" rel="noopener noreferrer">
                         - Victor Nogueira da Cruz Silveira, Saul Campos da Silva, Luana Lopes Padilha,
                         <strong> Fatores associados ao elevado percentual de gordura corporal em indivíduos fisicamente ativos</strong>,
                         Demetra - Alimentação, Nutrição & Saúde,
                         2021
                     </a>
-                    <a href="https://journals.physiology.org/doi/abs/10.1152/physrev.1953.33.3.245" target="_blank">
+                    <a href="https://journals.physiology.org/doi/abs/10.1152/physrev.1953.33.3.245" target="_blank" rel="noopener noreferrer">
                         - Ancel Keys, and Josef BroŽek,
                         <strong> Body Fat in Adult Man</strong>,
                         Physiological Reviews,
                         american physiological society,
                         1953
                     </a>
-                    <a href="https://www.flaticon.com/br/" title="ícone bf" target="_blank">
+                    <a href="https://www.flaticon.com/br/" title="ícone bf" target="_blank" rel="noopener noreferrer">
                         - ícones criados por dDara e freepik - flaticon
                     </a>
                 </div>
