@@ -1,11 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-}
-
 module.exports = {
-    async rewrites() {
-        return [
-            
-        ]
-    },
-}
+  output: 'export',
+  trailingSlash: true,
+  images: { unoptimized: true },
+  poweredByHeader: false,
+};
