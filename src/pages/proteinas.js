@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { calcularProteinas, calcularTotalProteinasPorDieta } from "./api/calculadoras";
+import { calcularProteinas } from "../lib/calculadoras.mjs";
 import Image from "next/image";
 
 export default function Proteinas() {
@@ -45,13 +45,13 @@ export default function Proteinas() {
                         <h1>Calculadora de Proteínas</h1>
                         <div className="input-linha">
                             <label htmlFor="peso" className="input-label">Peso (kg):</label>
-                            <input type="number" value={peso}
+                            <input step="0.1" min={0.1} id="peso" type="number" value={peso}
                                 onChange={(e) => setPeso(e.target.value)}
                                 className="input-campo" required />
                         </div>
                         <div className="input-linha">
                             <label htmlFor="nivelAtividade" className="input-label labels-select">Nível de Atividade:</label>
-                            <select value={nivelAtividade}
+                            <select id="nivelAtividade" value={nivelAtividade}
                                 onChange={(e) => setNivelAtividade(e.target.value)}
                                 className="input-campo select-formulario">
                                 <option value="sedentario">
@@ -94,7 +94,7 @@ export default function Proteinas() {
                     </form>
                 </section>
                 <Image src={"/images/proteinas.png"} width={150} height={150}
-                    className="imagem-demo" />
+                    className="imagem-demo"  alt="" />
                 <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
                     <h3>☑️ A Ingestão Diária Recomendada
                         é que as proteínas estejam entre 12% a 15% das necessidades calóricas.</h3>
@@ -158,7 +158,7 @@ export default function Proteinas() {
                         por quilograma de peso corporal por dia, dependendo do tipo e intensidade do treinamento.
                         É importante lembrar que essas são diretrizes gerais e as necessidades individuais podem variar.</p>
 
-                    <p>Quanto às calorias, cada grama de proteína fornece aproximadamente 
+                    <p>Quanto às calorias, cada grama de proteína fornece aproximadamente
                         <span className="text-pentagramBlue"> 4 calorias. </span>
                         Isso é igual ao número de calorias fornecidas por cada grama de carboidratos. No entanto,
                         as gorduras fornecem cerca de 9 calorias por grama,
@@ -174,7 +174,7 @@ export default function Proteinas() {
                     <hr />
                     <div className="fontes">
                         <small className="text-sm font-semibold">Referências:</small>
-                        <a href="https://pubmed.ncbi.nlm.nih.gov/24477298/" target="_blank">
+                        <a href="https://pubmed.ncbi.nlm.nih.gov/24477298/" target="_blank" rel="noopener noreferrer">
                             - Madonna M Mamerow, Joni A Mettler, Kirk L English, Shanon L Casperson,
                             Emily Arentson-Lantz, Melinda Sheffield-Moore, Donald K Layman, Douglas Paddon-Jones,
                             <strong> Dietary protein distribution positively
@@ -182,28 +182,28 @@ export default function Proteinas() {
                             Journal of Nutrition,
                             2014
                         </a>
-                        <a href="https://www.atletis.com.br/quantidade-proteina-dia" target="_blank">
+                        <a href="https://www.atletis.com.br/quantidade-proteina-dia" target="_blank" rel="noopener noreferrer">
                             - Redação Atletis,
                             <strong> Descubra a quantidade ideal de proteína por dia</strong>,
                             Atletis Blog,
                             2022
                         </a>
                         <a href="https://www.health.harvard.edu/blog/how-much-protein-do-you-need-every-day-201506188096"
-                            target="_blank">
+                            target="_blank" rel="noopener noreferrer">
                             - Harvard Health Publishing Staff,
                             <strong> How much protein do you need every day?</strong>,
                             Harvard Medical School,
                             2022
                         </a>
                         <a href="https://efdeportes.com/efd185/proteina-recomendada-para-hipertrofia-muscular.htm"
-                            target="_blank">
+                            target="_blank" rel="noopener noreferrer">
                             - Jorge Auri Flores Filho, Alexandre Luis da Silva Ritter, Anderson da Silva Garcez,
                             <strong> Quantidade de proteína recomendada para hipertrofia muscular: uma breve revisão</strong>,
                             efdesportes,
                             Lecturas: Educación Física y Deportes,
                             2013
                         </a>
-                        <a href="https://www.flaticon.com/free-icons/protein" title="protein icon" target="_blank">
+                        <a href="https://www.flaticon.com/free-icons/protein" title="protein icon" target="_blank" rel="noopener noreferrer">
                             -  icones criados por flat icons - flaticon</a>
                     </div>
                 </div>
