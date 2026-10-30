@@ -19,7 +19,7 @@ export default function AutoresPesoIdeal() {
                 </span>
                 <p>O IMC<em className="mr-1"><sub>objetivo </sub></em> na fórmula é onde se deve colocar o IMC que a
                     pessoa pretende ter ao atingir o peso ideal,
-                    como padrão foi colocado o valor 22, e também a altura sendo calculada em centímetros
+                    como padrão foi colocado o valor 22, para ambos os sexos. A altura informada em centímetros é convertida para metros antes do cálculo
                 </p>
             </div>
 
@@ -47,19 +47,15 @@ export default function AutoresPesoIdeal() {
                 <p>De acordo com a fórmula de Miller, o peso corporal ideal é calculado da seguinte maneira:</p>
                 <p className="homens">Homens:</p>
                 <span className="texto-destaque">
-                    Peso Ideal (kg) = 56,2 kg + 1,41 kg por cada centímetro acima de 5 pés (152,4 cm).
+                    Peso Ideal (kg) = 56,2 kg + 1,41 kg por cada polegada acima de 5 pés (152,4 cm).
                 </span>
                 <p className="mulheres">Mulheres:</p>
                 <span className="texto-destaque">
-                    Peso Ideal (kg) = 53,1 kg + 1,36 kg por cada centímetro acima de 5 pés (152,4 cm).
+                    Peso Ideal (kg) = 53,1 kg + 1,36 kg por cada polegada acima de 5 pés (152,4 cm).
                 </span>
                 <p>Vale ressaltar que 1 pé (1ft) é igual a 12 polegadas (12 inches), então a altura é convertida em
                     polegadas antes de aplicar a fórmula.</p>
-                <p>Por exemplo, se uma mulher tem uma altura de 5 pés (5 ft),
-                    seria definido os primeiros 5 pés (52,9 kgs) + as 2 polegadas (inches) subsequentes
-                    (2 &times; 1,41 kg) = 56 kg</p>
-                <p>Portanto, de acordo com a fórmula de Miller, o peso corporal ideal para uma mulher com 5 pés
-                    polegadas (152 cm) seria de aproximadamente 52,9 kgs.</p>
+                <p>Por exemplo, para uma mulher com 5 pés e 2 polegadas (157,48 cm), a estimativa de Miller é 53,1 + 2 × 1,36 = 55,82 kg.</p>
             </div>
 
             <div id="devine">
@@ -84,10 +80,7 @@ export default function AutoresPesoIdeal() {
 
             <div id="lorentz">
                 <h4>O que é a Fórmula de Lorentz?</h4>
-                <p>É uma fórmula simples que estima o peso corporal ideal subtraindo uma
-                    determinada quantidade da altura criada pelo matemático Lorentz em 2009. Ela não leva em consideração outros fatores,
-                    como a composição corporal, idade, sexo ou distribuição de gordura.
-                </p>
+                <p>A fórmula de Lorentz estima um peso de referência a partir da altura, com coeficientes diferentes para homens e mulheres. Ela não considera diretamente a composição corporal nem o histórico clínico.</p>
                 <p>Os valores padrão no final da fórmula são definidos 4 para homens e 2 para mulheres</p>
                 <p>A fórmula de Lorentz é a seguinte:</p>
                 <p className="homens">Homens:</p>
@@ -113,56 +106,56 @@ export default function AutoresPesoIdeal() {
 
             <div className="fontes">
                 <small className="referencias">Referências:</small>
-                <a href="https://pubmed.ncbi.nlm.nih.gov/6869387/" target="_blank">
+                <a href="https://pubmed.ncbi.nlm.nih.gov/6869387/" target="_blank" rel="noopener noreferrer">
                     - J D Robinson, S M Lupkiewicz, L Palenik, L M Lopez, M Ariet,
                     <strong> Determination of ideal body weight for drug dosage calculations</strong>,
                     National Library of Medicine,
                     2016
                 </a>
-                <a href="https://pubmed.ncbi.nlm.nih.gov/10981254/" target="_blank">
+                <a href="https://pubmed.ncbi.nlm.nih.gov/10981254/" target="_blank" rel="noopener noreferrer">
                     -  M P Pai, F P Paloucek,
                     <strong> The origin of the "ideal" body weight equations </strong>,
                     National Library of Medicine,
                     2000
                 </a>
-                <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4841935/" target="_blank">
+                <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4841935/" target="_blank" rel="noopener noreferrer">
                     - Courtney M Peterson, Diana M Thomas, George L Blackburn, and Steven B Heymsfield,
                     <strong> Universal equation for estimating ideal body weight and body weight at any BMI</strong>,
                     National Library of Medicine,
                     2016
                 </a>
-                <a href="https://halls.md/ideal-weight-formulas-broca-devine/" target="_blank">
+                <a href="https://halls.md/ideal-weight-formulas-broca-devine/" target="_blank" rel="noopener noreferrer">
                     - Dr Halls,
                     <strong> Ideal weight formulas by Broca and Devine</strong>,
                     halls.md Moose & Doc,
                     2019
                 </a>
-                <a href="https://link.springer.com/article/10.1007/s11605-015-2910-4" target="_blank">
+                <a href="https://link.springer.com/article/10.1007/s11605-015-2910-4" target="_blank" rel="noopener noreferrer">
                     - Michael R. Kammerer, Michelle M. Porter, Alec C. Beekley & David S. Tichansky,
                     <strong> Ideal Body Weight Calculation in the Bariatric Surgical Population</strong>,
                     Springer Link,
                     2015
                 </a>
-                <a href="https://pt.wikipedia.org/wiki/F%C3%B3rmula_de_Lorentz" target="_blank">
+                <a href="https://pt.wikipedia.org/wiki/F%C3%B3rmula_de_Lorentz" target="_blank" rel="noopener noreferrer">
                     - Fórmula de Lorentz,
                     Wikipépdia - A enciclópedia livre,
                     pt.wikipedia.org,
                     2022
                 </a>
-                <a href="https://doi.org/10.1007/978-3-211-89836-9_803" target="_blank">
+                <a href="https://doi.org/10.1007/978-3-211-89836-9_803" target="_blank" rel="noopener noreferrer">
                     - Nahler G.,
                     <strong> Lorentz-formula. In: Dictionary of Pharmaceutical Medicine</strong>,
                     Publisher:  Springer, Vienna,
                     2009</a>
                 <a href="https://www.jobese.org/articles/formulas-for-determining-ideal-weight-and-its-relationship-to-the-body-mass-index-in-adults.pdf"
-                    target="_blank">
+                    target="_blank" rel="noopener noreferrer">
                     - Gerardo Jose Bauce, Mary Zulay, Moya-Sifontes,
                     <strong> Formulas for Determining Ideal Weight and Its Relationship to the Body Mass Index in Adults</strong>,
                     Obese,
                     jobese.org,
                     2021
                 </a>
-                <a href="https://www.flaticon.com/br/" title="peso ícones" target="_blank">
+                <a href="https://www.flaticon.com/br/" title="peso ícones" target="_blank" rel="noopener noreferrer">
                     - ícones criados por freepik - flaticon
                 </a>
             </div>

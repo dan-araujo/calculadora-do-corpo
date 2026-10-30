@@ -5,9 +5,9 @@ import {
     calcularPesoIdealPorRobinson,
     calcularPesoIdealPorDevine,
     calcularPesoIdealPorPeterson
-} from "./api/calculadoras";
+} from "../lib/calculadoras.mjs";
 import Image from "next/image";
-import AutoresPesoIdeal from "./autores-peso-ideal";
+import AutoresPesoIdeal from "../components/autores-peso-ideal";
 
 export default function PesoIdeal() {
     const [altura, setAltura] = useState("");
@@ -22,11 +22,11 @@ export default function PesoIdeal() {
     const calculoPesoIdeal = async (e) => {
         e.preventDefault();
 
-        const pesoFormulaPeterson = calcularPesoIdealPorPeterson(parseInt(altura), genero);
-        const pesoFormulaLorentz = calcularPesoIdealPorLorentz(parseInt(altura), genero);
-        const pesoFormulaRobinson = calcularPesoIdealPorRobinson(parseInt(altura), genero);
-        const pesoFormulaMiller = calcularPesoIdealPorMiller(parseInt(altura), genero);
-        const pesoFormulaDevine = calcularPesoIdealPorDevine(parseInt(altura), genero);
+        const pesoFormulaPeterson = calcularPesoIdealPorPeterson(parseFloat(altura), genero);
+        const pesoFormulaLorentz = calcularPesoIdealPorLorentz(parseFloat(altura), genero);
+        const pesoFormulaRobinson = calcularPesoIdealPorRobinson(parseFloat(altura), genero);
+        const pesoFormulaMiller = calcularPesoIdealPorMiller(parseFloat(altura), genero);
+        const pesoFormulaDevine = calcularPesoIdealPorDevine(parseFloat(altura), genero);
 
         setPesoIdealPorPeterson(pesoFormulaPeterson);
         setPesoIdealPorLorentz(pesoFormulaLorentz);
@@ -73,29 +73,29 @@ export default function PesoIdeal() {
                         <button type="submit" className="botao-calcular">Calcular</button>
                     </form>
                 </section>
-                <Image src={"/images/escala-de-peso.png"} width={130} height={130} className="imagem-demo" />          
+                <Image src={"/images/escala-de-peso.png"} width={130} height={130} className="imagem-demo"  alt="" />
                     {pesoIdealPorLorentz !== "" && (
                         <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
-                            <h3 className="text-xl">O seu peso ideal está entre:</h3>          
+                            <h3 className="text-xl">O seu peso ideal está entre:</h3>
                             <div className="flex flex-row justify-center">
                                 <h2 className="text-2xl mr-1">Peterson: {pesoIdealPorPeterson} kgs</h2>
-                                <a href="#peterson"><Image src={"/images/interrogacao.png"} width={16} height={16} /></a>
+                                <a aria-label="Entenda a fórmula" href="#peterson"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
                             </div>
                             <div className="flex flex-row justify-center">
                             <h2 className="text-2xl mr-1">Robinson: {pesoIdealPorRobinson} kgs</h2>
-                            <a href="#robinson"><Image src={"/images/interrogacao.png"} width={16} height={16} /></a>
+                            <a aria-label="Entenda a fórmula" href="#robinson"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
                             </div>
                             <div className="flex flex-row justify-center">
                             <h2 className="text-2xl mr-1">Miller: {pesoIdealPorMiller} kgs</h2>
-                            <a href="#miller"><Image src={"/images/interrogacao.png"} width={16} height={16} /></a>
+                            <a aria-label="Entenda a fórmula" href="#miller"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
                             </div>
                             <div className="flex flex-row justify-center">
                             <h2 className="text-2xl mr-1">Devine: {pesoIdealPorDevine} kgs</h2>
-                            <a href="#devine"><Image src={"/images/interrogacao.png"} width={16} height={16} /></a>
+                            <a aria-label="Entenda a fórmula" href="#devine"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
                             </div>
                             <div className="flex flex-row justify-center">
                             <h2 className="text-2xl mr-1">Lorentz: {pesoIdealPorLorentz} kgs</h2>
-                            <a href="#lorentz"><Image src={"/images/interrogacao.png"} width={16} height={16} /></a>
+                            <a aria-label="Entenda a fórmula" href="#lorentz"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
                             </div>
                         </div>
                     )
