@@ -71,7 +71,7 @@ O código do site não envia peso, idade, medidas corporais ou resultados ao Ana
 ## Publicação na Vercel
 
 1. Selecione como pasta raiz aquela que contém este `package.json`.
-2. Use Node.js 24, comando de build `npm run build` e diretório de saída `out`.
+2. Use Node.js 24, **Framework Preset: Other**, comando de build `npm run build` e diretório de saída `out`. O `vercel.json` define `framework: null` para publicar a exportação como site estático, sem o adaptador de Next.js. Isso evita que a Vercel procure arquivos internos como `routes-manifest.json` dentro de `out/`.
 3. Em Production, confira os dois valores de ambiente listados acima. O `.env` já os fornece quando não há substituições no painel.
 4. Em Preview e Development, defina `NEXT_PUBLIC_GA_ID` vazio para não misturar testes com acessos reais.
 5. Após publicar, confira as calculadoras, `/sitemap.xml`, `/robots.txt` e o arquivo de verificação do Google. No Search Console, cadastre o site como **Prefixo do URL** e envie `sitemap.xml`.
