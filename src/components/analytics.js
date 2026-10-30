@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import Script from 'next/script';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { scheduleIdleAfterLoad } from '../lib/schedule-idle.mjs';
 
 const gaId = process.env.NEXT_PUBLIC_GA_ID;
 const enabled = /^G-[A-Z0-9]+$/.test(gaId || '');
@@ -22,6 +23,21 @@ const snapshot = () => {
 export function AnalyticsPreferencesButton() {
   if (!enabled) return null;
   return <button className="botao-link" onClick={() => window.dispatchEvent(new Event('open-analytics-preferences'))}>Preferências de cookies</button>;
+}
+
+function DeferredAnalyticsScript({ onReady }) {
+  const [idle, setIdle] = useState(false);
+
+  useEffect(() => scheduleIdleAfterLoad(() => {
+    if (snapshot() === 'accepted') setIdle(true);
+  }), []);
+
+  return idle ? <Script
+    id="google-analytics"
+    src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+    strategy="afterInteractive"
+    onReady={onReady}
+  /> : null;
 }
 
 export default function Analytics() {
@@ -48,11 +64,11 @@ export default function Analytics() {
   }, [consent, ready, pathname]);
 
   function choose(value) {
+    if (value === 'rejected') window[`ga-disable-${gaId}`] = true;
     try { localStorage.setItem(preferenceKey, value); } catch { /* Sem armazenamento, a medição permanece desativada. */ }
     window.dispatchEvent(new Event('analytics-preference'));
     setPreferencesOpen(false);
     if (value === 'rejected' && ready) {
-      window[`ga-disable-${gaId}`] = true;
       // Apaga cookies de medição no host e nos domínios ancestrais permitidos.
       const hostParts = location.hostname.split('.');
       for (const cookie of document.cookie.split(';')) {
@@ -69,11 +85,13 @@ export default function Analytics() {
 
   if (!enabled) return null;
   return <>
-    {consent === 'accepted' && <Script
-      id="google-analytics"
-      src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-      strategy="afterInteractive"
+    {consent === 'accepted' && <DeferredAnalyticsScript
       onReady={() => {
+        if (snapshot() !== 'accepted') {
+          window[`ga-disable-${gaId}`] = true;
+          return;
+        }
+        window[`ga-disable-${gaId}`] = false;
         window.dataLayer = window.dataLayer || [];
         window.gtag = function () { window.dataLayer.push(arguments); };
         window.gtag('js', new Date());
@@ -82,7 +100,7 @@ export default function Analytics() {
       }}
     />}
     {(consent === 'pending' || preferencesOpen) && <section className="painel-consentimento" aria-label="Preferências de cookies">
-      <p>Utilizamos cookies opcionais para analisar o uso do site e melhorar sua experiência. Você pode aceitar ou recusar esses cookies a qualquer momento. Saiba mais em nossa <Link href="/privacidade/">Política de Privacidade</Link>.</p>
+      <p>Utilizamos cookies opcionais para analisar o uso do site e melhorar sua experiência. Você pode aceitar ou recusar esses cookies a qualquer momento. Saiba mais em nossa <Link href="/privacidade/" prefetch={false}>Política de Privacidade</Link>.</p>
       <div className="acoes-consentimento">
         <button onClick={() => choose('rejected')}>Recusar cookies</button>
         <button onClick={() => choose('accepted')}>Aceitar cookies</button>
