@@ -1,5 +1,7 @@
+import NumericInput from '../components/numeric-input';
+import CalculatorForm from '../components/calculator-form';
+import CalculatorHeader from '../components/calculator-header';
 import { useState } from 'react';
-import Image from 'next/image';
 import { calcularQuantidadeAguaConsumida } from '../lib/calculadoras.mjs';
 
 const litros = ml => `${(ml / 1000).toLocaleString('pt-BR', { maximumFractionDigits: 3 })} L`;
@@ -21,43 +23,43 @@ export default function ConsumoAgua() {
   function mudarAtividade(value) { setNivelAtividade(value); setResultado(null); }
 
   return <main>
-    <article>
-      <section className="form-calculadora">
-        <form onSubmit={calcular}>
-          <h1>Calculadora de consumo de água</h1>
-          <p className="form-help" id="escopo-agua">Estimativa educativa para adultos saudáveis. Use o peso habitual como referência.</p>
-          <div className="input-linha">
-            <label htmlFor="peso" className="input-label">Peso (kg):</label>
-            <input id="peso" type="number" inputMode="decimal" min="0.1" step="0.1" value={peso} onChange={e => mudarPeso(e.target.value)} required className="input-campo" aria-describedby="escopo-agua" />
+    <article className="area-calculadora">
+      <section className="formulario-calculadora">
+        <CalculatorForm onResetResult={() => setResultado(null)} onSubmit={calcular}>
+          <CalculatorHeader title="Calculadora de consumo de água" image="/images/agua.png" />
+          <p className="orientacao-formulario" id="escopo-agua">Estimativa educativa para adultos saudáveis. Use o peso habitual como referência.</p>
+          <div className="linha-campo">
+            <label htmlFor="peso" className="rotulo-campo">Peso (kg):</label>
+            <NumericInput field="peso" id="peso" value={peso} onChange={e => mudarPeso(e.target.value)} required className="campo-formulario" aria-describedby="escopo-agua" />
           </div>
-          <div className="input-linha">
-            <label htmlFor="nivelAtividade" className="input-label">Atividade física:</label>
-            <select id="nivelAtividade" value={nivelAtividade} onChange={e => mudarAtividade(e.target.value)} className="input-campo select-formulario">
+          <div className="linha-campo">
+            <label htmlFor="nivelAtividade" className="rotulo-campo">Atividade física:</label>
+            <select id="nivelAtividade" value={nivelAtividade} onChange={e => mudarAtividade(e.target.value)} className="campo-formulario seletor-formulario">
               <option value="sedentario">Sem exercício no dia</option>
               <option value="ativo">Com exercício no dia</option>
             </select>
           </div>
-          <p className="form-help">A base é de 35 ml/kg. Para um dia com exercício, mostramos também uma simulação de 500 ml a 1 L adicionais; a reposição real precisa considerar as perdas de suor.</p>
-          {erro && <p className="form-error" role="alert">{erro}</p>}
+          <p className="orientacao-formulario">A base é de 35 ml/kg. Para um dia com exercício, mostramos também uma simulação de 500 ml a 1 L adicionais; a reposição real precisa considerar as perdas de suor.</p>
+          {erro && <p className="erro-formulario" role="alert">{erro}</p>}
           <button type="submit">Calcular</button>
-        </form>
+        </CalculatorForm>
       </section>
-      <Image src="/images/agua.png" alt="" width={150} height={150} className="imagem-demo" />
+
       <div role="status" aria-live="polite" aria-atomic="true">
         {resultado && <section className="resultado">
           <h2>Estimativa diária de referência</h2>
-          <p className="result-value">{litros(resultado.base)}</p>
+          <p className="valor-resultado">{litros(resultado.base)}</p>
           <p>{resultado.base.toLocaleString('pt-BR')} ml, calculados com 35 ml por kg.</p>
           {resultado.minimo !== resultado.maximo && <>
             <h3>Simulação para um dia com exercício</h3>
-            <p className="result-value">{litros(resultado.minimo)} a {litros(resultado.maximo)}</p>
+            <p className="valor-resultado">{litros(resultado.minimo)} a {litros(resultado.maximo)}</p>
             <p>Base mais 500 ml a 1 L. Essa faixa é ilustrativa e não define sua necessidade individual durante ou após o treino.</p>
           </>}
-          <p className="form-help">Distribua a ingestão ao longo do dia. A necessidade varia com clima, alimentação e condições de saúde.</p>
+          <p className="orientacao-formulario">Distribua a ingestão ao longo do dia. A necessidade varia com clima, alimentação e condições de saúde.</p>
         </section>}
       </div>
     </article>
-    <section className="informacoes"><div className="container-informacoes">
+    <section className="informacoes"><div className="conteiner-informacoes">
       <h2>Por que beber água é importante?</h2>
       <p>A água participa do transporte de nutrientes, da digestão e da eliminação de resíduos. Ela também ajuda a regular a temperatura corporal, especialmente quando perdemos líquido pelo suor. Manter a hidratação faz parte do cuidado diário com o funcionamento do organismo.</p>
       <h3>Quanto de água beber por dia?</h3>
