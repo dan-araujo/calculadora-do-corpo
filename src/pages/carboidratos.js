@@ -1,3 +1,4 @@
+import CalculatorResult from '../components/calculator-result';
 import NumericInput from '../components/numeric-input';
 import CalculatorForm from '../components/calculator-form';
 import CalculatorHeader from '../components/calculator-header';
@@ -116,8 +117,8 @@ export default function Carboidratos() {
                                 </option>
                             </select>
                         </div>
-                        <h3 className="subtitulo-tmb">Fórmula de estimativa para a Taxa Metabólica Basal:</h3>
-                        <div className="grupo-formulas">
+                        <h3 id="titulo-formulas" className="subtitulo-tmb">Fórmula de estimativa para a Taxa Metabólica Basal:</h3>
+                        <div className="grupo-formulas" role="radiogroup" aria-labelledby="titulo-formulas">
 <div className="opcao-formula">
                             <input type="radio"
                                 id="harris-benedict"
@@ -127,7 +128,7 @@ export default function Carboidratos() {
                                 checked={formulaTMB === 'harris-benedict'}
                             />
                             <label htmlFor="harris-benedict">Harris-Benedict</label>
-                            <a href="#benedict" className="ajuda-benedict">?</a>
+                            <a href="#benedict" className="ajuda-benedict" aria-label="Entenda a fórmula de Harris-Benedict">?</a>
                         </div>
                         <div className="opcao-formula">
                             <input type="radio"
@@ -138,7 +139,7 @@ export default function Carboidratos() {
                                 checked={formulaTMB === 'katch-mcardle'}
                             />
                             <label htmlFor="katch-mcardle">Katch-McArdle</label>
-                            <a href="#mcardle" className="ajuda-mcardle">?</a>
+                            <a href="#mcardle" className="ajuda-mcardle" aria-label="Entenda a fórmula de Katch-McArdle">?</a>
                             <NumericInput id="gorduraCorporal" field="gorduraCorporal"
                                 aria-label="Gordura corporal (%)" value={gorduraCorporal}
                                 onChange={(e) => setGorduraCorporal(e.target.value)}
@@ -162,7 +163,7 @@ export default function Carboidratos() {
                     </CalculatorForm>
                 </section>
 
-                <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
+                <CalculatorResult visible={mostrarResultado}>
                     {carboidratosMinimo !== 0 &&
                         <div>
                             <h2 className="text-xl">
@@ -175,7 +176,7 @@ export default function Carboidratos() {
                             <p className="text-lg">☑️ Cada grama de carboidrato fornece aproximadamente 4 calorias</p>
                         </div>
                     }
-                </div>
+                </CalculatorResult>
             </article>
             <section className="informacoes">
                 <div className="conteiner-informacoes">

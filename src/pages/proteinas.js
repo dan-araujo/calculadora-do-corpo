@@ -1,3 +1,4 @@
+import CalculatorResult from '../components/calculator-result';
 import NumericInput from '../components/numeric-input';
 import CalculatorForm from '../components/calculator-form';
 import CalculatorHeader from '../components/calculator-header';
@@ -96,7 +97,7 @@ export default function Proteinas() {
                     </CalculatorForm>
                 </section>
 
-                <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
+                <CalculatorResult visible={mostrarResultado}>
                     <h3>☑️ A Ingestão Diária Recomendada
                         é que as proteínas estejam entre 12% a 15% das necessidades calóricas.</h3>
                     {proteinasMinima !== 0 && (
@@ -104,7 +105,7 @@ export default function Proteinas() {
                             {exibirInformacoesProteinas(nivelAtividade)}
                         </h2>
                     )}
-                </div>
+                </CalculatorResult>
             </article>
             <section className="informacoes">
                 <div className="conteiner-informacoes">

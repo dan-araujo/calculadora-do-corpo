@@ -1,3 +1,4 @@
+import CalculatorResult from '../components/calculator-result';
 import NumericInput from '../components/numeric-input';
 import CalculatorForm from '../components/calculator-form';
 import CalculatorHeader from '../components/calculator-header';
@@ -114,8 +115,8 @@ export default function GordurasSaudaveis() {
                                 </option>
                             </select>
                         </div>
-                        <h3 className="subtitulo-tmb">Formula de estimativa para a Taxa Metabólica Basal:</h3>
-                        <div className="grupo-formulas">
+                        <h3 id="titulo-formulas" className="subtitulo-tmb">Formula de estimativa para a Taxa Metabólica Basal:</h3>
+                        <div className="grupo-formulas" role="radiogroup" aria-labelledby="titulo-formulas">
 <div className="opcao-formula">
                             <input type="radio"
                                 id="harris-benedict"
@@ -125,7 +126,7 @@ export default function GordurasSaudaveis() {
                                 checked={formulaTMB === 'harris-benedict'}
                             />
                             <label htmlFor="harris-benedict">Harris-Benedict</label>
-                            <a href="#benedict" className="ajuda-benedict">?</a>
+                            <a href="#benedict" className="ajuda-benedict" aria-label="Entenda a fórmula de Harris-Benedict">?</a>
                         </div>
                         <div className="opcao-formula">
                             <input type="radio"
@@ -136,7 +137,7 @@ export default function GordurasSaudaveis() {
                                 checked={formulaTMB === 'katch-mcardle'}
                             />
                             <label htmlFor="katch-mcardle">Katch-McArdle</label>
-                            <a href="#mcardle" className="ajuda-mcardle">?</a>
+                            <a href="#mcardle" className="ajuda-mcardle" aria-label="Entenda a fórmula de Katch-McArdle">?</a>
                             <NumericInput id="gorduraCorporal" field="gorduraCorporal"
                                 aria-label="Gordura corporal (%)" value={gorduraCorporal}
                                 onChange={(e) => setGorduraCorporal(e.target.value)}
@@ -160,7 +161,7 @@ export default function GordurasSaudaveis() {
                     </CalculatorForm>
                 </section>
 
-                <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
+                <CalculatorResult visible={mostrarResultado}>
                     {gordurasMinimas !== 0 &&
                         <div>
                             <h2 className="text-2xl">
@@ -171,7 +172,7 @@ export default function GordurasSaudaveis() {
                             <h3 className="text-xl">A faixa calculada corresponde a 20–35% da energia diária em gorduras totais. Priorize fontes insaturadas. A OMS recomenda limitar gorduras saturadas a menos de 10% da energia e gorduras trans a menos de 1%.</h3>
                         </div>
                     }
-                </div>
+                </CalculatorResult>
             </article>
             <section className="informacoes">
                 <div className="conteiner-informacoes">

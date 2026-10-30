@@ -1,3 +1,4 @@
+import CalculatorResult from '../components/calculator-result';
 import NumericInput from '../components/numeric-input';
 import CalculatorForm from '../components/calculator-form';
 import CalculatorHeader from '../components/calculator-header';
@@ -113,8 +114,8 @@ export default function Calorias() {
                                 </option>
                             </select>
                         </div>
-                        <h3 className="subtitulo-tmb">Formula de estimativa para a Taxa Metabólica Basal:</h3>
-                        <div className="grupo-formulas">
+                        <h3 id="titulo-formulas" className="subtitulo-tmb">Formula de estimativa para a Taxa Metabólica Basal:</h3>
+                        <div className="grupo-formulas" role="radiogroup" aria-labelledby="titulo-formulas">
 <div className="opcao-formula">
                             <input type="radio"
                                 id="harris-benedict"
@@ -124,7 +125,7 @@ export default function Calorias() {
                                 checked={formulaCalorias === 'harris-benedict'}
                             />
                             <label htmlFor="harris-benedict">Harris-Benedict</label>
-                            <a href="#benedict" className="ajuda-benedict">?</a>
+                            <a href="#benedict" className="ajuda-benedict" aria-label="Entenda a fórmula de Harris-Benedict">?</a>
                         </div>
                         <div className="opcao-formula">
                             <input type="radio"
@@ -135,7 +136,7 @@ export default function Calorias() {
                                 checked={formulaCalorias === 'katch-mcardle'}
                             />
                             <label htmlFor="katch-mcardle">Katch-McArdle</label>
-                            <a href="#mcardle" className="ajuda-mcardle">?</a>
+                            <a href="#mcardle" className="ajuda-mcardle" aria-label="Entenda a fórmula de Katch-McArdle">?</a>
                             <NumericInput id="gorduraCorporal" field="gorduraCorporal"
                                 aria-label="Gordura corporal (%)" value={gorduraCorporal}
                                 onChange={(e) => setGorduraCorporal(e.target.value)}
@@ -159,13 +160,13 @@ export default function Calorias() {
                     </CalculatorForm>
                 </section>
 
-                <div className="resultado" id="mostrar-resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
+                <CalculatorResult visible={mostrarResultado} id="mostrar-resultado">
                     {kcal !== 0 &&
                         <div>
                             <h2 className="text-2xl">Você precisa de {kcal} calorias diárias.</h2>
                         </div>
                     }
-                </div>
+                </CalculatorResult>
             </article>
             <section className="informacoes">
                 <div className="conteiner-informacoes">
