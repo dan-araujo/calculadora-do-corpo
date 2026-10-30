@@ -1,3 +1,4 @@
+import CalculatorResult from '../components/calculator-result';
 import NumericInput from '../components/numeric-input';
 import CalculatorForm from '../components/calculator-form';
 import CalculatorHeader from '../components/calculator-header';
@@ -67,27 +68,27 @@ export default function MassaCorporalMagra() {
                     </CalculatorForm>
                 </section>
 
-                <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
+                <CalculatorResult visible={mostrarResultado}>
                     {massaCorporalMagraPorBoer !== 0 &&
                         (
                             <div>
                                 <h3 className="text-xl">Sua Massa Corporal Magra está entre:</h3>
                                 <div className="flex flex-row justify-center">
                                     <h2 className="text-2xl">Boer: {massaCorporalMagraPorBoer} kgs</h2>
-                                    <a aria-label="Entenda a fórmula" href="#boer"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
+                                    <a aria-label="Entenda a fórmula de Boer" href="#boer"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
                                 </div>
                                 <div className="flex flex-row justify-center">
                                     <h2 className="text-2xl">James: {massaCorporalMagraPorJames} kgs</h2>
-                                    <a aria-label="Entenda a fórmula" href="#james"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
+                                    <a aria-label="Entenda a fórmula de James" href="#james"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
                                 </div>
                                 <div className="flex flex-row justify-center">
                                     <h2 className="text-2xl">Hume: {massaCorporalMagraPorHume} kgs</h2>
-                                    <a aria-label="Entenda a fórmula" href="#hume"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
+                                    <a aria-label="Entenda a fórmula de Hume" href="#hume"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
                                 </div>
                             </div>
                         )
                     }
-                </div>
+                </CalculatorResult>
             </article>
             <section className="informacoes">
                 <div className="conteiner-informacoes">

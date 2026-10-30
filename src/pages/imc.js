@@ -1,3 +1,4 @@
+import CalculatorResult from '../components/calculator-result';
 import NumericInput from '../components/numeric-input';
 import CalculatorForm from '../components/calculator-form';
 import CalculatorHeader from '../components/calculator-header';
@@ -48,14 +49,14 @@ export default function IMC() {
                     </CalculatorForm>
                 </section>
 
-                <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
+                <CalculatorResult visible={mostrarResultado}>
                     {imc &&
                         <div>
                             <h3 className="text-2xl">Seu IMC é:</h3>
                             <h2 className="text-3xl">{imc}</h2>
                         </div>
                     }
-                </div>
+                </CalculatorResult>
             </article>
 
             <section className="informacoes">

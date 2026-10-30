@@ -1,3 +1,4 @@
+import CalculatorResult from '../components/calculator-result';
 import NumericInput from '../components/numeric-input';
 import CalculatorForm from '../components/calculator-form';
 import CalculatorHeader from '../components/calculator-header';
@@ -85,20 +86,20 @@ export default function PotencialMaximoMuscular() {
                     </CalculatorForm>
                 </section>
 
-                <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
+                <CalculatorResult visible={mostrarResultado}>
                     {potencialMuscularPorBerkhan !== 0 && (
                         <div>
                             <h3 className="text-xl">O seu Potencial Muscular Máximo com {gorduraCorporal}% de gordura é:</h3>
                             <div className="flex flex-row justify-center">
                                 <h2 className="text-2xl"><strong>Martin Berkhan:</strong> {potencialMuscularPorBerkhan} kgs.</h2>
-                                <a aria-label="Entenda a fórmula" href="#martin-berkhan"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
+                                <a aria-label="Entenda a fórmula de Martin Berkhan" href="#martin-berkhan"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
                             </div>
                             <div className="flex flex-row justify-center">
                                 <h2 className="text-2xl"><strong>Casey Butt:</strong> {potencialMuscularPorCaseyButt} kgs</h2>
-                                <a aria-label="Entenda a fórmula" href="#casey-butt"><Image src={"/images/interrogacao.png"} width={16} height={16}   alt="" /></a>
+                                <a aria-label="Entenda a fórmula de Casey Butt" href="#casey-butt"><Image src={"/images/interrogacao.png"} width={16} height={16}   alt="" /></a>
                             </div>
                         </div>)}
-                </div>
+                </CalculatorResult>
             </article>
             <section className="informacoes">
                 <div className="conteiner-informacoes">

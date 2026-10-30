@@ -1,3 +1,4 @@
+import CalculatorResult from '../components/calculator-result';
 import NumericInput from '../components/numeric-input';
 import CalculatorForm from '../components/calculator-form';
 import CalculatorHeader from '../components/calculator-header';
@@ -95,15 +96,13 @@ export default function GorduraCorporal() {
                     </CalculatorForm>
                 </section>
 
-                {gorduraCorporal !== 0 &&
-                    <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
-                        <div>
-                            <h3 className="text-xl">Estimativa de Nível de Gordura Corporal:</h3>
-                            <h2 className="text-2xl">{gorduraCorporal}%</h2>
-                            <h2 className="text-2xl">Categoria: {categoria}</h2>
-                        </div>
+                <CalculatorResult visible={mostrarResultado && gorduraCorporal !== 0}>
+                    <div>
+                        <h3 className="text-xl">Estimativa de Nível de Gordura Corporal:</h3>
+                        <h2 className="text-2xl">{gorduraCorporal}%</h2>
+                        <h2 className="text-2xl">Categoria: {categoria}</h2>
                     </div>
-                }
+                </CalculatorResult>
             </article>
             <section className="informacoes">
                 <div className="conteiner-informacoes">

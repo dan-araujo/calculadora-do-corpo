@@ -1,3 +1,4 @@
+import CalculatorResult from '../components/calculator-result';
 import NumericInput from '../components/numeric-input';
 import CalculatorForm from '../components/calculator-form';
 import CalculatorHeader from '../components/calculator-header';
@@ -74,32 +75,29 @@ export default function PesoIdeal() {
                     </CalculatorForm>
                 </section>
 
-                    {pesoIdealPorLorentz !== "" && (
-                        <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
-                            <h3 className="text-xl">O seu peso ideal está entre:</h3>
-                            <div className="flex flex-row justify-center">
-                                <h2 className="text-2xl mr-1">Peterson: {pesoIdealPorPeterson} kgs</h2>
-                                <a aria-label="Entenda a fórmula" href="#peterson"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
-                            </div>
-                            <div className="flex flex-row justify-center">
-                            <h2 className="text-2xl mr-1">Robinson: {pesoIdealPorRobinson} kgs</h2>
-                            <a aria-label="Entenda a fórmula" href="#robinson"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
-                            </div>
-                            <div className="flex flex-row justify-center">
-                            <h2 className="text-2xl mr-1">Miller: {pesoIdealPorMiller} kgs</h2>
-                            <a aria-label="Entenda a fórmula" href="#miller"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
-                            </div>
-                            <div className="flex flex-row justify-center">
-                            <h2 className="text-2xl mr-1">Devine: {pesoIdealPorDevine} kgs</h2>
-                            <a aria-label="Entenda a fórmula" href="#devine"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
-                            </div>
-                            <div className="flex flex-row justify-center">
-                            <h2 className="text-2xl mr-1">Lorentz: {pesoIdealPorLorentz} kgs</h2>
-                            <a aria-label="Entenda a fórmula" href="#lorentz"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
-                            </div>
-                        </div>
-                    )
-                    }
+                <CalculatorResult visible={mostrarResultado && pesoIdealPorLorentz !== ""}>
+                    <h3 className="text-xl">O seu peso ideal está entre:</h3>
+                    <div className="flex flex-row justify-center">
+                        <h2 className="text-2xl mr-1">Peterson: {pesoIdealPorPeterson} kgs</h2>
+                        <a aria-label="Entenda a fórmula de Peterson" href="#peterson"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
+                    </div>
+                    <div className="flex flex-row justify-center">
+                    <h2 className="text-2xl mr-1">Robinson: {pesoIdealPorRobinson} kgs</h2>
+                    <a aria-label="Entenda a fórmula de Robinson" href="#robinson"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
+                    </div>
+                    <div className="flex flex-row justify-center">
+                    <h2 className="text-2xl mr-1">Miller: {pesoIdealPorMiller} kgs</h2>
+                    <a aria-label="Entenda a fórmula de Miller" href="#miller"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
+                    </div>
+                    <div className="flex flex-row justify-center">
+                    <h2 className="text-2xl mr-1">Devine: {pesoIdealPorDevine} kgs</h2>
+                    <a aria-label="Entenda a fórmula de Devine" href="#devine"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
+                    </div>
+                    <div className="flex flex-row justify-center">
+                    <h2 className="text-2xl mr-1">Lorentz: {pesoIdealPorLorentz} kgs</h2>
+                    <a aria-label="Entenda a fórmula de Lorentz" href="#lorentz"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
+                    </div>
+                </CalculatorResult>
             </article>
             <section className="informacoes">
                 <div className="conteiner-informacoes">
