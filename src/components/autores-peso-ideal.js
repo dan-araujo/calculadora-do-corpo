@@ -155,9 +155,7 @@ export default function AutoresPesoIdeal() {
                     jobese.org,
                     2021
                 </a>
-                <a href="https://www.flaticon.com/br/" title="peso ícones" target="_blank" rel="noopener noreferrer">
-                    - ícones criados por freepik - flaticon
-                </a>
+
             </div>
         </section>
     )

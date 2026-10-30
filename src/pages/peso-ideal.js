@@ -1,3 +1,6 @@
+import NumericInput from '../components/numeric-input';
+import CalculatorForm from '../components/calculator-form';
+import CalculatorHeader from '../components/calculator-header';
 import { useState } from "react";
 import {
     calcularPesoIdealPorLorentz,
@@ -43,37 +46,34 @@ export default function PesoIdeal() {
 
     return (
         <main>
-            <article>
-                <section className="form-calculadora">
-                    <form onSubmit={calculoPesoIdeal}>
-                        <h1>Calculadora de Peso Ideal</h1>
-                        <div className="input-linha">
-                            <label htmlFor="altura" className="input-label">Altura (cm):</label>
-                            <input
-                                min={100}
-                                step="0.1"
+            <article className="area-calculadora">
+                <section className="formulario-calculadora">
+                    <CalculatorForm onResetResult={() => setMostrarResultado(false)} onSubmit={calculoPesoIdeal}>
+                        <CalculatorHeader title="Calculadora de Peso Ideal" image="/images/escala-de-peso.png" />
+                        <div className="linha-campo">
+                            <label htmlFor="altura" className="rotulo-campo">Altura (cm):</label>
+                            <NumericInput field="altura"
                                 id="altura"
-                                type="number"
                                 value={altura}
                                 onChange={(e) => setAltura(e.target.value)}
-                                className="input-campo" required />
+                                className="campo-formulario" required />
 
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="genero" className="input-label">Gênero:</label>
+                        <div className="linha-campo">
+                            <label htmlFor="genero" className="rotulo-campo">Gênero:</label>
                             <select
                                 id="genero"
                                 value={genero}
                                 onChange={(e) => setGenero(e.target.value)}
-                                className="input-campo select-formulario">
+                                className="campo-formulario seletor-formulario">
                                 <option value="masculino">Masculino</option>
                                 <option value="feminino">Feminino</option>
                             </select>
                         </div>
                         <button type="submit" className="botao-calcular">Calcular</button>
-                    </form>
+                    </CalculatorForm>
                 </section>
-                <Image src={"/images/escala-de-peso.png"} width={130} height={130} className="imagem-demo"  alt="" />
+
                     {pesoIdealPorLorentz !== "" && (
                         <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
                             <h3 className="text-xl">O seu peso ideal está entre:</h3>
@@ -102,7 +102,7 @@ export default function PesoIdeal() {
                     }
             </article>
             <section className="informacoes">
-                <div className="container-informacoes">
+                <div className="conteiner-informacoes">
                     <h2>Por que é bom estar no peso ideal?</h2>
                     <p>É importante para a saúde e o bem-estar geral.
                         Aqui estão algumas razões pelas quais é recomendado manter um peso saudável:</p>
