@@ -9,7 +9,7 @@ export default function AutoresPotencialMaximoMuscular() {
                     Ele tem uma abordagem científica
                     embasada em suas recomendações e busca promover uma abordagem sustentável e realista para a transformação física.</p>
 
-                <p>É autor do site <a href="https://leangains.com/" target="_blank" className="text-triadicDarkBlue">LeanGains</a>,
+                <p>É autor do site <a href="https://leangains.com/" target="_blank" rel="noopener noreferrer" className="text-triadicDarkBlue">LeanGains</a>,
                     onde compartilha suas ideias e conhecimentos sobre nutrição
                     e treinamento. Ele é reconhecido por promover um estilo de vida saudável e sustentável,
                     com foco em estratégias eficientes para alcançar resultados estéticos e melhorar o desempenho físico.</p>
@@ -24,8 +24,7 @@ export default function AutoresPotencialMaximoMuscular() {
                 <span className="texto-destaque">
                     Potencial Máximo Muscular (PMM) com 5% de gordura = (Altura em cm - 100)
                 </span>
-                <p>Onde a cada valor de gordura corporal acima ou igual a 5% é também calculado e
-                    acrescentado no resultado.</p>
+                <p>Nesta calculadora, a massa magra implícita nessa referência é mantida: peso estimado = (altura − 100) × 0,95 ÷ (1 − percentual de gordura/100). Essa adaptação matemática não é uma fórmula clínica validada. A referência original se destina a homens treinados e não define um limite individual.</p>
 
                 <p>Ele também enfatiza a importância do treinamento de força, especificamente
                     o levantamento de peso composto e de alta intensidade, para maximizar os resultados de composição corporal.
@@ -54,7 +53,7 @@ export default function AutoresPotencialMaximoMuscular() {
                     (% de Gordura Corporal / 224 + 1)
                 </span>
 
-                <p>Seu trabalho tem sido amplamente utilizado como uma referência para estabelecer expectativas realistas em
+                <p>A equação acima usa altura, pulso e tornozelo em polegadas e fornece peso em libras, convertido para kg no resultado. O percentual de gordura já está incluído no fator final. Esses modelos não predizem com precisão o potencial de uma pessoa. Seu trabalho é usado como referência em
                     relação ao ganho de massa muscular natural. Ele é conhecido por enfatizar a importância de levar em consideração
                     fatores genéticos ao estabelecer metas e expectativas para o desenvolvimento muscular natural.</p>
 
@@ -66,33 +65,33 @@ export default function AutoresPotencialMaximoMuscular() {
             <div className="fontes">
                 <small className="text-sm font-semibold">Referências:</small>
                 <a href="https://www.feitodeiridium.com.br/potencial-muscular-maximo/"
-                    target="_blank">
+                    target="_blank" rel="noopener noreferrer">
                     - Feito de Iridium,
                     2017,
                     <strong> Potencial muscular máximo: descubra o quanto você pode crescer</strong>
                 </a>
                 <a href="https://leangains.com/maximum-muscular-potential-of-drug-free-athletes-updated-dec-31st/"
-                    target="_blank">
+                    target="_blank" rel="noopener noreferrer">
                     - Martin Berkhan,
                     LeanGains,
                     2010,
                     <strong> Maximum Muscular Potencial of Drug-free Athletes</strong>
                 </a>
                 <a href="https://www.poseidonperformance.com/blog/what-is-the-maximum-muscular-potential-of-drug-free-athletes-or-natural-bodybuilders"
-                    target="_blank">
+                    target="_blank" rel="noopener noreferrer">
                     - Nicholas Martin-Jones,
                     Poseidon Performance,
                     2022,
                     <strong> What is the maximum muscular potential of drug-free athletes?</strong>
                 </a>
-                <a href="https://rippedbody.com/maximum-muscular-potential/" target="_blank">
+                <a href="https://rippedbody.com/maximum-muscular-potential/" target="_blank" rel="noopener noreferrer">
                     - Andy Morgan,
                     Ripped Body,
                     No-Nonsense Diet & Training Guides,
                     2015,
                     <strong> Maximum Muscle Potential — What is your genetic muscular potential?</strong>
                 </a>
-                <a href="https://www.builtlean.com/how-much-muscle-can-you-gain-naturally/" target="_blank">
+                <a href="https://www.builtlean.com/how-much-muscle-can-you-gain-naturally/" target="_blank" rel="noopener noreferrer">
                     - Marc Perry,
                     BuiltLean,
                     2022,
@@ -104,19 +103,19 @@ export default function AutoresPotencialMaximoMuscular() {
                     2011,
                     <strong> An Interview with Casey Butt, Part 1</strong>
                 </a>
-                <a href="https://www.muscleandstrength.com/articles/interview-casey-butt-part-2.html" target="_blank">
+                <a href="https://www.muscleandstrength.com/articles/interview-casey-butt-part-2.html" target="_blank" rel="noopener noreferrer">
                     - M&S Writers,
                     Muscle Strength,
                     2011,
                     <strong> An Interview with Casey Butt, Part 2 </strong>
                 </a>
-                <a href="https://www.muscleandstrength.com/articles/interview-with-casey-butt-part-3.html" target="_blank">
+                <a href="https://www.muscleandstrength.com/articles/interview-with-casey-butt-part-3.html" target="_blank" rel="noopener noreferrer">
                     - M&S Writers,
                     Muscle Strength,
                     2011,
                     <strong> An Interview with Casey Butt, Part 3 </strong>
                 </a>
-                <a href="https://www.flaticon.com/br/icones-gratis/" title="exercite-se ícones" target="_blank">
+                <a href="https://www.flaticon.com/br/icones-gratis/" title="exercite-se ícones" target="_blank" rel="noopener noreferrer">
                     - ícones criados por ultimatearm e justicon - flaticon
                 </a>
             </div>

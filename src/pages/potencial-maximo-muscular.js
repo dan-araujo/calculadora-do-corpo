@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { calcularPotencialMaximoMuscularPorBerkhan, calcularPotencialMaximoMuscularPorCaseyButt } from "./api/calculadoras";
+import { calcularPotencialMaximoMuscularPorBerkhan, calcularPotencialMaximoMuscularPorCaseyButt } from "../lib/calculadoras.mjs";
 import Image from "next/image";
-import AutoresPotencialMaximoMuscular from "./autores-potencial-muscular";
+import AutoresPotencialMaximoMuscular from "../components/autores-potencial-muscular";
 
 export default function PotencialMaximoMuscular() {
-    const [peso, setPeso] = useState(0);
     const [altura, setAltura] = useState(0);
     const [pulso, setPulso] = useState(0);
     const [tornozelo, setTornozelo] = useState(0);
@@ -31,18 +30,7 @@ export default function PotencialMaximoMuscular() {
                 <section className="form-calculadora">
                     <form onSubmit={calculoPotencialMaximoMuscular}>
                         <h1>Calculadora de Potencial Máximo Muscular</h1>
-                        <div className="input-linha">
-                            <label htmlFor="peso" className="input-label">
-                                Peso (kg):
-                            </label>
-                            <input
-                                type="number"
-                                value={peso}
-                                onChange={(e) => setPeso(e.target.value)}
-                                required
-                                className="input-campo"
-                            />
-                        </div>
+                        <p className="form-help">Modelos teóricos derivados de homens treinados. Os resultados não são metas de saúde nem limites do seu corpo.</p>
                         <div className="input-linha">
                             <label htmlFor="altura" className="input-label">
                                 Altura (cm):
@@ -62,7 +50,7 @@ export default function PotencialMaximoMuscular() {
                             <label htmlFor="pulso" className="input-label">
                                 Pulso (cm):
                             </label>
-                            <input
+                            <input min={0.1}
                                 step="0.1"
                                 id="pulso"
                                 type="number"
@@ -76,7 +64,7 @@ export default function PotencialMaximoMuscular() {
                             <label htmlFor="tornozelo" className="input-label">
                                 Tornozelo (cm):
                             </label>
-                            <input
+                            <input min={0.1}
                                 step="0.1"
                                 id="tornozelo"
                                 type="number"
@@ -90,7 +78,7 @@ export default function PotencialMaximoMuscular() {
                             <label htmlFor="gorduraCorporal" className="input-label">
                                 Gordura Corporal (%):
                             </label>
-                            <input
+                            <input step="0.1" id="gorduraCorporal"
                                 type="number"
                                 value={gorduraCorporal}
                                 className="input-campo gorduraCorporal"
@@ -103,7 +91,7 @@ export default function PotencialMaximoMuscular() {
                         <button type="submit" className="botao-calcular">Calcular</button>
                     </form>
                 </section>
-                <Image src={"/images/musculos.png"} alt="Icone imc" width={150} height={150}
+                <Image src={"/images/musculos.png"} alt="" width={150} height={150}
                     className="imagem-demo" />
                 <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
                     {potencialMuscularPorBerkhan !== 0 && (
@@ -111,11 +99,11 @@ export default function PotencialMaximoMuscular() {
                             <h3 className="text-xl">O seu Potencial Muscular Máximo com {gorduraCorporal}% de gordura é:</h3>
                             <div className="flex flex-row justify-center">
                                 <h2 className="text-2xl"><strong>Martin Berkhan:</strong> {potencialMuscularPorBerkhan} kgs.</h2>
-                                <a href="#martin-berkhan"><Image src={"/images/interrogacao.png"} width={16} height={16} /></a>
+                                <a aria-label="Entenda a fórmula" href="#martin-berkhan"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
                             </div>
                             <div className="flex flex-row justify-center">
                                 <h2 className="text-2xl"><strong>Casey Butt:</strong> {potencialMuscularPorCaseyButt} kgs</h2>
-                                <a href="#casey-butt"><Image src={"/images/interrogacao.png"} width={16} height={16}  /></a>
+                                <a aria-label="Entenda a fórmula" href="#casey-butt"><Image src={"/images/interrogacao.png"} width={16} height={16}   alt="" /></a>
                             </div>
                         </div>)}
                 </div>
