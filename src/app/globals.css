@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../../tailwind.config.js";
 
 :root { color-scheme: light; --ink: #25394c; --blue: #203fa4; --muted: #556581; --line: #dce5ef; }
 * { box-sizing: border-box; }
