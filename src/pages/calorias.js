@@ -1,12 +1,14 @@
+import NumericInput from '../components/numeric-input';
+import CalculatorForm from '../components/calculator-form';
+import CalculatorHeader from '../components/calculator-header';
 import { useState } from "react";
 import { calcularCalorias, calcularTotalCaloriasPorDieta } from "../lib/calculadoras.mjs";
-import Image from "next/image";
 import AutoresTMB from "../components/autores-tmb";
 
 export default function Calorias() {
-    const [idade, setIdade] = useState(0);
-    const [peso, setPeso] = useState(0);
-    const [altura, setAltura] = useState(0);
+    const [idade, setIdade] = useState('');
+    const [peso, setPeso] = useState('');
+    const [altura, setAltura] = useState('');
     const [genero, setGenero] = useState('masculino');
     const [nivelAtividade, setNivelAtividade] = useState('sedentario');
     const [formulaCalorias, setFormulaCalorias] = useState('harris-benedict');
@@ -27,54 +29,49 @@ export default function Calorias() {
 
     return (
         <main>
-            <article>
-                <section className="form-calculadora form-calorias">
-                    <form onSubmit={calculoCalorias}>
-                        <h1>Calculadora de Calorias</h1>
-                        <div className="input-linha">
-                            <label htmlFor="idade" className="input-label">Idade:</label>
-                            <input type="number"
+            <article className="area-calculadora">
+                <section className="formulario-calculadora formulario-calorias">
+                    <CalculatorForm onResetResult={() => setMostrarResultado(false)} onSubmit={calculoCalorias}>
+                        <CalculatorHeader title="Calculadora de Calorias" image="/images/calorias2.png" />
+                        <div className="linha-campo">
+                            <label htmlFor="idade" className="rotulo-campo">Idade:</label>
+                            <NumericInput field="idade"
                                 id="idade"
                                 value={idade}
-                                step={1}
-                                min={18}
                                 onChange={(e) => setIdade(e.target.value)}
-                                className="input-campo" required />
+                                className="campo-formulario" required />
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="peso" className="input-label">Peso (kg):</label>
-                            <input step="0.1" min={0.1} id="peso" type="number"
+                        <div className="linha-campo">
+                            <label htmlFor="peso" className="rotulo-campo">Peso (kg):</label>
+                            <NumericInput field="peso" id="peso"
                                 value={peso}
                                 onChange={(e) => setPeso(e.target.value)}
-                                className="input-campo" required />
+                                className="campo-formulario" required />
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="altura" className="input-label">Altura (cm): </label>
-                            <input
-                                min={100}
-                                step="0.1"
+                        <div className="linha-campo">
+                            <label htmlFor="altura" className="rotulo-campo">Altura (cm): </label>
+                            <NumericInput field="altura"
                                 id="altura"
-                                type="number"
                                 value={altura}
                                 onChange={(e) => setAltura(e.target.value)}
-                                className="input-campo" required />
+                                className="campo-formulario" required />
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="genero" className="input-label labels-select ">Gênero:</label>
+                        <div className="linha-campo">
+                            <label htmlFor="genero" className="rotulo-campo rotulo-seletor ">Gênero:</label>
                             <select
                                 id="genero"
                                 value={genero}
                                 onChange={(e) => setGenero(e.target.value)}
-                                className="input-campo select-formulario">
+                                className="campo-formulario seletor-formulario">
                                 <option value="masculino">Masculino</option>
                                 <option value="feminino">Feminino</option>
                             </select>
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="nivelAtividade" className="input-label labels-select ">Nível de Atividade:</label>
+                        <div className="linha-campo">
+                            <label htmlFor="nivelAtividade" className="rotulo-campo rotulo-seletor ">Nível de Atividade:</label>
                             <select id="nivelAtividade" value={nivelAtividade}
                                 onChange={(e) => setNivelAtividade(e.target.value)}
-                                className="input-campo select-formulario">
+                                className="campo-formulario seletor-formulario">
                                 <option value="sedentario">
                                     Sedentário
                                 </option>
@@ -92,13 +89,13 @@ export default function Calorias() {
                                 </option>
                             </select>
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="objetivoDieta" className="input-label labels-select">
+                        <div className="linha-campo">
+                            <label htmlFor="objetivoDieta" className="rotulo-campo rotulo-seletor">
                                 Objetivo:
                             </label>
                             <select id="objetivoDieta" value={objetivoDieta}
                                 onChange={(e) => setObjetivoDieta(e.target.value)}
-                                className="input-campo select-formulario">
+                                className="campo-formulario seletor-formulario">
                                 <option value="perda-peso-gradual">
                                     Reduzir 250 kcal/dia
                                 </option>
@@ -117,7 +114,8 @@ export default function Calorias() {
                             </select>
                         </div>
                         <h3 className="subtitulo-tmb">Formula de estimativa para a Taxa Metabólica Basal:</h3>
-                        <div className="formulas-radio">
+                        <div className="grupo-formulas">
+<div className="opcao-formula">
                             <input type="radio"
                                 id="harris-benedict"
                                 name="formula"
@@ -126,9 +124,9 @@ export default function Calorias() {
                                 checked={formulaCalorias === 'harris-benedict'}
                             />
                             <label htmlFor="harris-benedict">Harris-Benedict</label>
-                            <a href="#benedict" className="benedict-question">?</a>
+                            <a href="#benedict" className="ajuda-benedict">?</a>
                         </div>
-                        <div className="formulas-radio">
+                        <div className="opcao-formula">
                             <input type="radio"
                                 id="katch-mcardle"
                                 name="formula"
@@ -137,15 +135,15 @@ export default function Calorias() {
                                 checked={formulaCalorias === 'katch-mcardle'}
                             />
                             <label htmlFor="katch-mcardle">Katch-McArdle</label>
-                            <a href="#mcardle" className="mcardle-question">?</a>
-                            <input step="0.1" type="number"
+                            <a href="#mcardle" className="ajuda-mcardle">?</a>
+                            <NumericInput id="gorduraCorporal" field="gorduraCorporal"
                                 aria-label="Gordura corporal (%)" value={gorduraCorporal}
-                                min={5} max={80}
                                 onChange={(e) => setGorduraCorporal(e.target.value)}
-                                className="input-bf"
+                                className="campo-gordura"
                             />
                         </div>
-                        <div className="small-nivel-atividade" >
+                        </div>
+                        <div className="descricao-nivel-atividade" >
                             <small><strong>Sedentário:</strong> Pouco ou nenhum exercício.</small>
                             <br />
                             <small><strong>Levemente ativo:</strong> Exercício leve de 1-3 dias por semana.</small>
@@ -158,10 +156,9 @@ export default function Calorias() {
                                 ou treinamento para competições.</small>
                         </div>
                             <button type="submit" className="botao-calcular">Calcular</button>
-                    </form>
+                    </CalculatorForm>
                 </section>
-                <Image src={"/images/calorias2.png"} alt="" width={150} height={150}
-                    className="imagem-demo" />
+
                 <div className="resultado" id="mostrar-resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
                     {kcal !== 0 &&
                         <div>
@@ -171,7 +168,7 @@ export default function Calorias() {
                 </div>
             </article>
             <section className="informacoes">
-                <div className="container-informacoes">
+                <div className="conteiner-informacoes">
                     <h2>Calcular as calorias que você precisa funciona?</h2>
                     <p>Contar calorias pode ser uma estratégia útil para algumas pessoas que desejam
                         gerenciar seu peso ou adotar um estilo de vida mais saudável. No entanto, sua eficácia
@@ -278,9 +275,7 @@ export default function Calorias() {
                             Tua Saúde,
                             2023
                         </a>
-                        <a href="https://www.flaticon.com" title="calorias ícones" target="_blank" rel="noopener noreferrer">
-                            - ícones criados por mhor phai e freepik - flaticon
-                        </a>
+
                     </div>
                 </div>
             </section>

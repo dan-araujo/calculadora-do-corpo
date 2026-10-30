@@ -1,12 +1,14 @@
+import NumericInput from '../components/numeric-input';
+import CalculatorForm from '../components/calculator-form';
+import CalculatorHeader from '../components/calculator-header';
 import { useState } from "react";
 import { calcularTaxaMetabolicaBasal } from "../lib/calculadoras.mjs";
-import Image from "next/image";
 import AutoresTMB from "../components/autores-tmb";
 
 export default function TaxaMetabolicaBasal() {
-    const [idade, setIdade] = useState(0);
-    const [peso, setPeso] = useState(0);
-    const [altura, setAltura] = useState(0);
+    const [idade, setIdade] = useState('');
+    const [peso, setPeso] = useState('');
+    const [altura, setAltura] = useState('');
     const [genero, setGenero] = useState('masculino');
     const [formulaTMB, setFormulaTMB] = useState('harris-benedict');
     const [gorduraCorporal, setGorduraCorporal] = useState(20);
@@ -24,58 +26,54 @@ export default function TaxaMetabolicaBasal() {
 
     return (
         <main>
-            <article>
-                <section className="form-calculadora">
-                    <form onSubmit={calculoTaxaMetabolicaBasal}>
-                        <h1>Calculadora de Taxa Metabólica Basal</h1>
-                        <div className="input-linha">
-                            <label htmlFor="idade" className="input-label">Idade:</label>
-                            <input type="number"
+            <article className="area-calculadora">
+                <section className="formulario-calculadora">
+                    <CalculatorForm onResetResult={() => setMostrarResultado(false)} onSubmit={calculoTaxaMetabolicaBasal}>
+                        <CalculatorHeader title="Calculadora de Taxa Metabólica Basal" image="/images/tmb.png" />
+                        <div className="linha-campo">
+                            <label htmlFor="idade" className="rotulo-campo">Idade:</label>
+                            <NumericInput field="idade"
                                 id="idade"
                                 value={idade}
-                                step={1}
-                                min={18}
                                 onChange={(e) => setIdade(e.target.value)}
-                                className="input-campo" required />
+                                className="campo-formulario" required />
 
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="peso" className="input-label">
+                        <div className="linha-campo">
+                            <label htmlFor="peso" className="rotulo-campo">
                                 Peso (kg):
                             </label>
-                            <input step="0.1" min={0.1} id="peso" type="number" value={peso}
+                            <NumericInput field="peso" id="peso" value={peso}
                                 onChange={(e) => setPeso(e.target.value)}
                                 required
-                                className="input-campo" />
+                                className="campo-formulario" />
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="altura" className="input-label">
+                        <div className="linha-campo">
+                            <label htmlFor="altura" className="rotulo-campo">
                                 Altura (cm):
                             </label>
-                            <input
-                                min={100}
-                                step="0.1"
+                            <NumericInput field="altura"
                                 id="altura"
-                                type="number"
                                 value={altura}
                                 onChange={(e) => setAltura(e.target.value)}
                                 required
-                                className="input-campo"
+                                className="campo-formulario"
                             />
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="genero" className="input-label">Gênero:</label>
+                        <div className="linha-campo">
+                            <label htmlFor="genero" className="rotulo-campo">Gênero:</label>
                             <select
                                 id="genero"
                                 value={genero}
                                 onChange={(e) => setGenero(e.target.value)}
-                                className="input-campo select-formulario">
+                                className="campo-formulario seletor-formulario">
                                 <option value="masculino">Masculino</option>
                                 <option value="feminino">Feminino</option>
                             </select>
                         </div>
                         <h3 className="subtitulo-tmb">Fórmula de estimativa para a Taxa Metabólica Basal:</h3>
-                        <div className="formulas-radio">
+                        <div className="grupo-formulas">
+<div className="opcao-formula">
                             <input type="radio"
                                 id="harris-benedict"
                                 name="formula"
@@ -84,9 +82,9 @@ export default function TaxaMetabolicaBasal() {
                                 checked={formulaTMB === 'harris-benedict'}
                             />
                             <label htmlFor="harris-benedict">Harris-Benedict</label>
-                            <a href="#benedict" className="benedict-question">?</a>
+                            <a href="#benedict" className="ajuda-benedict">?</a>
                         </div>
-                        <div className="formulas-radio">
+                        <div className="opcao-formula">
                             <input type="radio"
                                 id="katch-mcardle"
                                 name="formula"
@@ -95,19 +93,18 @@ export default function TaxaMetabolicaBasal() {
                                 checked={formulaTMB === 'katch-mcardle'}
                             />
                             <label htmlFor="katch-mcardle">Katch-McArdle</label>
-                            <a href="#mcardle" className="mcardle-question">?</a>
-                            <input step="0.1" type="number"
+                            <a href="#mcardle" className="ajuda-mcardle">?</a>
+                            <NumericInput id="gorduraCorporal" field="gorduraCorporal"
                                 aria-label="Gordura corporal (%)" value={gorduraCorporal}
-                                min={5} max={80}
                                 onChange={(e) => setGorduraCorporal(e.target.value)}
-                                className="input-bf"
+                                className="campo-gordura"
                             />
                         </div>
+                        </div>
                         <button type="submit" className="botao-calcular">Calcular</button>
-                    </form>
+                    </CalculatorForm>
                 </section>
-                <Image src={"/images/tmb.png"} width={150} height={150}
-                    className="imagem-demo"  alt="" />
+
                 <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
                     {TMB !== 0 &&
                         <div>
@@ -118,7 +115,7 @@ export default function TaxaMetabolicaBasal() {
                 </div>
             </article>
             <section className="informacoes">
-                <div className="container-informacoes">
+                <div className="conteiner-informacoes">
                     <h2>O que é a taxa metabólica basal?</h2>
                     <p>A taxa metabólica basal (TMB) é a quantidade de energia que o corpo precisa para manter
                         suas funções básicas em repouso, ou seja, em um estado de total relaxamento físico e mental.
@@ -181,9 +178,7 @@ export default function TaxaMetabolicaBasal() {
                             The Free Encyclopedia,
                             2023
                         </a>
-                        <a href="https://www.flaticon.com/" title="metabolism icon" target="_blank" rel="noopener noreferrer">
-                            - icones criados por freepik - flaticon
-                        </a>
+
                     </div>
                 </div>
             </section>
