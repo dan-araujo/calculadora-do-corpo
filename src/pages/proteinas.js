@@ -1,9 +1,11 @@
+import NumericInput from '../components/numeric-input';
+import CalculatorForm from '../components/calculator-form';
+import CalculatorHeader from '../components/calculator-header';
 import { useState } from "react";
 import { calcularProteinas } from "../lib/calculadoras.mjs";
-import Image from "next/image";
 
 export default function Proteinas() {
-    const [peso, setPeso] = useState(0);
+    const [peso, setPeso] = useState('');
     const [nivelAtividade, setNivelAtividade] = useState("sedentario");
     const [proteinasMinima, setProteinasMinima] = useState(0);
     const [proteinasMaxima, setProteinasMaxima] = useState(0);
@@ -39,21 +41,21 @@ export default function Proteinas() {
 
     return (
         <main>
-            <article>
-                <section className="form-calculadora form-proteinas">
-                    <form onSubmit={calculoProteinas}>
-                        <h1>Calculadora de Proteínas</h1>
-                        <div className="input-linha">
-                            <label htmlFor="peso" className="input-label">Peso (kg):</label>
-                            <input step="0.1" min={0.1} id="peso" type="number" value={peso}
+            <article className="area-calculadora">
+                <section className="formulario-calculadora formulario-proteinas">
+                    <CalculatorForm onResetResult={() => setMostrarResultado(false)} onSubmit={calculoProteinas}>
+                        <CalculatorHeader title="Calculadora de Proteínas" image="/images/proteinas.png" />
+                        <div className="linha-campo">
+                            <label htmlFor="peso" className="rotulo-campo">Peso (kg):</label>
+                            <NumericInput field="peso" id="peso" value={peso}
                                 onChange={(e) => setPeso(e.target.value)}
-                                className="input-campo" required />
+                                className="campo-formulario" required />
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="nivelAtividade" className="input-label labels-select">Nível de Atividade:</label>
+                        <div className="linha-campo">
+                            <label htmlFor="nivelAtividade" className="rotulo-campo rotulo-seletor">Nível de Atividade:</label>
                             <select id="nivelAtividade" value={nivelAtividade}
                                 onChange={(e) => setNivelAtividade(e.target.value)}
-                                className="input-campo select-formulario">
+                                className="campo-formulario seletor-formulario">
                                 <option value="sedentario">
                                     Sedentário
                                 </option>
@@ -71,7 +73,7 @@ export default function Proteinas() {
                                 </option>
                             </select>
                         </div>
-                        <div className="box-informacoes">
+                        <div className="caixa-informacoes">
                             <small><strong>Atividades Leves: </strong>
                                 Atividade fisica leve ou caminhada</small>
                             <br />
@@ -91,10 +93,9 @@ export default function Proteinas() {
                             <br />
                         </div>
                         <button type="submit" className="botao-calcular">Calcular</button>
-                    </form>
+                    </CalculatorForm>
                 </section>
-                <Image src={"/images/proteinas.png"} width={150} height={150}
-                    className="imagem-demo"  alt="" />
+
                 <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
                     <h3>☑️ A Ingestão Diária Recomendada
                         é que as proteínas estejam entre 12% a 15% das necessidades calóricas.</h3>
@@ -106,7 +107,7 @@ export default function Proteinas() {
                 </div>
             </article>
             <section className="informacoes">
-                <div className="container-informacoes">
+                <div className="conteiner-informacoes">
                     <h2>Por que as proteínas são tão importantes?</h2>
                     <p>As proteínas são extremamente importantes para o ganho de massa muscular devido a várias razões:</p>
 
@@ -203,8 +204,7 @@ export default function Proteinas() {
                             Lecturas: Educación Física y Deportes,
                             2013
                         </a>
-                        <a href="https://www.flaticon.com/free-icons/protein" title="protein icon" target="_blank" rel="noopener noreferrer">
-                            -  icones criados por flat icons - flaticon</a>
+
                     </div>
                 </div>
             </section>
