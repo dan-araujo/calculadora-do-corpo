@@ -138,14 +138,14 @@ export default function Autores1RepeticaoMaxima() {
 
                 <div className="fontes">
                     <small className="referencias">Referências:</small>
-                    <a href="https://www.revistamotricidade.com/arquivo/2010_vol6_n3/v6n3a05.pdf" target="_blank">
+                    <a href="https://www.revistamotricidade.com/arquivo/2010_vol6_n3/v6n3a05.pdf" target="_blank" rel="noopener noreferrer">
                         - M.L. Lacio, V.O. Damasceno, J.M. Vianna, J.R.P. Lima, V.M. Reis, J.P. Brito, J. Fernandes Filho,
                         <strong> Precisão das equações preditivas de 1-RM em praticantes não competitivos de treino de força</strong>,
                         Revista Motricidade,
                         2010
                     </a>
                     <a href="https://journals.lww.com/nsca-jscr/abstract/2006/08000/prediction_of_one_repetition_maximum_strength_from.20.aspx"
-                        target="_blank">
+                        target="_blank" rel="noopener noreferrer">
                         - Reynolds, Jeff M.; Gordon, Toryanno J.; Robergs, Robert A.,
                         <strong> Prediction Of One Repetition Maximum Strength From Multiple Repetition Maximum Testing And Anthropometry</strong>,
                         The Journal of Strength and Conditioning Research,
@@ -153,7 +153,7 @@ export default function Autores1RepeticaoMaxima() {
                         2006
                     </a>
                     <a href="https://go.gale.com/ps/i.do?p=AONE&u=googlescholar&id=GALE|A99373609&v=2.1&it=r&sid=AONE&asid=8682bda2"
-                        target="_blank">
+                        target="_blank" rel="noopener noreferrer">
                         - Wayne L. Westcott and Avery D. Faigenbaum,
                         IDEA Health & Fitness,
                         <strong>  Strength training for kids: Practical guidelines and recommended resistance exercises
@@ -167,7 +167,7 @@ export default function Autores1RepeticaoMaxima() {
                         McGraw-Hill,
                         1998
                     </small>
-                    <a href="https://www.tandfonline.com/doi/abs/10.1207/S15327841MPEE0602_1" target="_blank">
+                    <a href="https://www.tandfonline.com/doi/abs/10.1207/S15327841MPEE0602_1" target="_blank" rel="noopener noreferrer">
                         - Terry M. Wood,Gianni F. Maddalozzo, Rod A. Harter,
                         <strong>  Accuracy of Seven Equations for Predicting 1-RM Performance
                             of Apparently Healthy, Sedentary Older Adults </strong>,
@@ -175,14 +175,14 @@ export default function Autores1RepeticaoMaxima() {
                         2009
                     </a>
                     <a href="https://journals.lww.com/nsca-jscr/abstract/1997/11000/the_accuracy_of_prediction_equations_for.1.aspx"
-                        target="_blank">
+                        target="_blank" rel="noopener noreferrer">
                         - LeSuer, Dale A., McCormick, James H., Mayhew, Jerry L., Wasserstein, Ronald L.4, Arnold, Michael D.,
                         <strong>  The Accuracy of Prediction Equations for Estimating 1-RM Performance
                             in the Bench Press, Squat, and Deadlift</strong>,
                         Journal of Strength and Conditioning Research,
                         1997
                     </a>
-                    <a href="https://www.flaticon.com/br/icones-gratis/" title="levantamento de peso ícones" target="_blank">
+                    <a href="https://www.flaticon.com/br/icones-gratis/" title="levantamento de peso ícones" target="_blank" rel="noopener noreferrer">
                         - ícones criados por ultimatearm e lapiyee - flaticon
                     </a>
                 </div>

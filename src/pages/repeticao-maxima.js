@@ -7,9 +7,9 @@ import {
     calcular1RepeticaoMaximaPorOConner,
     calcular1RepeticaoMaximaPorWathen,
     mostrarCargasRecomendadas1RepeticaoMaxima
-} from "./api/calculadoras";
+} from "../lib/calculadoras.mjs";
 import Image from "next/image";
-import Autores1RepeticaoMaxima from "./autores-1rm";
+import Autores1RepeticaoMaxima from "../components/autores-1rm";
 
 export default function RepeticaoMaxima() {
     const [pesoLevantado, setPesoLevantado] = useState(0);
@@ -23,12 +23,12 @@ export default function RepeticaoMaxima() {
     const calculo1RepeticaoMaxima = async (e) => {
         e.preventDefault();
 
-        const epleyFormula1RM = calcular1RepeticaoMaximaPorEpley(parseInt(pesoLevantado), parseInt(numeroRepeticoes));
-        const landerFormula1RM = calcular1RepeticaoMaximaPorLander(parseInt(pesoLevantado), parseInt(numeroRepeticoes));
-        const oConnerFormula1RM = calcular1RepeticaoMaximaPorOConner(parseInt(pesoLevantado), parseInt(numeroRepeticoes));
-        const lombardiFormula1RM = calcular1RepeticaoMaximaPorLombardi(parseInt(pesoLevantado), parseInt(numeroRepeticoes));
-        const brzyckiformula1RM = calcular1RepeticaoMaximaPorBrzycki(parseInt(pesoLevantado), parseInt(numeroRepeticoes));
-        const wathenFormula1RM = calcular1RepeticaoMaximaPorWathen(parseInt(pesoLevantado), parseInt(numeroRepeticoes));
+        const epleyFormula1RM = calcular1RepeticaoMaximaPorEpley(parseFloat(pesoLevantado), parseInt(numeroRepeticoes));
+        const landerFormula1RM = calcular1RepeticaoMaximaPorLander(parseFloat(pesoLevantado), parseInt(numeroRepeticoes));
+        const oConnerFormula1RM = calcular1RepeticaoMaximaPorOConner(parseFloat(pesoLevantado), parseInt(numeroRepeticoes));
+        const lombardiFormula1RM = calcular1RepeticaoMaximaPorLombardi(parseFloat(pesoLevantado), parseInt(numeroRepeticoes));
+        const brzyckiformula1RM = calcular1RepeticaoMaximaPorBrzycki(parseFloat(pesoLevantado), parseInt(numeroRepeticoes));
+        const wathenFormula1RM = calcular1RepeticaoMaximaPorWathen(parseFloat(pesoLevantado), parseInt(numeroRepeticoes));
 
         const cargaRecomendadaPorEpley = mostrarCargasRecomendadas1RepeticaoMaxima(epleyFormula1RM, tipoTreinamento);
         const cargaRecomendadaPorLander = mostrarCargasRecomendadas1RepeticaoMaxima(landerFormula1RM, tipoTreinamento);
@@ -38,12 +38,12 @@ export default function RepeticaoMaxima() {
         const cargaRecomendadaPorWathen = mostrarCargasRecomendadas1RepeticaoMaxima(wathenFormula1RM, tipoTreinamento);
 
         const resultados = {
-            epley: cargaRecomendadaPorEpley[1],
-            lander: cargaRecomendadaPorLander[1],
-            oConner: cargaRecomendadaPorOConner[1],
-            lombardi: cargaRecomendadaPorLombardi[1],
-            brzycki: cargaRecomendadaPorBrzycki[1],
-            wathen: cargaRecomendadaPorWathen[1]
+            epley: { maxima: epleyFormula1RM, treino: cargaRecomendadaPorEpley },
+            lander: { maxima: landerFormula1RM, treino: cargaRecomendadaPorLander },
+            oConner: { maxima: oConnerFormula1RM, treino: cargaRecomendadaPorOConner },
+            lombardi: { maxima: lombardiFormula1RM, treino: cargaRecomendadaPorLombardi },
+            brzycki: { maxima: brzyckiformula1RM, treino: cargaRecomendadaPorBrzycki },
+            wathen: { maxima: wathenFormula1RM, treino: cargaRecomendadaPorWathen }
         };
 
         setResultados(resultados);
@@ -61,7 +61,7 @@ export default function RepeticaoMaxima() {
                             <label htmlFor="peso-levantado" className="input-label">
                                 Carga Levantada (kg):
                             </label>
-                            <input type="number"
+                            <input step="0.1" id="peso-levantado" type="number"
                                 value={pesoLevantado}
                                 min={1}
                                 onChange={(e) => setPesoLevantado(e.target.value)}
@@ -84,7 +84,7 @@ export default function RepeticaoMaxima() {
                         </div>
                         <div className="input-linha">
                             <label htmlFor="tipoTreinamento" className="input-label label-treinamento">Tipo de Treinamento:</label>
-                            <select value={tipoTreinamento}
+                            <select id="tipoTreinamento" value={tipoTreinamento}
                                 onChange={(e) => setTipoTreinamento(e.target.value)}
                                 className="input-campo select-formulario">
                                 <option value="treino-forca">
@@ -101,20 +101,21 @@ export default function RepeticaoMaxima() {
                                 </option>
                             </select>
                         </div>
-                        <button type="submit" style={{marginLeft: "25%"}} className="botao-1rm">
+                        <button type="submit" className="botao-1rm">
                             Calcular
                         </button>
                     </form>
                 </section>
-                    <Image src={"/images/supino.png"} alt="Icone supino" width={150} height={150}
+                    <Image src={"/images/supino.png"} alt="" width={150} height={150}
                         className="imagem-demo" />
                 <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
-                    <h3 className="text-xl">A carga recomendada em 1 Repetição Máxima para o seu tipo de treinamento é:</h3>
+                    <h3 className="text-xl">Estimativa de 1RM e faixa de carga para o treino selecionado:</h3>
                     {Object.entries(resultados).map(([formula, valor]) => (
                         <h2 key={formula} className="text-2xl">
-                            <div className="flex flex-row justify-center">
-                                <strong className="mr-1">{formula.charAt(0).toUpperCase() + formula.slice(1)}:</strong> {valor} kgs.
-                                <a href={`#${formula}`}><Image src={"/images/interrogacao.png"} width={16} height={16} className="question" /></a>
+                            <div className="flex flex-col items-center">
+                                <strong className="mr-1">{formula.charAt(0).toUpperCase() + formula.slice(1)}:</strong> {valor.maxima} kg de 1RM
+                                <span className="block text-base">Treino: {valor.treino[0] > 0 ? `${valor.treino[0]} a ` : 'até '}{valor.treino[1]} kg</span>
+                                <a aria-label="Entenda a fórmula" href={`#${formula}`}><Image src={"/images/interrogacao.png"} width={16} height={16} className="question"  alt="" /></a>
                             </div>
                         </h2>
                     ))}
