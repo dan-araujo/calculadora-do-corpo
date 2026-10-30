@@ -1,3 +1,6 @@
+import NumericInput from '../components/numeric-input';
+import CalculatorForm from '../components/calculator-form';
+import CalculatorHeader from '../components/calculator-header';
 import { useState } from "react";
 import {
     calcular1RepeticaoMaximaPorBrzycki,
@@ -12,7 +15,7 @@ import Image from "next/image";
 import Autores1RepeticaoMaxima from "../components/autores-1rm";
 
 export default function RepeticaoMaxima() {
-    const [pesoLevantado, setPesoLevantado] = useState(0);
+    const [pesoLevantado, setPesoLevantado] = useState('');
     const [numeroRepeticoes, setNumeroRepeticoes] = useState(10);
     const [tipoTreinamento, setTipoTreinamento] = useState("treino-hipertrofia");
     const [resultados, setResultados] = useState({});
@@ -53,40 +56,35 @@ export default function RepeticaoMaxima() {
 
     return (
         <main>
-            <article className="flex flex-wrap">
-                <section className="form-1rm">
-                    <form onSubmit={calculo1RepeticaoMaxima}>
-                        <h1>Calculadora de 1 Repetição Máxima (1RM)</h1>
-                        <div className="input-linha">
-                            <label htmlFor="peso-levantado" className="input-label">
+            <article className="area-calculadora">
+                <section className="formulario-1rm">
+                    <CalculatorForm onResetResult={() => setMostrarResultado(false)} onSubmit={calculo1RepeticaoMaxima}>
+                        <CalculatorHeader title="Calculadora de 1 Repetição Máxima (1RM)" image="/images/supino.png" />
+                        <div className="linha-campo">
+                            <label htmlFor="peso-levantado" className="rotulo-campo">
                                 Carga Levantada (kg):
                             </label>
-                            <input step="0.1" id="peso-levantado" type="number"
+                            <NumericInput field="pesoLevantado" id="peso-levantado"
                                 value={pesoLevantado}
-                                min={1}
                                 onChange={(e) => setPesoLevantado(e.target.value)}
-                                className="input-campo" required />
+                                className="campo-formulario" required />
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="numero-repeticoes" className="input-label">
+                        <div className="linha-campo">
+                            <label htmlFor="numero-repeticoes" className="rotulo-campo">
                                 Número de Repetições (1-10):
                             </label>
-                            <input
-                                min={1}
-                                max={10}
-                                step="1"
+                            <NumericInput field="numeroRepeticoes"
                                 id="numero-repeticoes"
-                                type="number"
                                 value={numeroRepeticoes}
                                 onChange={(e) => setNumeroRepeticoes(e.target.value)}
-                                className="input-campo" required />
+                                className="campo-formulario" required />
 
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="tipoTreinamento" className="input-label label-treinamento">Tipo de Treinamento:</label>
+                        <div className="linha-campo">
+                            <label htmlFor="tipoTreinamento" className="rotulo-campo rotulo-treinamento">Tipo de Treinamento:</label>
                             <select id="tipoTreinamento" value={tipoTreinamento}
                                 onChange={(e) => setTipoTreinamento(e.target.value)}
-                                className="input-campo select-formulario">
+                                className="campo-formulario seletor-formulario">
                                 <option value="treino-forca">
                                     Treino de Força
                                 </option>
@@ -104,10 +102,9 @@ export default function RepeticaoMaxima() {
                         <button type="submit" className="botao-1rm">
                             Calcular
                         </button>
-                    </form>
+                    </CalculatorForm>
                 </section>
-                    <Image src={"/images/supino.png"} alt="" width={150} height={150}
-                        className="imagem-demo" />
+
                 <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
                     <h3 className="text-xl">Estimativa de 1RM e faixa de carga para o treino selecionado:</h3>
                     {Object.entries(resultados).map(([formula, valor]) => (
@@ -115,14 +112,14 @@ export default function RepeticaoMaxima() {
                             <div className="flex flex-col items-center">
                                 <strong className="mr-1">{formula.charAt(0).toUpperCase() + formula.slice(1)}:</strong> {valor.maxima} kg de 1RM
                                 <span className="block text-base">Treino: {valor.treino[0] > 0 ? `${valor.treino[0]} a ` : 'até '}{valor.treino[1]} kg</span>
-                                <a aria-label="Entenda a fórmula" href={`#${formula}`}><Image src={"/images/interrogacao.png"} width={16} height={16} className="question"  alt="" /></a>
+                                <a aria-label="Entenda a fórmula" href={`#${formula}`}><Image src={"/images/interrogacao.png"} width={16} height={16} className="icone-ajuda"  alt="" /></a>
                             </div>
                         </h2>
                     ))}
                 </div>
             </article>
             <section className="informacoes">
-                <div className="container-informacoes">
+                <div className="conteiner-informacoes">
                     <h2>O que é 1 Repetição Máxima (1RM)?</h2>
                     <p>É uma medida usada no treinamento de força para determinar a
                         carga máxima que uma pessoa pode levantar em um determinado exercício. É definido como

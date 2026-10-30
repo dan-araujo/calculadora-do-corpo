@@ -182,9 +182,7 @@ export default function Autores1RepeticaoMaxima() {
                         Journal of Strength and Conditioning Research,
                         1997
                     </a>
-                    <a href="https://www.flaticon.com/br/icones-gratis/" title="levantamento de peso ícones" target="_blank" rel="noopener noreferrer">
-                        - ícones criados por ultimatearm e lapiyee - flaticon
-                    </a>
+
                 </div>
 
             </div>
