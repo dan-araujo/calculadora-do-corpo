@@ -1,3 +1,4 @@
+import CalculatorResult from '../components/calculator-result';
 import NumericInput from '../components/numeric-input';
 import CalculatorForm from '../components/calculator-form';
 import CalculatorHeader from '../components/calculator-header';
@@ -105,18 +106,18 @@ export default function RepeticaoMaxima() {
                     </CalculatorForm>
                 </section>
 
-                <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
+                <CalculatorResult visible={mostrarResultado}>
                     <h3 className="text-xl">Estimativa de 1RM e faixa de carga para o treino selecionado:</h3>
                     {Object.entries(resultados).map(([formula, valor]) => (
                         <h2 key={formula} className="text-2xl">
                             <div className="flex flex-col items-center">
                                 <strong className="mr-1">{formula.charAt(0).toUpperCase() + formula.slice(1)}:</strong> {valor.maxima} kg de 1RM
                                 <span className="block text-base">Treino: {valor.treino[0] > 0 ? `${valor.treino[0]} a ` : 'até '}{valor.treino[1]} kg</span>
-                                <a aria-label="Entenda a fórmula" href={`#${formula}`}><Image src={"/images/interrogacao.png"} width={16} height={16} className="icone-ajuda"  alt="" /></a>
+                                <a aria-label={`Entenda a fórmula de ${formula.charAt(0).toUpperCase() + formula.slice(1)}`} href={`#${formula}`}><Image src={"/images/interrogacao.png"} width={16} height={16} className="icone-ajuda"  alt="" /></a>
                             </div>
                         </h2>
                     ))}
-                </div>
+                </CalculatorResult>
             </article>
             <section className="informacoes">
                 <div className="conteiner-informacoes">
