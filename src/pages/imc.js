@@ -1,6 +1,8 @@
+import NumericInput from '../components/numeric-input';
+import CalculatorForm from '../components/calculator-form';
+import CalculatorHeader from '../components/calculator-header';
 import { useState } from "react";
 import { calcularIMC } from "../lib/calculadoras.mjs";
-import Image from "next/image";
 
 export default function IMC() {
     const [peso, setPeso] = useState('');
@@ -17,39 +19,35 @@ export default function IMC() {
 
     return (
         <main>
-            <article>
-                <section className="form-calculadora">
-                    <form onSubmit={calculoIMC}>
-                        <h1>Calculadora de IMC</h1>
-                        <div className="input-linha">
-                            <label htmlFor="peso" className="input-label">
+            <article className="area-calculadora">
+                <section className="formulario-calculadora">
+                    <CalculatorForm onResetResult={() => setMostrarResultado(false)} onSubmit={calculoIMC}>
+                        <CalculatorHeader title="Calculadora de IMC" image="/images/imc2.png" />
+                        <div className="linha-campo">
+                            <label htmlFor="peso" className="rotulo-campo">
                                 Peso (kg):
                             </label>
-                            <input step="0.1" min={0.1} id="peso" type="number" value={peso}
+                            <NumericInput field="peso" id="peso" value={peso}
                                 onChange={(e) => setPeso(e.target.value)}
                                 required
-                                className="input-campo" />
+                                className="campo-formulario" />
                         </div>
-                        <div className="input-linha">
-                            <label htmlFor="altura" className="input-label">
+                        <div className="linha-campo">
+                            <label htmlFor="altura" className="rotulo-campo">
                                 Altura (cm):
                             </label>
-                            <input
-                                min={100}
-                                step="0.1"
+                            <NumericInput field="altura"
                                 id="altura"
-                                type="number"
                                 value={altura}
                                 onChange={(e) => setAltura(e.target.value)}
                                 required
-                                className="input-campo"
+                                className="campo-formulario"
                             />
                         </div>
                         <button type="submit" className="botao-calcular">Calcular</button>
-                    </form>
+                    </CalculatorForm>
                 </section>
-                <Image src={"/images/imc2.png"} alt="" width={150} height={150}
-                    className="imagem-demo" />
+
                 <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
                     {imc &&
                         <div>
@@ -61,7 +59,7 @@ export default function IMC() {
             </article>
 
             <section className="informacoes">
-                <div className="container-informacoes">
+                <div className="conteiner-informacoes">
                     <h2>O que é IMC?</h2>
                     <p>O Índice de Massa Corporal (IMC) é uma medida amplamente utilizada para avaliar
                         se uma pessoa está dentro de faixas consideradas saudáveis em relação ao seu peso e altura.
@@ -136,7 +134,7 @@ export default function IMC() {
                         uol.com.br,
                         2020
                     </a>
-                    <a href="https://www.flaticon.com/br/icones-gratis/" title="carboidratos ícones" target="_blank" rel="noopener noreferrer">ícone criado por monkik - flaticon</a>
+
                 </div>
                 </div>
             </section>
