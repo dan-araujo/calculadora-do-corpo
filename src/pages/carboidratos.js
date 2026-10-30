@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { calcularCarboidratos, calcularTotalCarboidratosPorDieta } from "./api/calculadoras";
+import { calcularCarboidratos } from "../lib/calculadoras.mjs";
 import Image from "next/image";
-import AutoresTMB from "./autores-tmb";
+import AutoresTMB from "../components/autores-tmb";
 
 export default function Carboidratos() {
     const [idade, setIdade] = useState(0);
@@ -18,11 +18,11 @@ export default function Carboidratos() {
 
     const calculoCarboidratos = async (e) => {
         e.preventDefault();
-        const valoresCarboidratos = calcularCarboidratos(parseInt(idade), parseFloat(peso), parseInt(altura),
-            genero, nivelAtividade, formulaTMB, parseInt(gorduraCorporal));
+        const valoresCarboidratos = calcularCarboidratos(parseInt(idade), parseFloat(peso), parseFloat(altura),
+            genero, nivelAtividade, formulaTMB, parseFloat(gorduraCorporal), objetivoDieta);
 
-        setCarboidratosMinimo(calcularTotalCarboidratosPorDieta(valoresCarboidratos[0], objetivoDieta));
-        setCarboidratosMaximo(calcularTotalCarboidratosPorDieta(valoresCarboidratos[1], objetivoDieta));
+        setCarboidratosMinimo(valoresCarboidratos[0]);
+        setCarboidratosMaximo(valoresCarboidratos[1]);
         setMostrarResultado(true);
     }
 
@@ -38,14 +38,14 @@ export default function Carboidratos() {
                                 id="idade"
                                 value={idade}
                                 step={1}
-                                min={0}
+                                min={18}
                                 onChange={(e) => setIdade(e.target.value)}
                                 className="input-campo" required />
 
                         </div>
                         <div className="input-linha">
                             <label htmlFor="peso" className="input-label">Peso (kg):</label>
-                            <input type="number" value={peso}
+                            <input step="0.1" min={0.1} id="peso" type="number" value={peso}
                                 onChange={(e) => setPeso(e.target.value)}
                                 className="input-campo" required />
 
@@ -75,7 +75,7 @@ export default function Carboidratos() {
                         </div>
                         <div className="input-linha">
                             <label htmlFor="nivelAtividade" className="input-label labels-select">Nível de Atividade:</label>
-                            <select value={nivelAtividade}
+                            <select id="nivelAtividade" value={nivelAtividade}
                                 onChange={(e) => setNivelAtividade(e.target.value)}
                                 className="input-campo select-formulario">
                                 <option value="sedentario">
@@ -99,23 +99,23 @@ export default function Carboidratos() {
                             <label htmlFor="objetivoDieta" className="input-label labels-select">
                                 Objetivo:
                             </label>
-                            <select value={objetivoDieta}
+                            <select id="objetivoDieta" value={objetivoDieta}
                                 onChange={(e) => setObjetivoDieta(e.target.value)}
                                 className="input-campo select-formulario">
                                 <option value="perda-peso-gradual">
-                                    Perder 0.5kg/semana
+                                    Reduzir 250 kcal/dia
                                 </option>
                                 <option value="perda-peso">
-                                    Perder 1kg/semana
+                                    Reduzir 500 kcal/dia
                                 </option>
                                 <option value="manutencao-peso">
                                     Manter peso
                                 </option>
                                 <option value="ganho-peso-gradual">
-                                    Ganhar 0.5kg/semana
+                                    Acrescentar 250 kcal/dia
                                 </option>
                                 <option value="ganho-peso">
-                                    Ganhar 1kg/semana
+                                    Acrescentar 500 kcal/dia
                                 </option>
                             </select>
                         </div>
@@ -141,8 +141,8 @@ export default function Carboidratos() {
                             />
                             <label htmlFor="katch-mcardle">Katch-McArdle</label>
                             <a href="#mcardle" className="mcardle-question">?</a>
-                            <input type="number"
-                                value={gorduraCorporal}
+                            <input step="0.1" type="number"
+                                aria-label="Gordura corporal (%)" value={gorduraCorporal}
                                 min={5} max={80}
                                 onChange={(e) => setGorduraCorporal(e.target.value)}
                                 className="input-bf"
@@ -163,7 +163,7 @@ export default function Carboidratos() {
                         <button type="submit" className="botao-calcular">Calcular</button>
                     </form>
                 </section>
-                <Image src={"/images/carboidratos.png"} width={150} height={150} className="imagem-demo" />
+                <Image src={"/images/carboidratos.png"} width={150} height={150} className="imagem-demo"  alt="" />
                 <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
                     {carboidratosMinimo !== 0 &&
                         <div>
@@ -252,26 +252,26 @@ export default function Carboidratos() {
 
                     <div className="fontes">
                         <small className="referencias">Referências:</small>
-                        <a href="http://www.rbne.com.br/index.php/rbne/article/view/67" target="_blank">
+                        <a href="http://www.rbne.com.br/index.php/rbne/article/view/67" target="_blank" rel="noopener noreferrer">
                             - Anderson Luiz da Silva, Guilherme Dal Farra Miranda, Rafaela Liberali,
                             <strong> A influência dos carboidratos antes, durante e após-treinos de alta intensidade</strong>,
                             RBNE - Revista Brasileira de Nutrição Esportiva,
                             2008
                         </a>
-                        <a href="https://www.scielo.br/j/rbme/a/J4HtDsVWM6GHF6dhHDFGhst/?format=pdf" target="_blank">
+                        <a href="https://www.scielo.br/j/rbme/a/J4HtDsVWM6GHF6dhHDFGhst/?format=pdf" target="_blank" rel="noopener noreferrer">
                             - Katiuce Borges Sapata, Ana Paula Trussardi Fayh e Alvaro Reischak de Oliveira,
                             <strong> Efeitos do consumo prévio de carboidratos sobre a resposta glicêmica e desempenho</strong>,
                             RBME - Revista Brasileira de Medicina do Esporte, Volume: 12, Número: 4,
                             2006
                         </a>
-                        <a href="http://www.rbne.com.br/index.php/rbne/article/view/67" target="_blank">
+                        <a href="http://www.rbne.com.br/index.php/rbne/article/view/67" target="_blank" rel="noopener noreferrer">
                             - Cargill Agrícola S.A.,
                             <strong> Dossiê carboidratos</strong>,
                             Revista FIB - Food Ingredients Brasil, Nº 20,
                             2012
                         </a>
                         <a href="https://www.flaticon.com/free-icons/carbohydrates" title="carboidrato ícone"
-                            target="_blank">
+                            target="_blank" rel="noopener noreferrer">
                             - ícones criados por freepik - flaticon</a>
                     </div>
                 </div>

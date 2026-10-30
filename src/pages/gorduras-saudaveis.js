@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { calcularGodurasSaudaveis, calcularTotalGordurasSaudaveisPorDieta } from "./api/calculadoras";
+import { calcularGordurasSaudaveis } from "../lib/calculadoras.mjs";
 import Image from "next/image";
-import AutoresTMB from "./autores-tmb";
+import AutoresTMB from "../components/autores-tmb";
 
 export default function GordurasSaudaveis() {
     const [idade, setIdade] = useState(0);
@@ -18,11 +18,11 @@ export default function GordurasSaudaveis() {
 
     const calculoGodurasSaudaveis = async (e) => {
         e.preventDefault();
-        const valoresGordurasSaudaveis = calcularGodurasSaudaveis(parseInt(idade), parseFloat(peso), parseInt(altura),
-            genero, nivelAtividade, formulaTMB, parseInt(gorduraCorporal));
+        const valoresGordurasSaudaveis = calcularGordurasSaudaveis(parseInt(idade), parseFloat(peso), parseFloat(altura),
+            genero, nivelAtividade, formulaTMB, parseFloat(gorduraCorporal), objetivoDieta);
 
-        setGordurasMinimas(calcularTotalGordurasSaudaveisPorDieta(valoresGordurasSaudaveis[0], objetivoDieta));
-        setGordurasMaximas(calcularTotalGordurasSaudaveisPorDieta(valoresGordurasSaudaveis[1], objetivoDieta));
+        setGordurasMinimas(valoresGordurasSaudaveis[0]);
+        setGordurasMaximas(valoresGordurasSaudaveis[1]);
         setMostrarResultado(true);
     }
 
@@ -31,20 +31,20 @@ export default function GordurasSaudaveis() {
             <article>
                 <section className="form-calculadora form-gorduras">
                     <form onSubmit={calculoGodurasSaudaveis}>
-                        <h1>Calculadora de Gorduras Saudáveis</h1>
+                        <h1>Calculadora de Gorduras Totais</h1>
                         <div className="input-linha">
                             <label htmlFor="idade" className="input-label">Idade:</label>
                             <input type="number"
                                 id="idade"
                                 value={idade}
                                 step={1}
-                                min={0}
+                                min={18}
                                 onChange={(e) => setIdade(e.target.value)}
                                 className="input-campo" required />
                         </div>
                         <div className="input-linha">
                             <label htmlFor="peso" className="input-label">Peso (kg):</label>
-                            <input type="number"
+                            <input step="0.1" min={0.1} id="peso" type="number"
                                 value={peso}
                                 onChange={(e) => setPeso(e.target.value)}
                                 className="input-campo" required />
@@ -73,7 +73,7 @@ export default function GordurasSaudaveis() {
                         </div>
                         <div className="input-linha">
                             <label htmlFor="nivelAtividade" className="input-label labels-select">Nível de Atividade:</label>
-                            <select value={nivelAtividade}
+                            <select id="nivelAtividade" value={nivelAtividade}
                                 onChange={(e) => setNivelAtividade(e.target.value)}
                                 className="input-campo select-formulario">
                                 <option value="sedentario">
@@ -97,23 +97,23 @@ export default function GordurasSaudaveis() {
                             <label htmlFor="objetivoDieta" className="input-label labels-select">
                                 Objetivo:
                             </label>
-                            <select value={objetivoDieta}
+                            <select id="objetivoDieta" value={objetivoDieta}
                                 onChange={(e) => setObjetivoDieta(e.target.value)}
                                 className="input-campo select-formulario">
                                 <option value="perda-peso-gradual">
-                                    Perder 0.5kg/semana
+                                    Reduzir 250 kcal/dia
                                 </option>
                                 <option value="perda-peso">
-                                    Perder 1kg/semana
+                                    Reduzir 500 kcal/dia
                                 </option>
                                 <option value="manutencao-peso">
                                     Manter peso
                                 </option>
                                 <option value="ganho-peso-gradual">
-                                    Ganhar 0.5kg/semana
+                                    Acrescentar 250 kcal/dia
                                 </option>
                                 <option value="ganho-peso">
-                                    Ganhar 1kg/semana
+                                    Acrescentar 500 kcal/dia
                                 </option>
                             </select>
                         </div>
@@ -139,8 +139,8 @@ export default function GordurasSaudaveis() {
                             />
                             <label htmlFor="katch-mcardle">Katch-McArdle</label>
                             <a href="#mcardle" className="mcardle-question">?</a>
-                            <input type="number"
-                                value={gorduraCorporal}
+                            <input step="0.1" type="number"
+                                aria-label="Gordura corporal (%)" value={gorduraCorporal}
                                 min={5} max={80}
                                 onChange={(e) => setGorduraCorporal(e.target.value)}
                                 className="input-bf"
@@ -162,19 +162,16 @@ export default function GordurasSaudaveis() {
                     </form>
                 </section>
                 <Image src={"/images/gorduras.png"} width={150} height={150}
-                    className="imagem-demo" />
+                    className="imagem-demo"  alt="" />
                 <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
                     {gordurasMinimas !== 0 &&
                         <div>
                             <h2 className="text-2xl">
-                            ☑️ A quantidade de total ingestão de gorduras saudáveis recomendada por dia
+                            ☑️ A faixa estimada de gorduras totais por dia
                                 está entre {gordurasMinimas} g à {gordurasMaximas} g
                             </h2>
                             <br />
-                            <h3 className="text-xl">☑️ De acordo com a OMS as gorduras totais devem corresponder
-                                a cerca de <span className="text-pentagramBlue"> 25-35%</span> das calorias diárias,
-                                onde as gorduras saturadas devem representar menos de 7% das calorias diárias, enquanto as gorduras
-                                trans devem ser evitadas ao máximo.</h3>
+                            <h3 className="text-xl">A faixa calculada corresponde a 20–35% da energia diária em gorduras totais. Priorize fontes insaturadas. A OMS recomenda limitar gorduras saturadas a menos de 10% da energia e gorduras trans a menos de 1%.</h3>
                         </div>
                     }
                 </div>
@@ -209,7 +206,7 @@ export default function GordurasSaudaveis() {
 
                     <p><strong>Ácidos graxos ômega-6: </strong> São encontrados em óleos vegetais, como óleo de girassol, milho e soja.
                         Embora sejam necessários para a saúde, o consumo
-                        excessivo de ômega-6 em relação aos ômega-3 pode promover inflamação.</p>
+                        de gorduras deve ser avaliado no contexto da alimentação como um todo; não é necessário evitar fontes de ômega-6 por receio de inflamação.</p>
 
                     <h3>Gorduras trans</h3>
                     <p>São produzidas por meio de um processo chamado hidrogenação, no qual óleos
@@ -259,7 +256,7 @@ export default function GordurasSaudaveis() {
                     <p><strong>Nozes e sementes: </strong>Amêndoas, castanhas, nozes, sementes de chia e linhaça
                         são fontes de gorduras insaturadas, fibras, vitaminas e minerais.</p>
 
-                    <p><strong>Óleos vegetais não refinados: </strong>Óleo de coco, óleo de abacate e óleo de cártamo
+                    <p><strong>Óleos vegetais não refinados: </strong>Azeite de oliva, óleo de abacate e óleo de canola
                         são exemplos de óleos vegetais saudáveis, que podem ser usados em preparações culinárias.</p>
 
                     <p>Pequenas quantidades de gorduras saudáveis encontradas em alimentos como ovos, queijos magros,
@@ -277,15 +274,17 @@ export default function GordurasSaudaveis() {
                     <hr />
                     <div className="fontes">
                         <small className="text-sm font-semibold">Referências:</small>
+                        <a href="https://www.who.int/news-room/fact-sheets/detail/healthy-diet" target="_blank" rel="noopener noreferrer">OMS — Healthy diet: limites para gorduras saturadas e trans.</a>
+                        <a href="https://nap.nationalacademies.org/read/10490/chapter/1" target="_blank" rel="noopener noreferrer">National Academies — Dietary Reference Intakes: distribuição de macronutrientes para adultos (gorduras totais: 20–35%).</a>
                         <a href="https://www.myprotein.pt/thezone/nutricao/quanta-gordura-comer-por-dia/"
-                            target="_blank">
+                            target="_blank" rel="noopener noreferrer">
                             - Claire Muszalski,
                             <strong> Quanta Gordura Devemos Comer Por Dia?</strong>,
                             MyProtein,
                             2020
                         </a>
                         <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5577766/"
-                            target="_blank">
+                            target="_blank" rel="noopener noreferrer">
                             - Ann G. Liu, Nikki A. Ford, Frank B. Hu, Kathleen M. Zelman,4 Dariush Mozaffarian,
                             and Penny M. Kris-Etherton,
                             <strong> A healthy approach to dietary fats: understanding the science and taking
@@ -294,7 +293,7 @@ export default function GordurasSaudaveis() {
                             2017
                         </a>
                         <a href="https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD011834/full"
-                            target="_blank">
+                            target="_blank" rel="noopener noreferrer">
                             - Lee Hooper, Asmaa Abdelhamid, Diane Bunn, Tracey Brown, Carolyn D Summerbell, C Murray Skeaff,
                             <strong> Effects of total fat intake on body weight</strong>,
                             Cochrane Library,
@@ -302,7 +301,7 @@ export default function GordurasSaudaveis() {
                             2015
                         </a>
                         <a href="https://karger.com/anm/article/77/2/65/820721/A-Scoping-Review-of-Current-Guidelines-on-Dietary"
-                            target="_blank">
+                            target="_blank" rel="noopener noreferrer">
                             - Lukas Schwingshackl; Jasmin Zähringer; Jessica Beyerbach;
                             Sarah S. Werner; Blin Nagavci; Helmut Heseker; Berthold Koletzko; Joerg J. Meerpohl;
                             <strong> A Scoping Review of Current Guidelines on Dietary Fat and Fat Quality</strong>,
@@ -311,14 +310,14 @@ export default function GordurasSaudaveis() {
                             2021
                         </a>
                         <a href="https://ric.cps.sp.gov.br/handle/123456789/9546"
-                            target="_blank">
+                            target="_blank" rel="noopener noreferrer">
                             - Isabela Cristina Vicenzoto S. Cavalaro, Reizon Vieira dos Santos
                             <strong> Gordura trans e os impactos na escolha dos alimentos</strong>,
                             Cochrane Library,
                             Repositório Institucional do Conhecimento - RIC-CPS,
                             2022
                         </a>
-                        <a href="https://www.flaticon.com/br/" 
+                        <a href="https://www.flaticon.com/br/"
                         title="carboidrato ícone">- ícones criados por justicon</a>
                     </div>
                 </div>

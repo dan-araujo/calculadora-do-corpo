@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { calcularTaxaMetabolicaBasal } from "./api/calculadoras";
+import { calcularTaxaMetabolicaBasal } from "../lib/calculadoras.mjs";
 import Image from "next/image";
-import AutoresTMB from "./autores-tmb";
+import AutoresTMB from "../components/autores-tmb";
 
 export default function TaxaMetabolicaBasal() {
     const [idade, setIdade] = useState(0);
@@ -16,7 +16,7 @@ export default function TaxaMetabolicaBasal() {
     const calculoTaxaMetabolicaBasal = async (e) => {
         e.preventDefault();
         const resultado = calcularTaxaMetabolicaBasal(parseInt(idade), parseFloat(peso),
-            parseInt(altura), genero, formulaTMB, parseInt(gorduraCorporal));
+            parseFloat(altura), genero, formulaTMB, parseFloat(gorduraCorporal));
 
         setTMB(resultado);
         setMostrarResultado(true);
@@ -34,7 +34,7 @@ export default function TaxaMetabolicaBasal() {
                                 id="idade"
                                 value={idade}
                                 step={1}
-                                min={0}
+                                min={18}
                                 onChange={(e) => setIdade(e.target.value)}
                                 className="input-campo" required />
 
@@ -43,7 +43,7 @@ export default function TaxaMetabolicaBasal() {
                             <label htmlFor="peso" className="input-label">
                                 Peso (kg):
                             </label>
-                            <input type="number" value={peso}
+                            <input step="0.1" min={0.1} id="peso" type="number" value={peso}
                                 onChange={(e) => setPeso(e.target.value)}
                                 required
                                 className="input-campo" />
@@ -96,8 +96,8 @@ export default function TaxaMetabolicaBasal() {
                             />
                             <label htmlFor="katch-mcardle">Katch-McArdle</label>
                             <a href="#mcardle" className="mcardle-question">?</a>
-                            <input type="number"
-                                value={gorduraCorporal}
+                            <input step="0.1" type="number"
+                                aria-label="Gordura corporal (%)" value={gorduraCorporal}
                                 min={5} max={80}
                                 onChange={(e) => setGorduraCorporal(e.target.value)}
                                 className="input-bf"
@@ -107,7 +107,7 @@ export default function TaxaMetabolicaBasal() {
                     </form>
                 </section>
                 <Image src={"/images/tmb.png"} width={150} height={150}
-                    className="imagem-demo" />
+                    className="imagem-demo"  alt="" />
                 <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
                     {TMB !== 0 &&
                         <div>
@@ -145,7 +145,7 @@ export default function TaxaMetabolicaBasal() {
                     <div className="fontes">
                         <small className="text-sm font-semibold">Referências:</small>
                         <a href="https://efdeportes.com/efd166/equacoes-do-protocolo-de-katch-e-mcardle.htm"
-                            target="_blank">
+                            target="_blank" rel="noopener noreferrer">
                             - Amarildo César de Oliveira,
                             <strong> Adaptação das equações do protocolo de Katch e McArdle para cálculo
                                 da estimativa do percentual através da perimetria</strong>,
@@ -154,34 +154,34 @@ export default function TaxaMetabolicaBasal() {
                             2012
                         </a>
                         <a href="https://archive.org/details/exercisephysiolo00mcar"
-                            target="_blank">
+                            target="_blank" rel="noopener noreferrer">
                             - McArdle, William D, Katch, Frank I, Katch, Victor L,
                             <strong> Exercise physiology : energy, nutrition, and human performance - 2nd Edition</strong>,
                             Philadelphia: Lea & Febiger,
                             1986
                         </a>
                         <a href="https://en.wikipedia.org/wiki/Harris%E2%80%93Benedict_equation"
-                            target="_blank">
+                            target="_blank" rel="noopener noreferrer">
                             - Wikipédia,
                             <strong> Harris-Benedict equation</strong>,
                             The Free Encyclopedia,
                             2023
                         </a>
                         <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1091498/"
-                            target="_blank">
+                            target="_blank" rel="noopener noreferrer">
                             - J. Arthur Harris and Francis G. Benedict,
                             <strong> A Biometric Study of Human Basal Metabolism</strong>,
                             Proceedings of National Academy of Sciences of the United States of America,
                             1918
                         </a>
                         <a href="https://en.wikipedia.org/wiki/Basal_metabolic_rate"
-                            target="_blank">
+                            target="_blank" rel="noopener noreferrer">
                             - Wikipédia,
                             <strong> Basal metabolic rate</strong>,
                             The Free Encyclopedia,
                             2023
                         </a>
-                        <a href="https://www.flaticon.com/" title="metabolism icon" target="_blank">
+                        <a href="https://www.flaticon.com/" title="metabolism icon" target="_blank" rel="noopener noreferrer">
                             - icones criados por freepik - flaticon
                         </a>
                     </div>

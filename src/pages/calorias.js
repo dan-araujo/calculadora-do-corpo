@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { calcularCalorias, calcularTotalCaloriasPorDieta } from "./api/calculadoras";
+import { calcularCalorias, calcularTotalCaloriasPorDieta } from "../lib/calculadoras.mjs";
 import Image from "next/image";
-import AutoresTMB from "./autores-tmb";
+import AutoresTMB from "../components/autores-tmb";
 
 export default function Calorias() {
     const [idade, setIdade] = useState(0);
@@ -17,8 +17,8 @@ export default function Calorias() {
 
     const calculoCalorias = async (e) => {
         e.preventDefault();
-        const calorias = calcularCalorias(parseInt(idade), parseFloat(peso), parseInt(altura),
-            genero, nivelAtividade, formulaCalorias, parseInt(gorduraCorporal));
+        const calorias = calcularCalorias(parseInt(idade), parseFloat(peso), parseFloat(altura),
+            genero, nivelAtividade, formulaCalorias, parseFloat(gorduraCorporal));
         const quantidadeCalorias = calcularTotalCaloriasPorDieta(calorias, objetivoDieta);
 
         setKcal(quantidadeCalorias);
@@ -37,13 +37,13 @@ export default function Calorias() {
                                 id="idade"
                                 value={idade}
                                 step={1}
-                                min={0}
+                                min={18}
                                 onChange={(e) => setIdade(e.target.value)}
                                 className="input-campo" required />
                         </div>
                         <div className="input-linha">
                             <label htmlFor="peso" className="input-label">Peso (kg):</label>
-                            <input type="number"
+                            <input step="0.1" min={0.1} id="peso" type="number"
                                 value={peso}
                                 onChange={(e) => setPeso(e.target.value)}
                                 className="input-campo" required />
@@ -72,7 +72,7 @@ export default function Calorias() {
                         </div>
                         <div className="input-linha">
                             <label htmlFor="nivelAtividade" className="input-label labels-select ">Nível de Atividade:</label>
-                            <select value={nivelAtividade}
+                            <select id="nivelAtividade" value={nivelAtividade}
                                 onChange={(e) => setNivelAtividade(e.target.value)}
                                 className="input-campo select-formulario">
                                 <option value="sedentario">
@@ -96,23 +96,23 @@ export default function Calorias() {
                             <label htmlFor="objetivoDieta" className="input-label labels-select">
                                 Objetivo:
                             </label>
-                            <select value={objetivoDieta}
+                            <select id="objetivoDieta" value={objetivoDieta}
                                 onChange={(e) => setObjetivoDieta(e.target.value)}
                                 className="input-campo select-formulario">
                                 <option value="perda-peso-gradual">
-                                    Perder 0.5kg/semana
+                                    Reduzir 250 kcal/dia
                                 </option>
                                 <option value="perda-peso">
-                                    Perder 1kg/semana
+                                    Reduzir 500 kcal/dia
                                 </option>
                                 <option value="manutencao-peso">
                                     Manter peso
                                 </option>
                                 <option value="ganho-peso-gradual">
-                                    Ganhar 0.5kg/semana
+                                    Acrescentar 250 kcal/dia
                                 </option>
                                 <option value="ganho-peso">
-                                    Ganhar 1kg/semana
+                                    Acrescentar 500 kcal/dia
                                 </option>
                             </select>
                         </div>
@@ -138,8 +138,8 @@ export default function Calorias() {
                             />
                             <label htmlFor="katch-mcardle">Katch-McArdle</label>
                             <a href="#mcardle" className="mcardle-question">?</a>
-                            <input type="number"
-                                value={gorduraCorporal}
+                            <input step="0.1" type="number"
+                                aria-label="Gordura corporal (%)" value={gorduraCorporal}
                                 min={5} max={80}
                                 onChange={(e) => setGorduraCorporal(e.target.value)}
                                 className="input-bf"
@@ -160,7 +160,7 @@ export default function Calorias() {
                             <button type="submit" className="botao-calcular">Calcular</button>
                     </form>
                 </section>
-                <Image src={"/images/calorias2.png"} alt="Icone imc" width={150} height={150}
+                <Image src={"/images/calorias2.png"} alt="" width={150} height={150}
                     className="imagem-demo" />
                 <div className="resultado" id="mostrar-resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
                     {kcal !== 0 &&
@@ -257,14 +257,14 @@ export default function Calorias() {
                         <small className="text-sm font-semibold">Referências:</small>
 
                         <a href="https://academic.oup.com/biomedgerontology/article/60/5/549/561215?login=false"
-                            target="_blank">
+                            target="_blank" rel="noopener noreferrer">
                             - Matthew D. W. Piper, William Mair, Linda Partridge,
                             <strong> Counting the Calories: The Role of Specific Nutrients in Extension of Life Span by Food Restriction, </strong>
                             The Journal of Gerontology,
                             2005
                         </a>
                         <a href="https://jamanetwork.com/journals/jama/article-abstract/2669738"
-                            target="_blank">
+                            target="_blank" rel="noopener noreferrer">
                             - Eve Guth, MD,
                             Jesse Brown Veterans Affairs Medical Center, Chicago, Illinois,
                             <strong> Counting Calories as an Approach to Achieve Weight Control </strong>,
@@ -272,13 +272,13 @@ export default function Calorias() {
                             2018
                         </a>
                         <a href="https://www.tuasaude.com/o-que-sao-calorias/"
-                            target="_blank">
+                            target="_blank" rel="noopener noreferrer">
                             - Karla Leal, Tatiana Zanin, Manuel Reis,
                             <strong> Como calcular as calorias dos alimentos </strong>,
                             Tua Saúde,
                             2023
                         </a>
-                        <a href="https://www.flaticon.com" title="calorias ícones" target="_blank">
+                        <a href="https://www.flaticon.com" title="calorias ícones" target="_blank" rel="noopener noreferrer">
                             - ícones criados por mhor phai e freepik - flaticon
                         </a>
                     </div>
