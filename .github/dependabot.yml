@@ -6,6 +6,9 @@ updates:
       interval: weekly
     open-pull-requests-limit: 5
     groups:
+      # Tailwind e seu plugin precisam acompanhar a mesma versão principal.
+      tailwind:
+        patterns: [tailwindcss, '@tailwindcss/*']
       development:
         dependency-type: development
         update-types: [minor, patch]
