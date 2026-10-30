@@ -1,7 +1,13 @@
+import { useContext } from 'react';
+import { FormValidationContext } from './calculator-form';
 import { FIELD_LIMITS, numberError } from '../lib/validation.mjs';
 
-export default function NumericInput({ field, value, onChange, className = '', required = true, ...props }) {
+export default function NumericInput({ field, value, onChange, className = '', required = true,
+  id, 'aria-describedby': describedBy, 'aria-invalid': ariaInvalid, ...props }) {
   const rule = FIELD_LIMITS[field];
+  const validation = useContext(FormValidationContext);
+  const invalid = Boolean(id && validation?.invalidFieldId === id);
+  const descriptions = [describedBy, invalid ? validation.errorId : null].filter(Boolean).join(' ');
 
   function update(event, candidate) {
     const raw = candidate.replace(',', '.');
@@ -11,7 +17,8 @@ export default function NumericInput({ field, value, onChange, className = '', r
   }
 
   return <span className={`campo-numerico ${className}`}>
-    <input {...props} type="text" inputMode={rule.decimals ? 'decimal' : 'numeric'}
+    <input {...props} id={id} type="text" inputMode={rule.decimals ? 'decimal' : 'numeric'}
+      aria-invalid={invalid ? true : ariaInvalid} aria-describedby={descriptions || undefined}
       className="entrada-numerica" value={value} required={required}
       ref={node => { if (node) node.setCustomValidity(numberError(value, field)); }}
       onInvalid={event => event.preventDefault()}

@@ -39,8 +39,9 @@ nav { background: #fff; border-bottom: 1px solid var(--line); }
 .linha-campo { display: flex; align-items: center; gap: .75rem; margin: 0 0 1rem; }
 .rotulo-campo { flex: 1 1 46%; color: var(--ink); font-size: .95rem; }
 .campo-formulario { flex: 1 1 54%; width: 54%; min-width: 0; }
-input[type=number], .entrada-numerica, select { border: 1px solid #a1b1c7; border-radius: 8px; min-height: 44px; padding: .5rem .6rem; font: inherit; color: var(--blue); background: #fff; }
+input[type=number], .entrada-numerica, select { border: 1px solid #73839a; border-radius: 8px; min-height: 44px; padding: .5rem .6rem; font: inherit; color: var(--blue); background: #fff; }
 input[type=number]:focus, .entrada-numerica:focus, select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px #203fa410; }
+.entrada-numerica[aria-invalid=true] { border-color: #a32030; }
 input[type=radio] { width: 18px; height: 18px; accent-color: var(--blue); flex-shrink: 0; }
 button { font: inherit; cursor: pointer; }
 button[type=submit] { display: block; position: static; margin: 1.5rem 0 0 auto; padding: .7rem 1.75rem; min-height: 46px; border: 0; border-radius: 9px; background: #d72735; color: #fff; font-weight: 700; }
@@ -57,6 +58,7 @@ button[type=submit]:hover { background: #b91c2a; }
 .resultado h2 { color: var(--blue); text-align: center; margin: .75rem 0; }
 .resultado h3 { text-align: center; margin-bottom: 1rem; }
 .resultado p { margin: .75rem 0; }
+.resultado a { display: inline-flex; align-items: center; justify-content: center; min-width: 28px; min-height: 28px; flex-shrink: 0; }
 .resultado .icone-ajuda { flex-shrink: 0; margin: .25rem; }
 #mostrar-resultado { margin-top: 0; }
 .valor-resultado { font-weight: 700; font-size: 2rem; color: var(--blue); }
@@ -98,7 +100,7 @@ button[type=submit]:hover { background: #b91c2a; }
 /* Um único fluxo: título, ilustração, campos e resultado. */
 main > .area-calculadora { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem; width: 100%; max-width: 680px; margin: 0 auto 2rem; }
 .area-calculadora .formulario-calculadora, .area-calculadora .formulario-1rm, .area-calculadora .resultado { width: 100%; max-width: none; min-width: 0; }
-.area-calculadora > [role=status]:empty { display: none; }
+.area-calculadora > [role=status]:empty { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .cabecalho-calculadora { display: flex; flex-direction: column; align-items: center; gap: .75rem; margin-bottom: 1.5rem; }
 .cabecalho-calculadora h1 { margin: 0; }
 .ilustracao-calculadora { display: block; width: min(100%, 280px); height: 180px; object-fit: contain; }
