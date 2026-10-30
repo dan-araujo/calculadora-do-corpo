@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#f1f6fb"/><stop offset="1" stop-color="#e0eafa"/></linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1110" cy="70" r="260" fill="#d5e2fa" opacity=".6"/>
+  <circle cx="1120" cy="610" r="180" fill="#ccece6" opacity=".6"/>
+  <rect x="56" y="56" width="6" height="36" rx="3" fill="#203fa4"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="80" y="81" fill="#203fa4" font-size="19" font-weight="700" letter-spacing="2">CONHEÇA. CALCULE. ENTENDA.</text>
+    <text x="56" y="213" fill="#25394c" font-size="72" font-weight="700" letter-spacing="-3">Calculadora</text>
+    <text x="56" y="291" fill="#203fa4" font-size="72" font-weight="700" letter-spacing="-3">do Corpo</text>
+    <text x="59" y="354" fill="#556581" font-size="26">Um ponto de partida para cuidar de você.</text>
+    <rect x="58" y="399" width="117" height="42" rx="21" fill="#fff"/>
+    <text x="116" y="427" text-anchor="middle" fill="#25394c" font-size="18">IMC</text>
+    <rect x="187" y="399" width="135" height="42" rx="21" fill="#fff"/>
+    <text x="254" y="427" text-anchor="middle" fill="#25394c" font-size="18">Calorias</text>
+    <rect x="334" y="399" width="138" height="42" rx="21" fill="#fff"/>
+    <text x="403" y="427" text-anchor="middle" fill="#25394c" font-size="18">Proteínas</text>
+    <rect x="484" y="399" width="106" height="42" rx="21" fill="#fff"/>
+    <text x="537" y="427" text-anchor="middle" fill="#25394c" font-size="18">Água</text>
+    <text x="59" y="515" fill="#203fa4" font-size="21" font-weight="700">12 calculadoras gratuitas</text>
+    <text x="59" y="551" fill="#556581" font-size="19">Saúde, nutrição e atividade física</text>
+    <text x="1140" y="587" text-anchor="end" fill="#556581" font-size="16">calculadora-do-corpo.vercel.app</text>
+  </g>
+  <g transform="translate(808 126) rotate(8 140 175)">
+    <rect x="8" y="13" width="284" height="364" rx="34" fill="#203fa4" opacity=".12"/>
+    <rect width="280" height="360" rx="30" fill="#25394c"/>
+    <rect x="25" y="26" width="230" height="90" rx="15" fill="#a8dcf0"/>
+    <path d="M57 73h31l14-22 24 45 18-30h79" stroke="#25394c" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="25" y="140" width="104" height="86" rx="17" fill="#fff"/>
+    <rect x="151" y="140" width="104" height="86" rx="17" fill="#ffe268"/>
+    <rect x="25" y="247" width="104" height="86" rx="17" fill="#62c3a1"/>
+    <rect x="151" y="247" width="104" height="86" rx="17" fill="#ff8285"/>
+    <g fill="none" stroke="#25394c" stroke-width="8" stroke-linecap="round">
+      <path d="M59 183h36m-18-18v36M185 183h36M64 277l26 26m0-26-26 26M185 282h36m-36 17h36"/>
+    </g>
+  </g>
+</svg>
