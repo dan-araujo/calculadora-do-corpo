@@ -26,7 +26,7 @@ export default function ConsumoAgua() {
     <article className="area-calculadora">
       <section className="formulario-calculadora">
         <CalculatorForm onResetResult={() => setResultado(null)} onSubmit={calcular}>
-          <CalculatorHeader title="Calculadora de consumo de água" image="/images/agua.png" />
+          <CalculatorHeader title="Calculadora de consumo de água" image="/images/agua2.png" />
           <p className="orientacao-formulario" id="escopo-agua">Estimativa educativa para adultos saudáveis. Use o peso habitual como referência.</p>
           <div className="linha-campo">
             <label htmlFor="peso" className="rotulo-campo">Peso (kg):</label>
@@ -39,7 +39,7 @@ export default function ConsumoAgua() {
               <option value="ativo">Com exercício no dia</option>
             </select>
           </div>
-          <p className="orientacao-formulario">A base é de 35 ml/kg. Para um dia com exercício, mostramos também uma simulação de 500 ml a 1 L adicionais; a reposição real precisa considerar as perdas de suor.</p>
+          <p className="orientacao-formulario">A base é de 35 ml/kg. Para quem pratica exercícios físicos, a recomendação prática desta calculadora é beber de 500 ml a 1 L a mais que a quantidade padrão estimada. A necessidade individual varia conforme o treino e as perdas de suor.</p>
           {erro && <p className="erro-formulario" role="alert">{erro}</p>}
           <button type="submit">Calcular</button>
         </CalculatorForm>
@@ -48,9 +48,10 @@ export default function ConsumoAgua() {
       <div role="status" aria-live="polite" aria-atomic="true">
         {resultado && <section className="resultado">
           <h2>Estimativa diária de referência</h2>
-          <p className="valor-resultado">{litros(resultado.base)}</p>
-          <p>{resultado.base.toLocaleString('pt-BR')} ml, calculados com 35 ml por kg.</p>
-          {resultado.minimo !== resultado.maximo && <>
+          {resultado.minimo === resultado.maximo ? <>
+            <p className="valor-resultado">{litros(resultado.base)}</p>
+            <p>{resultado.base.toLocaleString('pt-BR')} ml, calculados com 35 ml por kg.</p>
+          </> : <>
             <h3>Simulação para um dia com exercício</h3>
             <p className="valor-resultado">{litros(resultado.minimo)} a {litros(resultado.maximo)}</p>
             <p>Base mais 500 ml a 1 L. Essa faixa é ilustrativa e não define sua necessidade individual durante ou após o treino.</p>
