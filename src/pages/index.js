@@ -12,10 +12,10 @@ export default function Home() {
       </section>
       <section className="grade-calculadoras" aria-label="Calculadoras disponíveis">
         {calculators.map((item, index) => (
-          <Link className="cartao-calculadora" href={`/${item.slug}/`} key={item.slug}>
+          <Link className="cartao-calculadora" href={`/${item.slug}/`} prefetch={false} key={item.slug}>
             <div className="imagem-cartao"><ImagemOtimizada src={`/images/${item.image}`} alt="" width={320} height={220}
-              loading={index === 0 ? 'eager' : 'lazy'} fetchPriority={index === 0 ? 'high' : undefined}
-              sizes="(max-width: 480px) 260px, (max-width: 800px) 40vw, (max-width: 1050px) 27vw, 260px" /></div>
+              loading={index < 2 ? 'eager' : 'lazy'} fetchPriority={index < 2 ? 'high' : undefined}
+              sizes="(max-width: 480px) min(260px, calc(100vw - 74px)), (max-width: 800px) min(280px, calc(50vw - 4.6rem - 2px)), (max-width: 1050px) min(280px, calc(33.333333vw - 4.266667rem - 2px)), (max-width: 1240px) calc(25vw - 4.15rem - 2px), 242px" /></div>
             <div className="cabecalho-cartao"><h2>{item.title}</h2><span className="seta-cartao" aria-hidden="true">↗</span></div>
             <p>{item.description}</p>
           </Link>
