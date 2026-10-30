@@ -8,7 +8,7 @@ import { calculators } from '../src/lib/site.mjs';
 const destino = resolve('public/images/otimizadas');
 await mkdir(destino, { recursive: true });
 const manifestoPath = resolve(destino, 'manifesto.json');
-const largurasAlvo = [240, 320, 480, 640, 960];
+const largurasAlvo = [240, 280, 320, 480, 560, 640, 800, 960];
 const compressao = { quality: 78, alphaQuality: 100, effort: 4 };
 const versao = JSON.stringify({ pipeline: 'webp-v2', largurasAlvo, compressao });
 let anterior = {};
