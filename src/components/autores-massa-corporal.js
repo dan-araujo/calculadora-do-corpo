@@ -54,22 +54,22 @@ export default function AutoresMassaCorporalMagra() {
             <hr />
             <div className="fontes">
                 <small className="referencias">Referências:</small>
-                <a href="https://pubmed.ncbi.nlm.nih.gov/6496691/" target="_blank">
+                <a href="https://pubmed.ncbi.nlm.nih.gov/6496691/" target="_blank" rel="noopener noreferrer">
                     - P. Boer,
                     <strong> Estimated lean body mass as an index for normalization of body fluid volumes in humans</strong>,
                     A report of the DHSS/MRC group, Department of Health and Social Security/Medical Research Council, 1976
                 </a>
-                <a href="https://onlinelibrary.wiley.com/doi/10.1111/j.1467-3010.1977.tb00966.x" target="_blank">
+                <a href="https://onlinelibrary.wiley.com/doi/10.1111/j.1467-3010.1977.tb00966.x" target="_blank" rel="noopener noreferrer">
                     - W. P. T. James,
                     <strong> Research on obesity</strong>,
                     American Physiological Society, 1984
                 </a>
-                <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC473290/" target="_blank">
+                <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC473290/" target="_blank" rel="noopener noreferrer">
                     - R. Hume,
                     <strong> Prediction of lean body mass from height and weight</strong>,
                     Journal of Clinical Pathology, 1966
                 </a>
-                <a href="https://www.flaticon.com/br/" title="musculo ícone" target="_blank">
+                <a href="https://www.flaticon.com/br/" title="musculo ícone" target="_blank" rel="noopener noreferrer">
                     - ícones criados por justicon - flaticon
                 </a>
             </div>

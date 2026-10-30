@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { calcularMassaCorporalMagraPorBoer, calcularMassaCorporalMagraPorHume, calcularMassaCorporalMagraPorJames } from "./api/calculadoras";
+import { calcularMassaCorporalMagraPorBoer, calcularMassaCorporalMagraPorHume, calcularMassaCorporalMagraPorJames } from "../lib/calculadoras.mjs";
 import Image from "next/image";
-import AutoresMassaCorporalMagra from "./autores-massa-corporal";
+import AutoresMassaCorporalMagra from "../components/autores-massa-corporal";
 
 export default function MassaCorporalMagra() {
     const [peso, setPeso] = useState(0)
@@ -14,9 +14,9 @@ export default function MassaCorporalMagra() {
 
     const calculoMassaCorporalMagra = async (e) => {
         e.preventDefault();
-        const formulaBoer = calcularMassaCorporalMagraPorBoer(parseFloat(peso), parseInt(altura), genero);
-        const formulaHume = calcularMassaCorporalMagraPorHume(parseFloat(peso), parseInt(altura), genero);
-        const formulaJames = calcularMassaCorporalMagraPorJames(parseFloat(peso), parseInt(altura), genero);
+        const formulaBoer = calcularMassaCorporalMagraPorBoer(parseFloat(peso), parseFloat(altura), genero);
+        const formulaHume = calcularMassaCorporalMagraPorHume(parseFloat(peso), parseFloat(altura), genero);
+        const formulaJames = calcularMassaCorporalMagraPorJames(parseFloat(peso), parseFloat(altura), genero);
 
         setMostrarResultado(true);
         setMassaMagraCorporalPorBoer(formulaBoer);
@@ -34,7 +34,7 @@ export default function MassaCorporalMagra() {
                             <label htmlFor="peso" className="input-label">
                                 Peso (kg):
                             </label>
-                            <input type="number" value={peso}
+                            <input step="0.1" min={0.1} id="peso" type="number" value={peso}
                                 onChange={(e) => setPeso(e.target.value)}
                                 className="input-campo" required />
                         </div>
@@ -66,7 +66,7 @@ export default function MassaCorporalMagra() {
                         <button type="submit" className="botao-calcular">Calcular</button>
                     </form>
                 </section>
-                <Image src={"/images/massa-corporal-halter.png"} alt="Icone massa corporal magra"
+                <Image src={"/images/massa-corporal-halter.png"} alt=""
                     width={180} height={100} className="imagem-demo flex flex-row" />
                 <div className="resultado" style={{ display: mostrarResultado ? 'block' : 'none' }}>
                     {massaCorporalMagraPorBoer !== 0 &&
@@ -75,15 +75,15 @@ export default function MassaCorporalMagra() {
                                 <h3 className="text-xl">Sua Massa Corporal Magra está entre:</h3>
                                 <div className="flex flex-row justify-center">
                                     <h2 className="text-2xl">Boer: {massaCorporalMagraPorBoer} kgs</h2>
-                                    <a href="#boer"><Image src={"/images/interrogacao.png"} width={16} height={16} /></a>
+                                    <a aria-label="Entenda a fórmula" href="#boer"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
                                 </div>
                                 <div className="flex flex-row justify-center">
                                     <h2 className="text-2xl">James: {massaCorporalMagraPorJames} kgs</h2>
-                                    <a href="#james"><Image src={"/images/interrogacao.png"} width={16} height={16} /></a>
+                                    <a aria-label="Entenda a fórmula" href="#james"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
                                 </div>
                                 <div className="flex flex-row justify-center">
                                     <h2 className="text-2xl">Hume: {massaCorporalMagraPorHume} kgs</h2>
-                                    <a href="#hume"><Image src={"/images/interrogacao.png"} width={16} height={16} /></a>
+                                    <a aria-label="Entenda a fórmula" href="#hume"><Image src={"/images/interrogacao.png"} width={16} height={16}  alt="" /></a>
                                 </div>
                             </div>
                         )
