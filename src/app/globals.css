@@ -97,7 +97,6 @@ button[type=submit]:hover { background: #b91c2a; }
 @media (max-width: 480px) { main { padding: 1.25rem 1rem; } .grade-calculadoras { grid-template-columns: 1fr; } .cartao-calculadora { padding: 1.25rem; } .imagem-cartao { height: 180px; } .linha-campo { flex-direction: column; align-items: stretch; gap: .35rem; } .campo-formulario { width: 100%; flex: auto; } button[type=submit] { width: 100%; } .informacoes { border-radius: 12px; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } }
 
-/* Um único fluxo: título, ilustração, campos e resultado. */
 main > .area-calculadora { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem; width: 100%; max-width: 680px; margin: 0 auto 2rem; }
 .area-calculadora .formulario-calculadora, .area-calculadora .formulario-1rm, .area-calculadora .resultado { width: 100%; max-width: none; min-width: 0; }
 .area-calculadora > [role=status]:empty { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

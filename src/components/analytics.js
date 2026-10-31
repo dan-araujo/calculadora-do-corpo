@@ -65,11 +65,10 @@ export default function Analytics() {
 
   function choose(value) {
     if (value === 'rejected') window[`ga-disable-${gaId}`] = true;
-    try { localStorage.setItem(preferenceKey, value); } catch { /* Sem armazenamento, a medição permanece desativada. */ }
+    try { localStorage.setItem(preferenceKey, value); } catch {}
     window.dispatchEvent(new Event('analytics-preference'));
     setPreferencesOpen(false);
     if (value === 'rejected' && ready) {
-      // Apaga cookies de medição no host e nos domínios ancestrais permitidos.
       const hostParts = location.hostname.split('.');
       for (const cookie of document.cookie.split(';')) {
         const name = cookie.split('=')[0].trim();

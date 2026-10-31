@@ -4,7 +4,6 @@ import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
 import { calculators } from '../src/lib/site.mjs';
 
-// Derivados de publicação: os PNGs originais permanecem intactos.
 const destino = resolve('public/images/otimizadas');
 await mkdir(destino, { recursive: true });
 const manifestoPath = resolve(destino, 'manifesto.json');
@@ -12,7 +11,7 @@ const largurasAlvo = [240, 280, 320, 480, 560, 640, 800, 960];
 const compressao = { quality: 78, alphaQuality: 100, effort: 4 };
 const versao = JSON.stringify({ pipeline: 'webp-v2', largurasAlvo, compressao });
 let anterior = {};
-try { anterior = JSON.parse(await readFile(manifestoPath, 'utf8')); } catch { /* Primeiro build. */ }
+try { anterior = JSON.parse(await readFile(manifestoPath, 'utf8')); } catch {}
 const fontes = new Set(calculators.map(item => `/images/${item.image}`));
 for (const pagina of await readdir('src/pages')) {
   if (!pagina.endsWith('.js')) continue;
@@ -34,7 +33,7 @@ for (const src of [...fontes].sort()) {
     const nome = `${basename(src, '.png')}-${width}.webp`;
     const arquivo = resolve(destino, nome);
     let existente;
-    try { existente = await stat(arquivo); } catch { /* Nova variante. */ }
+    try { existente = await stat(arquivo); } catch {}
     const varianteAnterior = anterior[src]?.variantes.find(item => item.width === width);
     if (anterior[src]?.hash !== hash || !existente || existente.size !== varianteAnterior?.bytes) {
       const referencia = await sharp(original).resize({ width, withoutEnlargement: true }).ensureAlpha().raw().toBuffer({ resolveWithObject: true });

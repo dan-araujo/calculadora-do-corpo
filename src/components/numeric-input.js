@@ -23,8 +23,7 @@ export default function NumericInput({ field, value, onChange, className = '', r
       ref={node => { if (node) node.setCustomValidity(numberError(value, field)); }}
       onInvalid={event => event.preventDefault()}
       onBlur={event => {
-        // Permite os dígitos intermediários de 175, por exemplo, mas não
-        // mantém uma medida abaixo do mínimo ao terminar o preenchimento.
+
         if (value !== '' && numberError(value, field)) onChange({ ...event, target: { ...event.target, value: '' } });
       }}
       onChange={event => update(event, event.target.value)}
@@ -32,7 +31,7 @@ export default function NumericInput({ field, value, onChange, className = '', r
         event.preventDefault();
         const input = event.target;
         const candidate = String(value).slice(0, input.selectionStart) + event.clipboardData.getData('text').trim() + String(value).slice(input.selectionEnd);
-        // Colagem é uma entrada completa: recusa também valores abaixo do mínimo.
+
         if (numberError(candidate, field)) return;
         update(event, candidate);
       }} />

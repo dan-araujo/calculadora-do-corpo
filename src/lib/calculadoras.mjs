@@ -272,8 +272,7 @@ export function calcularMassaCorporalMagraPorJames(peso, altura, genero) {
     return validateResult(massaCorporalMagra.toFixed(1), { max: peso });
 }
 
-// A Sociedade Brasileira de Medicina do Esporte estabelece a ingestão de 1,6 a 1,7 g/kg
-// a cada dia, para atletas com o objetivo de ganho de massa muscular.
+
 export function calcularProteinas(peso, nivelAtividade) {
     peso = validateNumber(peso, 'peso');
     let quantidadeProteinasMinima, quantidadeProteinasMaxima = 0;
@@ -353,7 +352,6 @@ export function calcularGordurasSaudaveis(idade, peso, altura, genero,
 export function calcularPotencialMaximoMuscularPorBerkhan(altura, gorduraCorporal) {
     altura = validateNumber(altura, 'altura');
     gorduraCorporal = validateNumber(gorduraCorporal, 'gorduraCorporal');
-    // Altura - 100 é peso total a 5% de gordura; conserva-se a massa magra.
     const massaMagra = (altura - 100) * 0.95;
     return validateResult((massaMagra / (1 - gorduraCorporal / 100)).toFixed(1), { max: 635 });
 }
@@ -369,7 +367,6 @@ export function calcularPotencialMaximoMuscularPorCaseyButt(altura, pulso, torno
 
     const massaCorporalMagra = (Math.pow(altura, 1.5) * (Math.sqrt(pulso) / 22.6670
         + Math.sqrt(tornozelo) / 17.0104) * (gorduraCorporal / 224 + 1));
-    // O fator de gordura já está incluído na equação; não somá-lo novamente.
     let pesoTotal = massaCorporalMagra;
     pesoTotal = converterLibrasParaKg(pesoTotal);
 
@@ -481,7 +478,6 @@ export function mostrarCargasRecomendadas1RepeticaoMaxima(peso1RepeticaoMaxima, 
     return validateResult([Math.round(cargaMinimaRecomendada), Math.round(cargaMaximaRecomendada)], { max: 1500, allowZero: true });
 }
 
-/** Estimativa educativa para adultos saudáveis; extra do exercício é ilustrativo. */
 export function calcularQuantidadeAguaConsumida(peso, nivelAtividade = 'sedentario') {
     peso = validateNumber(peso, 'peso');
     const pesoNumerico = Number(peso);

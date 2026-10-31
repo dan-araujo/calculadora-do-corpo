@@ -1,9 +1,3 @@
-// Limites operacionais de entrada, não faixas saudáveis nem validação clínica.
-// Tetos de peso/altura/idade orientados pelos registros do Guinness:
-// https://www.guinnessworldrecords.com/world-records/heaviest-man
-// https://www.guinnessworldrecords.com/world-records/tallest-man-living
-// https://www.guinnessworldrecords.com/world-records/oldest-person-
-// As circunferências e a carga têm limites amplos próprios desta aplicação.
 export const FIELD_LIMITS = {
   peso: { label: 'Peso', min: 1, max: 635, decimals: 1 },
   altura: { label: 'Altura', min: 50, max: 272, decimals: 1 },
